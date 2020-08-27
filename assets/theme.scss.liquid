@@ -1,6 +1,4 @@
 /*============================================================================
-  Debut | Built with Shopify Slate
-
   Some things to know about this file:
     - Sass is compiled on Shopify's server so you don't need to convert it to CSS yourself
     - The output CSS is compressed and comments are removed
@@ -508,32 +506,48 @@ $color-slideshow-dots: #fff;
 
 /*================ Typography ================*/
 
-{% assign header_font = settings.type_header_font %}
-{% assign base_font = settings.type_base_font %}
+@font-face {
+  font-family: 'Saa-Series-C-D';
+  src: url('{{ 'Saa-Series-C-D.woff2' | asset_url }}');
+}
 
-{{ header_font | font_face }}
-{{ base_font | font_face }}
+@font-face {
+  font-family: 'WorkSans-Regular';
+  src: url('{{ 'WorkSans-Regular.ttf' | asset_url }}');
+}
 
-{%- assign base_font_bolder = base_font | font_modify: 'weight', 'bolder' -%}
-{%- assign base_font_bold = base_font | font_modify: 'weight', 'bold' -%}
-{%- assign base_font_italic = base_font | font_modify: 'style', 'italic' -%}
-{%- assign base_font_bold_italic = base_font_bold | font_modify: 'style', 'italic' -%}
+@font-face {
+  font-family: 'WorkSans-Bold';
+  src: url('{{ 'WorkSans-Bold.ttf' | asset_url }}');
+}
+  
 
-{{ base_font_bold | font_face }}
-{{ base_font_bolder | font_face }}
-{{ base_font_italic | font_face }}
-{{ base_font_bold_italic | font_face }}
+{% assign header_font = 'Saa-Series-C-D' %}
+{% assign base_font = 'WorkSans-Regular' %}
+
+// {{ header_font | font_face }}
+// {{ base_font | font_face }}
+
+{%- assign base_font_bold = 'WorkSans-Bold' -%}
+{%- assign base_font_bolder = 'WorkSans-Bold' -%}
+{%- assign base_font_italic = 'WorkSans-Bold' -%}
+{%- assign base_font_bold_italic = 'WorkSans-Bold' -%}
+
+// {{ base_font_bold | font_face }}
+// {{ base_font_bolder | font_face }}
+// {{ base_font_italic | font_face }}
+// {{ base_font_bold_italic | font_face }}
 
 $font-weight-body--bold: {{ base_font_bold.weight | default: 700 }};
 $font-weight-body--bolder: {{ base_font_bolder.weight | default: 700 }};
 
-$font-stack-header: {{ header_font.family }}, {{ header_font.fallback_families }};
-$font-style-header: {{ header_font.style }};
-$font-weight-header: {{ header_font.weight }};
+$font-stack-header: 'Saa-Series-C-D';
+$font-style-header: normal;
+$font-weight-header: 500;
 
-$font-stack-body: {{ base_font.family }}, {{ base_font.fallback_families }};
-$font-style-body: {{ base_font.style }};
-$font-weight-body: {{ base_font.weight }};
+$font-stack-body: 'WorkSans-Regular';
+$font-style-body: normal;
+$font-weight-body: 500;
 
 $font-size-header: {{ settings.type_header_base_size }} * 1px;
 
