@@ -1449,7 +1449,8 @@ h6 {
   font-family: $font-stack-header;
   font-style: $font-style-header;
   font-weight: $font-weight-header;
-  line-height: 1.2;
+  line-height: 93.75%;
+  letter-spacing: -0.04em;
   overflow-wrap: break-word;
   word-wrap: break-word;
 
@@ -1463,7 +1464,7 @@ h6 {
 h1 {
   font-size: em(floor($font-size-header * 1.35));
   text-transform: none;
-  letter-spacing: 0;
+  letter-spacing: -0.04em;
 
   @include media-query($small) {
     font-size: em(floor($font-size-header * 1.25));
@@ -1473,7 +1474,7 @@ h1 {
 h2 {
   font-size: em(floor($font-size-header * 0.78));
   text-transform: uppercase;
-  letter-spacing: 0.1em;
+  letter-spacing: -0.04em;
 
   @include media-query($small) {
     font-size: em(floor(($font-size-header * 0.78) * 0.9));
@@ -1483,7 +1484,7 @@ h2 {
 h3 {
   font-size: em($font-size-header);
   text-transform: none;
-  letter-spacing: 0;
+  letter-spacing: -0.04em;
 
   @include media-query($small) {
     font-size: em(floor($font-size-header * 0.78));
@@ -2567,6 +2568,11 @@ textarea {
 }
 
 /*================ #Site Nav and Dropdowns ================*/
+
+.logo-svg {
+  fill: black;
+}
+
 .site-header__logo {
   img {
     display: block;
@@ -2575,8 +2581,8 @@ textarea {
 
 .site-nav {
   position: relative;
-  padding: 0;
-  text-align: center;
+  padding: 0 0 0 48px;
+  text-align: left;
   margin: 25px 0;
 
   a {
@@ -4901,6 +4907,7 @@ $color-blankstate-background: rgba($color-body-text, 0.1);
 
 .site-header__icons-wrapper {
   position: relative;
+  padding: 0 48px 0 0;
   @include display-flexbox();
   @include align-items(center);
   @include justify-content(flex-end);
