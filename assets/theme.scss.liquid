@@ -2575,7 +2575,7 @@ textarea {
 /*================ #Site Nav and Dropdowns ================*/
 
 .logo-svg {
-  fill: black;
+  fill: #ffffff;
 }
 
 .site-header-desktop-offset{
@@ -7384,7 +7384,7 @@ $toolbar-height-small: 46px;
 .feature-row {
   @include display-flexbox();
   @include justify-content(space-between);
-  @include align-items(center);
+  @include align-items(flex-end);
 
   @include media-query($small) {
     @include flex-direction(column);
@@ -7521,6 +7521,10 @@ $toolbar-height-small: 46px;
   vertical-align: middle;
   padding: $section-spacing 0;
   z-index: 2;
+}
+
+.hero__inner--offset {
+  margin-top: 80px;
 }
 
 .hero__btn {
