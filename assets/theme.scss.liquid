@@ -513,7 +513,12 @@ $color-slideshow-dots: #fff;
 
 @font-face {
   font-family: 'WorkSans-Regular';
-  src: url('{{ 'WorkSans-Regular.ttf' | asset_url }}');
+  src: url('{{ 'WorkSans-Medium.ttf' | asset_url }}');
+}
+
+@font-face {
+  font-family: 'WorkSans-Medium';
+  src: url('{{ 'WorkSans-Medium.ttf' | asset_url }}');
 }
 
 @font-face {
@@ -523,7 +528,7 @@ $color-slideshow-dots: #fff;
   
 
 {% assign header_font = 'Saa-Series-C-D' %}
-{% assign base_font = 'WorkSans-Regular' %}
+{% assign base_font = 'WorkSans-Medium' %}
 
 // {{ header_font | font_face }}
 // {{ base_font | font_face }}
@@ -541,11 +546,11 @@ $color-slideshow-dots: #fff;
 $font-weight-body--bold: {{ base_font_bold.weight | default: 700 }};
 $font-weight-body--bolder: {{ base_font_bolder.weight | default: 700 }};
 
-$font-stack-header: 'Saa-Series-C-D';
+$font-stack-header: 'Saa-Series-C-D', 'Sans-Serif';
 $font-style-header: normal;
 $font-weight-header: 500;
 
-$font-stack-body: 'WorkSans-Regular';
+$font-stack-body: 'WorkSans-Medium', 'Sans-Serif';
 $font-style-body: normal;
 $font-weight-body: 500;
 
