@@ -16,6 +16,8 @@
 
 {% include 'search-drawer' %}
 
+<!-- Announcement Bar -->
+
 <div data-section-id="{{ section.id }}" data-section-type="header-section" data-header-section>
   {% if section.settings.message %}
     {% if section.settings.home_page_only == false or request.page_type == 'index' %}
@@ -54,7 +56,9 @@
     {% endif %}
   {% endif %}
 
-  <header class="site-header{% if section.settings.align_logo == 'left' %}border-bottom logo--left{% else %} logo--center{% endif %}" role="banner">
+  <!-- Header Desktop  -->
+
+  <header class="site-header-desktop-offset site-header{% if section.settings.align_logo == 'left' %}border-bottom logo--left{% else %} logo--center{% endif %}" role="banner">
     
     <div class="grid grid--no-gutters grid--table site-header__mobile-nav">
 
@@ -131,6 +135,8 @@
 
       </div>
     </div>
+
+<!-- Header Mobile -->
 
     <nav class="mobile-nav-wrapper medium-up--hide" role="navigation">
       <ul id="MobileNav" class="mobile-nav">
