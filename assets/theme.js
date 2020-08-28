@@ -2667,7 +2667,7 @@ theme.MobileNav = (function() {
     cache.$mobileNavContainer.prepareTransition().addClass(classes.navOpen);
 
     cache.$mobileNavContainer.css({
-      transform: 'translateY(100px)'
+      transform: 'translateY(50%)'
     });
 
     cache.$pageContainer.css({

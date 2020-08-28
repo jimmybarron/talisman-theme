@@ -4914,7 +4914,7 @@ $color-blankstate-background: rgba($color-body-text, 0.1);
 
 .site-header__icons-wrapper--left {
   position: relative;
-  padding: 0 48px 0 0;
+  padding: 0 0 0 0;
   @include display-flexbox();
   @include align-items(center);
   @include justify-content(flex-start);
@@ -6271,6 +6271,7 @@ $nav-button-padding: 15px;
   display: none;
   overflow: hidden;
   width: 100%;
+  z-index: 1;
 
   &::after {
     content: '';
