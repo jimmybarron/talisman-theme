@@ -360,7 +360,7 @@ $grid-medium: 750px;
 $grid-large: 990px;
 $grid-widescreen: 1400px;
 $grid-gutter: 30px;
-$grid-gutter-mobile: 22px;
+$grid-gutter-mobile: 16px;
 
 $small: 'small';
 $medium: 'medium';
@@ -4855,12 +4855,12 @@ $color-blankstate-background: rgba($color-body-text, 0.1);
 
     @include media-query($small) {
       text-align: center;
+      margin-top: 10px;
     }
   }
 
   @include media-query($small) {
-    padding-left: $gutter-site-mobile;
-    text-align: left;
+
 
     img {
       margin: 0;
@@ -5013,10 +5013,12 @@ $color-blankstate-background: rgba($color-body-text, 0.1);
 }
 
 .site-header__icon {
+  padding: 16px;
+
   @include media-query($small) {
     display: inline-block;
     vertical-align: middle;
-    padding: 10px 16px;
+    padding: 8px;
     margin: 0;
   }
 
