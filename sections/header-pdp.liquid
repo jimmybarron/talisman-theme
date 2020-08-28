@@ -56,11 +56,27 @@
     {% endif %}
   {% endif %}
 
-  <!-- Header Desktop  -->
+  <!-- Header -->
 
   <header class="site-header-desktop-offset site-header{% if section.settings.align_logo == 'left' %}border-bottom logo--left{% else %} logo--center{% endif %}" role="banner">
     
     <div class="grid grid--no-gutters grid--table site-header__mobile-nav">
+
+      <!-- LEFT SIDE -->
+
+      <div class="site-header__icons-wrapper--left">
+
+        <!-- Hamburger -->
+
+        {% unless linklists[section.settings.main_linklist] == blank %}
+          <button type="button" class="btn--link site-header__icon site-header__menu js-mobile-nav-toggle mobile-nav--open" aria-controls="MobileNav"  aria-expanded="false" aria-label="{{ 'layout.navigation.menu' | t }}">
+            {% include 'icon-hamburger' %}
+            {% include 'icon-close' %}
+          </button>
+        {% endunless %}
+      </div>
+
+      <!-- CENTER -->
 
       {% if section.settings.align_logo == 'center' %}
         {%- assign logo_classes = 'medium-up--one-third medium-up--push-one-third logo-align--center' -%}
@@ -73,14 +89,13 @@
         {%- assign logo_classes = 'medium-up--one-third logo-align--center' -%}
       {% endif %}
 
-
       {% if section.settings.align_logo == 'left' %}
         <nav class="grid__item medium-up--one-third small--hide" id="AccessibleNav" role="navigation">
           {% include 'site-nav', linklist: section.settings.main_linklist %}
         </nav>
       {% endif %}
 
-            <div class="grid__item {{ logo_classes }}">
+      <div class="grid__item {{ logo_classes }}">
         {% comment %}
           Use the uploaded logo from theme settings if enabled.
           Site name gets precedence with H1 tag on homepage, div on other pages.
@@ -92,49 +107,52 @@
             </svg>
             </a>
           </div>
+
       </div>
 
-      <div class="grid__item {% if section.settings.align_logo == 'left' %}medium-up--one-third{% else %}medium-up--one-third medium-up--push-one-third{% endif %} text-right site-header__icons{% if shop.customer_accounts_enabled %} site-header__icons--plus{% endif %}">
-        <div class="site-header__icons-wrapper">
-
+      <!-- RIGHT SIDE -->
+    
+      <div
+        class="grid__item {% if section.settings.align_logo == 'left' %}medium-up--one-third{% else %}medium-up--one-third medium-up--push-one-third{% endif %} text-right site-header__icons{% if shop.customer_accounts_enabled %} site-header__icons--plus{% endif %}">
+        <div class="site-header__icons-wrapper--right">
+      
           <button type="button" class="btn--link site-header__icon site-header__search-toggle js-drawer-open-top">
             {% include 'icon-search' %}
             <span class="icon__fallback-text">{{ 'layout.navigation.search' | t }}</span>
           </button>
-
+      
           {% if shop.customer_accounts_enabled %}
-            {% if customer %}
-              <a href="{{ routes.account_url }}" class="site-header__icon site-header__account">
-                {% include 'icon-login' %}
-                <span class="icon__fallback-text">{{ 'layout.customer.account' | t }}</span>
-              </a>
-            {% else %}
-              <a href="{{ routes.account_login_url }}" class="site-header__icon site-header__account">
-                {% include 'icon-login' %}
-                <span class="icon__fallback-text">{{ 'layout.customer.log_in' | t }}</span>
-              </a>
-            {% endif %}
+          {% if customer %}
+          <a href="{{ routes.account_url }}" class="site-header__icon site-header__account">
+            {% include 'icon-login' %}
+            <span class="icon__fallback-text">{{ 'layout.customer.account' | t }}</span>
+          </a>
+          {% else %}
+          <a href="{{ routes.account_login_url }}" class="site-header__icon site-header__account">
+            {% include 'icon-login' %}
+            <span class="icon__fallback-text">{{ 'layout.customer.log_in' | t }}</span>
+          </a>
           {% endif %}
-
+          {% endif %}
+      
           <a href="{{ routes.cart_url }}" class="site-header__icon site-header__cart">
             {% include 'icon-cart' %}
             <span class="icon__fallback-text">{{ 'layout.cart.title' | t }}</span>
-            <div id="CartCount" class="site-header__cart-count{% if cart.item_count == 0 %} hide{% endif %}" data-cart-count-bubble>
+            <div id="CartCount" class="site-header__cart-count{% if cart.item_count == 0 %} hide{% endif %}"
+              data-cart-count-bubble>
               <span data-cart-count>{{ cart.item_count }}</span>
-              <span class="icon__fallback-text medium-up--hide">{{ 'layout.cart.items_count' | t: count: cart.item_count }}</span>
+              <span
+                class="icon__fallback-text medium-up--hide">{{ 'layout.cart.items_count' | t: count: cart.item_count }}</span>
             </div>
           </a>
-
-          {% unless linklists[section.settings.main_linklist] == blank %}
-            <button type="button" class="btn--link site-header__icon site-header__menu js-mobile-nav-toggle mobile-nav--open" aria-controls="MobileNav"  aria-expanded="false" aria-label="{{ 'layout.navigation.menu' | t }}">
-              {% include 'icon-hamburger' %}
-              {% include 'icon-close' %}
-            </button>
-          {% endunless %}
+      
         </div>
-
+      
       </div>
+
     </div>
+
+  </div>
 
 <!-- Header Mobile -->
 

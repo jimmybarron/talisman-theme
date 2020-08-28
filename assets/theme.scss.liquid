@@ -4854,8 +4854,7 @@ $color-blankstate-background: rgba($color-body-text, 0.1);
     margin: 0 auto;
 
     @include media-query($small) {
-      text-align: left;
-      margin: 15px 0;
+      text-align: center;
     }
   }
 
@@ -4905,7 +4904,6 @@ $color-blankstate-background: rgba($color-body-text, 0.1);
 
   @include media-query($small) {
     width: auto;
-    padding-right: 13px;
 
     .btn--link,
     .site-header__cart {
@@ -4914,9 +4912,18 @@ $color-blankstate-background: rgba($color-body-text, 0.1);
   }
 }
 
-.site-header__icons-wrapper {
+.site-header__icons-wrapper--left {
   position: relative;
   padding: 0 48px 0 0;
+  @include display-flexbox();
+  @include align-items(center);
+  @include justify-content(flex-start);
+  width: 20%;
+}
+
+.site-header__icons-wrapper--right {
+  position: relative;
+  padding: 0 0 0 0;
   @include display-flexbox();
   @include align-items(center);
   @include justify-content(flex-end);
@@ -5009,7 +5016,7 @@ $color-blankstate-background: rgba($color-body-text, 0.1);
   @include media-query($small) {
     display: inline-block;
     vertical-align: middle;
-    padding: 10px 11px;
+    padding: 10px 16px;
     margin: 0;
   }
 
