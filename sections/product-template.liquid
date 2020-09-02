@@ -1,4 +1,4 @@
-<div class="product-template__container page-width"
+<div class="product-template__container"
   id="ProductSection-{{ section.id }}"
   data-section-id="{{ section.id }}"
   data-section-type="product"
@@ -8,6 +8,7 @@
   {% comment %}
     Get first variant, or deep linked one
   {% endcomment %}
+
   {%- assign current_variant = product.selected_or_first_available_variant -%}
   {%- assign product_image_zoom_size = '1024x1024' -%}
   {%- assign product_image_scale = '2' -%}
@@ -36,6 +37,7 @@
   {% endcase %}
 
   <div class="grid product-single{% if section.settings.enable_payment_button %} product-single--{{ section.settings.media_size }}-media{% endif %}">
+    
     <div class="grid__item product-single__media-group {{ product_media_width }}{% if section.settings.media_size == 'full' %} product-single__media-group--full{% endif %}" data-product-single-media-group>
       {%- assign featured_media = product.selected_or_first_available_variant.featured_media | default: product.featured_media -%}
 
@@ -65,18 +67,22 @@
 
 
       {% if product.media.size > 1 %}
+
         {% if product.media.size > 4 %}
           {%- assign enable_thumbnail_slides = true -%}
         {% endif %}
 
         <div class="thumbnails-wrapper{% if enable_thumbnail_slides == true %} thumbnails-slider--active{% endif %}">
+
           {% if enable_thumbnail_slides == true %}
             <button type="button" class="btn btn--link medium-up--hide thumbnails-slider__btn thumbnails-slider__prev thumbnails-slider__prev--{{ section.id }}">
               {% include 'icon-chevron-left' %}
               <span class="icon__fallback-text">{{ 'sections.slideshow.previous_slide' | t }}</span>
             </button>
           {% endif %}
+
           <ul class="product-single__thumbnails product-single__thumbnails-{{ section.id }}">
+
             {% for media in product.media %}
               <li class="product-single__thumbnails-item product-single__thumbnails-item--{{ section.settings.media_size }} js">
                 <a href="{{ media.preview_image | img_url: product_image_zoom_size, scale: product_image_scale }}"
@@ -95,11 +101,13 @@
                     {%- endcapture -%}
 
                     <img class="product-single__thumbnail-image" src="{{ media.preview_image | img_url: '110x110', scale: 2 }}" alt="{{ thumbnailAlt }}">
+
                     {%- if media.media_type == 'video' or media.media_type =='external_video' -%}
                       <div class="product-single__thumbnail-badge">
                         {% include 'icon-video-badge-full-color' %}
                       </div>
                     {%- endif -%}
+
                     {%- if media.media_type == 'model' -%}
                       <div class="product-single__thumbnail-badge">
                         {% include 'icon-3d-badge-full-color' %}
@@ -108,15 +116,20 @@
                 </a>
               </li>
             {% endfor %}
+
           </ul>
+
           {% if enable_thumbnail_slides == true %}
             <button type="button" class="btn btn--link medium-up--hide thumbnails-slider__btn thumbnails-slider__next thumbnails-slider__next--{{ section.id }}">
               {% include 'icon-chevron-right' %}
               <span class="icon__fallback-text">{{ 'sections.slideshow.next_slide' | t }}</span>
             </button>
           {% endif %}
+
         </div>
+
       {% endif %}
+
     </div>
 
     <div class="grid__item {{ product_description_width }}">
