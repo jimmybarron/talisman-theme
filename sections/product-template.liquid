@@ -65,6 +65,9 @@
         </button>
       {%- endif -%}
 
+      {%- comment -%}
+        Image Gallery
+      {%- endcomment -%}
 
       {% if product.media.size > 1 %}
 
@@ -131,6 +134,10 @@
       {% endif %}
 
     </div>
+
+    {%- comment -%}
+      Product Description
+    {%- endcomment -%}
 
     <div class="grid__item {{ product_description_width }}">
       <div class="product-single__meta">
@@ -244,6 +251,7 @@
         {%- comment -%}
           Live region for announcing updated price and availability to screen readers
         {%- endcomment -%}
+        
         <p class="visually-hidden" data-product-status
           aria-live="polite"
           role="status"
@@ -253,6 +261,7 @@
           Live region for announcing that the product form has been submitted and the
           product is in the process being added to the cart
         {%- endcomment -%}
+
         <p class="visually-hidden" data-loader-status
           aria-live="assertive"
           role="alert"
