@@ -20,7 +20,7 @@
     assign available = true
   endif
 
-  assign money_price = price | money
+  assign money_price = price | money_without_trailing_zeros
 -%}
 
 <dl class="price
