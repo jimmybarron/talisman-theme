@@ -77,23 +77,32 @@
       Product Name & Price & CTA
     {%- endcomment -%}
 
-    <div>
-      <div>Iridescence visible at angles</div>
-      <div>
-        {%- comment -%}
-          Get total number of media things
-          Get the last one minus 4 and display it
-        {%- endcomment -%}
+    <div class="flex items-center -mt-8">
+      <h1 class="flex items-center justify-center text-sm w-1/6">
+        <div class="whitespace-no-wrap transform -rotate-90">
+          Iridescence at angles
+        </div>
+      </h1>
+      <div class="w-4/6 z-10">
         {% assign nicknameIllustration = product.images.size | minus: 4 %}
         {{ product.images[nicknameIllustration] | img_url: 'master' | img_tag }}
       </div>
-      <div>Polished on one side, on the other</div>
+      <h1 class="flex items-center justify-center text-sm w-1/6">
+        <div class="whitespace-no-wrap transform rotate-90">
+          Polished on one side
+        </div>
+      </h1>
     </div>
+    <h1 class="flex items-center justify-center text-sm w-screen mt-6">
+      <div class="whitespace-no-wrap">
+        Polished on one side
+      </div>
+    </h1>
 
-    <div class="mx-8 my-8">
+    <div class="mx-8 my-10">
       <div class="flex flex-col items-center product-single__meta">
 
-        <h1 class="text-5xl">{{ product.title }}</h1>
+        <h1 class="text-5xl leading-8">{{ product.title }}</h1>
 
           <h1 class="text-5xl pt-2">
             {% include 'product-price', variant: current_variant, show_vendor: section.settings.show_vendor %}
