@@ -237,69 +237,69 @@
 
 <!-- Product Description -->
 
-        <div class="gradBg px-8 py-20">
-          <!-- <div class="gradDark1"></div>
-          <div class="gradDark2"></div>
-          <div class="gradDark3"></div>
-          <div class="gradDark4"></div>
-          <div class="gradLight1"></div>
-          <div class="gradLight2"></div> -->
-          <div class="product__description relative z-10">
-
-            <h5>
-              {{ product.metafields.description.blockquote1 }}
-            </h5>
-
-            {%- capture pdp-2 -%}
-              {{ productTitle }}-pdp-2.png
-            {% endcapture %}
-            {{ pdp-2 | file_url | img_tag }}
-
-            <p>
-              {{ product.metafields.description.paragraph1 }}
-            </p>
-
-            <h6>
-              {{ product.metafields.description.blockquote2 }}
-            </h6>
-            
-            {%- capture pdp-3 -%}
-              {{ productTitle }}-pdp-3.png
-            {% endcapture %}
-            {{ pdp-3 | file_url | img_tag }}
-
-            <p>
-              {{ product.metafields.description.paragraph2 }}
-            </p>
-
-            {%- capture pdp-4 -%}
-              {{ productTitle }}-pdp-4.png
-            {% endcapture %}
-            {{ pdp-4 | file_url | img_tag }}
-
-            <h4>
-              {{ product.metafields.description.imageSubtext }}
-            </h4>
-
-            <p>
-              {{ product.metafields.description.paragraph3 }}
-            </p>
-
-            {{ 'wowScience.png' | asset_url | img_tag }}
-
-            <p>
-              {{ product.metafields.description.paragraph4 }}
-            </p>
-
-          </div>
+      <div class="gradBg">
+        <div class="gradDark1"></div>
+        <div class="gradDark2"></div>
+        <!-- <div class="gradDark3"></div>
+        <div class="gradDark4"></div> -->
+        <div class="gradLight1"></div>
+        <div class="gradLight2"></div>
+        <div class="product__description px-8 py-20 relative z-10">
+      
+          <h5>
+            {{ product.metafields.description.blockquote1 }}
+          </h5>
+      
+          {%- capture pdp-2 -%}
+          {{ productTitle }}-pdp-2.png
+          {% endcapture %}
+          {{ pdp-2 | file_url | img_tag }}
+      
+          <p>
+            {{ product.metafields.description.paragraph1 }}
+          </p>
+      
+          <h6>
+            {{ product.metafields.description.blockquote2 }}
+          </h6>
+      
+          {%- capture pdp-3 -%}
+          {{ productTitle }}-pdp-3.png
+          {% endcapture %}
+          {{ pdp-3 | file_url | img_tag }}
+      
+          <p>
+            {{ product.metafields.description.paragraph2 }}
+          </p>
+      
+          {%- capture pdp-4 -%}
+          {{ productTitle }}-pdp-4.png
+          {% endcapture %}
+          {{ pdp-4 | file_url | img_tag }}
+      
+          <h4>
+            {{ product.metafields.description.imageSubtext }}
+          </h4>
+      
+          <p>
+            {{ product.metafields.description.paragraph3 }}
+          </p>
+      
+          {{ 'wowScience.png' | asset_url | img_tag }}
+      
+          <p>
+            {{ product.metafields.description.paragraph4 }}
+          </p>
+      
         </div>
-
-        {% if section.settings.show_share_buttons %}
-          {% include 'social-sharing', share_title: product.title, share_permalink: product.url, share_image: product.featured_media %}
-        {% endif %}
-    </div>
-  </div>
-</div>
+      </div>
+      
+      {% if section.settings.show_share_buttons %}
+      {% include 'social-sharing', share_title: product.title, share_permalink: product.url, share_image: product.featured_media %}
+      {% endif %}
+      </div>
+      </div>
+      </div>
 
 {% unless product == empty %}
   <script type="application/json" id="ProductJson-{{ section.id }}">
@@ -312,6 +312,12 @@
 
 <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.4.2/gsap.min.js"></script>
 {{ 'animatedGrad.js' | asset_url | script_tag }}
+
+<style>
+  #preview-bar-iframe {
+    display: none;
+  }
+</style>
 
 
 {% schema %}
