@@ -73,26 +73,27 @@
 
     </div>
 
-    {%- comment -%}
-      Product Details
-    {%- endcomment -%}
+<!-- Product Details -->
 
     <div class="flex items-center -mt-8">
  
       <h1 class="flex items-center justify-center text-sm w-1/6">
         <div class="whitespace-no-wrap transform -rotate-90">
-          {{ product.metafields.details.left-bullet }}
+          {{ product.metafields.description.left-bullet }}
         </div>
       </h1>
 
       <div class="w-4/6 z-10">
-        <!-- {% assign nicknameIllustration = product.images.size | minus: 4 %} -->
-        {{ product.images | last | img_url: 'master' | img_tag }}
+        {% assign productTitle = product.title | downcase %}
+        {%- capture pdp-1 -%}
+           {{ productTitle }}-pdp-1.png
+        {% endcapture %}
+        {{ pdp-1 | file_url | img_tag }}
       </div>
 
       <h1 class="flex items-center justify-center text-sm w-1/6">
         <div class="whitespace-no-wrap transform rotate-90">
-          {{ product.metafields.details.right-bullet }}
+          {{ product.metafields.description.right-bullet }}
         </div>
       </h1>
 
@@ -100,13 +101,9 @@
 
     <h1 class="flex items-center justify-center text-sm w-screen mt-6">
       <div class="whitespace-no-wrap">
-        {{ product.metafields.details.bottom-bullet }}
+        {{ product.metafields.description.bottom-bullet }}
       </div>
     </h1>
-
-    {%- comment -%}
-      Product Description
-    {%- endcomment -%}
 
     <div class="px-8 py-10">
 
@@ -238,9 +235,7 @@
           aria-hidden="true"
         >{{ 'products.product.loader_label' | t }}</p>
 
-        {%- comment -%}
-          Product Description
-        {%- endcomment -%}
+<!-- Product Description -->
 
         <div class="gradBg px-8 py-20">
           <!-- <div class="gradDark1"></div>
@@ -250,7 +245,52 @@
           <div class="gradLight1"></div>
           <div class="gradLight2"></div> -->
           <div class="product__description relative z-10">
-            {{ product.description }}
+
+            <h5>
+              {{ product.metafields.description.blockquote1 }}
+            </h5>
+
+            {%- capture pdp-2 -%}
+              {{ productTitle }}-pdp-2.png
+            {% endcapture %}
+            {{ pdp-2 | file_url | img_tag }}
+
+            <p>
+              {{ product.metafields.description.paragraph1 }}
+            </p>
+
+            <h6>
+              {{ product.metafields.description.blockquote2 }}
+            </h6>
+            
+            {%- capture pdp-3 -%}
+              {{ productTitle }}-pdp-3.png
+            {% endcapture %}
+            {{ pdp-3 | file_url | img_tag }}
+
+            <p>
+              {{ product.metafields.description.paragraph2 }}
+            </p>
+
+            {%- capture pdp-4 -%}
+              {{ productTitle }}-pdp-4.png
+            {% endcapture %}
+            {{ pdp-4 | file_url | img_tag }}
+
+            <h4>
+              {{ product.metafields.description.imageSubtext }}
+            </h4>
+
+            <p>
+              {{ product.metafields.description.paragraph3 }}
+            </p>
+
+            {{ 'wowScience.png' | asset_url | img_tag }}
+
+            <p>
+              {{ product.metafields.description.paragraph4 }}
+            </p>
+
           </div>
         </div>
 
