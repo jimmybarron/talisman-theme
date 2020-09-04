@@ -48,31 +48,31 @@ let gradAnimate4 = gsap.timeline({
   yoyo: true
 })
 
-gradAnimate4
-  .to('.gradDark4', 4 , {
-    ease: 'power1.inOut',
-    transform: 'translateY(30%)'
-  })
+// gradAnimate4
+//   .to('.gradDark4', 4 , {
+//     ease: 'power1.inOut',
+//     transform: 'translateY(30%)'
+//   })
 
-let gradAnimate5 = gsap.timeline({
-  repeat: -1,
-  yoyo: true
-})
+// let gradAnimate5 = gsap.timeline({
+//   repeat: -1,
+//   yoyo: true
+// })
 
 // Bottom Left to Bottom Right
 
-gradAnimate5
-  .to('.gradLight1', 5 , {
-    ease: 'power1.inOut',
-    css: {
-      backgroundImage: 'radial-gradient(30% 40% at 40% 10%, #FFD349 0%, rgba(255, 0, 0, 0) 100%)'
-    }
-  })
+// gradAnimate5
+//   .to('.gradLight1', 5 , {
+//     ease: 'power1.inOut',
+//     css: {
+//       backgroundImage: 'radial-gradient(30% 40% at 40% 10%, #FFD349 0%, rgba(255, 0, 0, 0) 100%)'
+//     }
+//   })
 
-let gradAnimate6 = gsap.timeline({
-  repeat: -1,
-  yoyo: true
-})
+// let gradAnimate6 = gsap.timeline({
+//   repeat: -1,
+//   yoyo: true
+// })
 
 // Top Right to Top Left
 
