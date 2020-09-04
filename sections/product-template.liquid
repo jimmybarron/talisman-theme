@@ -86,8 +86,8 @@
       </h1>
 
       <div class="w-4/6 z-10">
-        {% assign nicknameIllustration = product.images.size | minus: 4 %}
-        {{ product.images[nicknameIllustration] | img_url: 'master' | img_tag }}
+        <!-- {% assign nicknameIllustration = product.images.size | minus: 4 %} -->
+        {{ product.images | last | img_url: 'master' | img_tag }}
       </div>
 
       <h1 class="flex items-center justify-center text-sm w-1/6">
@@ -105,7 +105,7 @@
     </h1>
 
     {%- comment -%}
-      Product Description 
+      Product Description
     {%- endcomment -%}
 
     <div class="px-8 py-10">

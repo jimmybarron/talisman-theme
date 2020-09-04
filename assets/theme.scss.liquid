@@ -8703,9 +8703,10 @@ $min-height-disclosure: 92px;
 
 /*================ Product Page ================*/
 
-.product__description,
+// Text color & padding on paragraphs
 .product__description > p {
   color: {{ settings.color_body_bg }};
+  padding-bottom: 40px;
 }
 
 
@@ -8716,12 +8717,30 @@ $min-height-disclosure: 92px;
   padding-bottom: 40px;
 }
 
+// All images after first block quote
+.product__description > img {
+  padding-bottom: 40px;
+}
+
 // Second Blockquote
 .product__description > h6 {
   color: {{ settings.color_body_bg }};
   font-size: 44px;
   padding-bottom: 40px;
   text-align: right;
+}
+
+//Size Variation Text
+.product__description > h4 {
+  font-family: {{ base_font }};
+  color: {{ settings.color_body_bg }};
+  font-size: 14px;
+  padding-bottom: 40px;
+  margin-top: -20px;
+  text-align: right;
+  font-size: 14px;
+  line-height: 16px;
+  opacity: 0.5;
 }
 
 .gradBg {
