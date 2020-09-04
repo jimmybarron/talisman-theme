@@ -74,32 +74,42 @@
     </div>
 
     {%- comment -%}
-      Product Name & Price & CTA
+      Product Details
     {%- endcomment -%}
 
     <div class="flex items-center -mt-8">
+ 
       <h1 class="flex items-center justify-center text-sm w-1/6">
         <div class="whitespace-no-wrap transform -rotate-90">
-          Iridescence at angles
+          {{ product.metafields.details.left-bullet }}
         </div>
       </h1>
+
       <div class="w-4/6 z-10">
         {% assign nicknameIllustration = product.images.size | minus: 4 %}
         {{ product.images[nicknameIllustration] | img_url: 'master' | img_tag }}
       </div>
+
       <h1 class="flex items-center justify-center text-sm w-1/6">
         <div class="whitespace-no-wrap transform rotate-90">
-          Polished on one side
+          {{ product.metafields.details.right-bullet }}
         </div>
       </h1>
+
     </div>
+
     <h1 class="flex items-center justify-center text-sm w-screen mt-6">
       <div class="whitespace-no-wrap">
-        Polished on one side
+        {{ product.metafields.details.bottom-bullet }}
       </div>
     </h1>
 
-    <div class="mx-8 my-10">
+    {%- comment -%}
+      Product Description 
+    {%- endcomment -%}
+
+    <div class="px-8 py-10">
+
       <div class="flex flex-col items-center product-single__meta">
 
         <h1 class="text-5xl leading-8">{{ product.title }}</h1>
@@ -178,7 +188,7 @@
               <span class="product-form__error-message" data-error-message>{{ 'products.product.quantity_minimum_message' | t }}</span>
             </div>
 
-            <div class="product-form__controls-group product-form__controls-group--submit">
+            <div class="flex justify-center product-form__controls-group product-form__controls-group--submit">
               <div class="product-form__item product-form__item--submit
                 {%- if section.settings.enable_payment_button %} product-form__item--payment-button {%- endif -%}
                 {%- if product.has_only_default_variant %} product-form__item--no-variants {%- endif -%}"
@@ -229,11 +239,19 @@
         >{{ 'products.product.loader_label' | t }}</p>
 
         {%- comment -%}
-          DESCRIPTION
+          Product Description
         {%- endcomment -%}
 
-        <div class="mx-8">
-          {{ product.description }}
+        <div class="gradBg px-8 py-20">
+          <!-- <div class="gradDark1"></div>
+          <div class="gradDark2"></div>
+          <div class="gradDark3"></div>
+          <div class="gradDark4"></div>
+          <div class="gradLight1"></div>
+          <div class="gradLight2"></div> -->
+          <div class="product__description relative z-10">
+            {{ product.description }}
+          </div>
         </div>
 
         {% if section.settings.show_share_buttons %}
@@ -252,6 +270,8 @@
   </script>
 {% endunless %}
 
+<script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.4.2/gsap.min.js"></script>
+{{ 'animatedGrad.js' | asset_url | script_tag }}
 
 
 {% schema %}
