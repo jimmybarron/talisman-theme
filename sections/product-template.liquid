@@ -240,8 +240,6 @@
       <div class="gradBg">
         <div class="gradDark1"></div>
         <div class="gradDark2"></div>
-        <!-- <div class="gradDark3"></div>
-        <div class="gradDark4"></div> -->
         <div class="gradLight1"></div>
         <div class="gradLight2"></div>
         <div class="product__description px-8 py-20 relative z-10">
@@ -311,13 +309,106 @@
 {% endunless %}
 
 <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.4.2/gsap.min.js"></script>
-{{ 'animatedGrad.js' | asset_url | script_tag }}
+
+{%- comment -%}-------- Animated Gradient Colors pulled from metafields to override defaults from theme.scss ---------{%- endcomment -%}
 
 <style>
+  .gradBg {
+    background-color: {{ product.metafields.description.backgroundColor }};
+  }
+  
+  .gradDark1 {
+    background-image: radial-gradient(50% 80% at 0% 30%, {{ product.metafields.description.darkColor }} 0%, rgba(255, 0, 0, 0) 100%);
+  }
+  
+  .gradDark2 {
+    background-image: radial-gradient(60% 80% at 100% 100%, {{ product.metafields.description.darkColor }} 0%, rgba(255, 0, 0, 0) 100%);
+  }
+  
+  .gradLight1 {
+    background-image: radial-gradient(50% 40% at 80% 60%, {{ product.metafields.description.lightColor }} 0%, rgba(255, 0, 0, 0) 100%);
+  }
+  
+  .gradLight2 {
+    background-image: radial-gradient(40% 40% at 90% 80%, {{ product.metafields.description.lightColor }} 0%, rgba(255, 0, 0, 0) 100%);
+  }
+  
   #preview-bar-iframe {
     display: none;
   }
+  
 </style>
+
+{%- comment -%}-------- Animated Background ---------{%- endcomment -%}
+
+<script>
+  // Top left to bottom left
+
+  let gradAnimate1 = gsap.timeline({
+    repeat: -1,
+    yoyo: true
+  })
+
+  gradAnimate1
+    .to('.gradDark1', 4 , {
+      ease: 'power1.inOut',
+      css: {
+        backgroundImage: 'radial-gradient(50% 80% at 0% 70%, {{ product.metafields.description.lightColor }} 0%, rgba(255, 0, 0, 0) 100%)'
+      }
+    })
+
+
+
+    let gradAnimate2 = gsap.timeline({
+    repeat: -1,
+    yoyo: true
+  })
+
+  // Bottom Right to Top Left
+
+  gradAnimate2
+    .to('.gradDark2', 7 , {
+      ease: 'power1.inOut',
+      css: {
+        backgroundImage: 'radial-gradient(60% 20% at 100% 0%, {{ product.metafields.description.lightColor }} 0%, rgba(255, 0, 0, 0) 100%)'
+      }
+    })
+
+  let gradAnimate5 = gsap.timeline({
+    repeat: -1,
+    yoyo: true
+  })
+
+  // Bottom Left to Bottom Right
+
+  gradAnimate5
+    .to('.gradLight1', 5 , {
+      ease: 'power1.inOut',
+      css: {
+        backgroundImage: 'radial-gradient(50% 40% at 40% 10%, {{ product.metafields.description.darkColor }} 0%, rgba(255, 0, 0, 0) 100%)'
+      }
+    })
+
+  let gradAnimate6 = gsap.timeline({
+    repeat: -1,
+    yoyo: true
+  })
+
+  // Top Right to Top Left
+
+  gradAnimate6
+    .to('.gradLight2', 6 , {
+      ease: 'power1.inOut',
+      css: {
+        backgroundImage: 'radial-gradient(80% 40% at 10% 90%, {{ product.metafields.description.darkColor }} 0%, rgba(255, 0, 0, 0) 100%)'
+      }
+    }) 
+    
+  // gradAnimate1.pause()
+  // gradAnimate2.pause()
+  // gradAnimate5.pause()
+  // gradAnimate6.pause()
+</script>
 
 
 {% schema %}
@@ -343,6 +434,18 @@
     "zh-TW": "產品頁面"
   },
   "settings": [
+    {
+      "type": "header",
+      "content": "Description",
+      "info": "Add description content & colors"
+    },
+    {
+      "id": "gradDarkColor",
+      "type": "color",
+      "label": "Dark color for animated background",
+      "default": "#FF940C"
+
+    },
     {
       "type": "checkbox",
       "id": "show_quantity_selector",
