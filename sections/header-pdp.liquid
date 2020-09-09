@@ -58,15 +58,19 @@
 
   <!-- Header -->
 
-  <header class="container absolute z-10">
+  <header class="w-screen absolute z-10">
     
     <div class="flex items-center">
 
-      <!-- LEFT SIDE -->
+      <!-- MOBILE LEFT SIDE -->
 
       <div class="flex-1">
 
-        <!-- Hamburger -->
+      {%- comment -%}
+      ...........................................................
+      ..................Mobile Header Elements..................
+      ...........................................................
+      {%- endcomment -%}
 
         {% unless linklists[section.settings.main_linklist] == blank %}
           <button type="button" class="btn--link site-header__icon site-header__menu js-mobile-nav-toggle mobile-nav--open" aria-controls="MobileNav"  aria-expanded="false" aria-label="{{ 'layout.navigation.menu' | t }}">
@@ -89,11 +93,21 @@
         {%- assign logo_classes = 'medium-up--one-third logo-align--center' -%}
       {% endif %}
 
+      {%- comment -%}
+      ...........................................................
+      ..................Desktop Header Elements..................
+      ...........................................................
+      {%- endcomment -%}
+
+      <!-- Desktop Header -->
+
       {% if section.settings.align_logo == 'left' %}
-        <nav class="grid__item medium-up--one-third small--hide" id="AccessibleNav" role="navigation">
+        <nav class="flex-1 small--hide" id="AccessibleNav" role="navigation">
           {% include 'site-nav', linklist: section.settings.main_linklist %}
         </nav>
       {% endif %}
+
+      <!-- CENTER -->
 
       <div class="flex-1">
         {% comment %}

@@ -7,6 +7,9 @@
     Usage:
     {% include 'site-nav', linklist: section.settings.main_linklist, wrapper_class: 'site-nav--centered' %}
 {% endcomment %}
+
+<!-- site-nav snippet -->
+
 <ul class="site-nav list--inline{% if wrapper_class != blank %} {{ wrapper_class }}{% endif %}" id="SiteNav">
   {% for link in linklists[linklist].links %}
     {%- assign child_list_handle = link.title | handleize -%}
