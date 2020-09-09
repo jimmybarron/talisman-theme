@@ -30,7 +30,7 @@
 {% capture image_size %}{{ height }}x{{ height }}{% endcapture %}
 
 <div id="{{ media_wrapper_id }}"
-    class="product-single__media-wrapper js{% unless featured_media == media %} hide{% endunless %}"
+    class="product-single__media-wrapper"
     {% if media.media_type == 'video' or media.media_type == 'external_video' %} data-product-media-type-video data-enable-video-looping="{{ section.settings.enable_video_looping }}"{% endif %}
     {% if media.media_type == 'model' %} data-product-media-type-model{% endif %}
     {% if media.media_type == 'external_video' %} data-video-id="{{ media.external_id }}"{% endif %}
