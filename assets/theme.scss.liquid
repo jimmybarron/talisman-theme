@@ -8703,6 +8703,20 @@ $min-height-disclosure: 92px;
 
 /*================ Product Page ================*/
 
+// Carousel
+
+.carousel-cell {
+
+}
+
+@media screen and ( min-width: 768px ) {
+  /* half-width cells for larger devices */
+  .carousel-cell {
+    width: 50%
+  }
+}
+
+
 // Text color & padding on paragraphs
 .product__description > p {
   color: {{ settings.color_body_bg }};

@@ -1,4 +1,5 @@
 <link rel="stylesheet" href="{{ 'tailwind.min.css' | asset_url }}">
+<link rel="stylesheet" href="{{ 'flickity.css' | asset_url }}">
 
 <div class="product-template__container"
   id="ProductSection-{{ section.id }}"
@@ -39,14 +40,22 @@
   {% endcase %}
 
   <div class="grid-cols-1">
+
+    <!-- Product Carousel -->
     
-    <div class="">
+    <div class="carousel" data-flickity='{
+      "imagesLoaded": true,
+      "cellAlign": "left",
+      "wrapAround": true,
+      "prevNextButtons": false
+    }'>
       {%- assign featured_media = product.selected_or_first_available_variant.featured_media | default: product.featured_media -%}
 
-      {%- for media in product.media -%}
-        {% include 'media', media: media, featured_media: featured_media, height: height, enable_image_zoom: enable_image_zoom, image_zoom_size: product_image_zoom_size, image_scale: product_image_scale %}
+      {%- comment -%} The Limit Below controls how many images are pulled from the uploaded Product images{%- endcomment -%}
+      {%- for media in product.media limit: 3 -%}
+        {% include 'media-pdp', media: media, featured_media: featured_media, height: height, enable_image_zoom: enable_image_zoom, image_zoom_size: product_image_zoom_size, image_scale: product_image_scale %}
       {%- endfor -%}
-
+<!-- 
       <noscript>
         {% capture product_image_size %}{{ height }}x{% endcapture %}
         <img src="{{ featured_media | img_url: product_image_size, scale: product_image_scale }}" alt="{{ featured_media.alt }}" id="FeaturedMedia-{{ section.id }}" class="product-featured-media" style="max-width: {{ height }}px;">
@@ -65,11 +74,7 @@
         >
           {% include 'icon-3d-badge-full-color' %}<span class='product-single__view-in-space-text'>{{ 'products.product.view_in_space' | t }}</span>
         </button>
-      {%- endif -%}
-
-      {%- comment -%}
-        Image Gallery
-      {%- endcomment -%}
+      {%- endif -%} -->
 
     </div>
 
@@ -309,6 +314,7 @@
 {% endunless %}
 
 <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.4.2/gsap.min.js"></script>
+<script src="{{ 'flickity.min.js' | asset_url }}"></script>
 
 {%- comment -%}-------- Animated Gradient Colors pulled from metafields to override defaults from theme.scss ---------{%- endcomment -%}
 
@@ -338,6 +344,15 @@
   }
   
 </style>
+
+{%- comment -%}-------- Carousel ---------{%- endcomment -%}
+
+<!-- <script>
+  let elem = document.querySelector('.carousel')
+  let flkty = new Flickity(elem, {
+    imagesLoaded: true
+  })
+</script> -->
 
 {%- comment -%}-------- Animated Background ---------{%- endcomment -%}
 
@@ -404,10 +419,10 @@
       }
     }) 
     
-  // gradAnimate1.pause()
-  // gradAnimate2.pause()
-  // gradAnimate5.pause()
-  // gradAnimate6.pause()
+  gradAnimate1.pause()
+  gradAnimate2.pause()
+  gradAnimate5.pause()
+  gradAnimate6.pause()
 </script>
 
 
