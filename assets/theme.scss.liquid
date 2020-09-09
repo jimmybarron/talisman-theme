@@ -1364,10 +1364,10 @@ html {
 
 .main-content {
   display: block;
-  padding-top: $section-spacing-small;
+  // padding-top: $section-spacing-small;
 
   @include media-query($medium-up) {
-    padding-top: $section-spacing;
+    // padding-top: $section-spacing;
   }
 }
 
@@ -8708,12 +8708,25 @@ $min-height-disclosure: 92px;
 .carousel-cell {
 
 }
+  
+.carousel-mobile {
+  display: block;
+}
 
-@media screen and ( min-width: 768px ) {
-  /* half-width cells for larger devices */
-  .carousel-cell {
-    width: 50%
+.carousel-desktop {
+  display: none;
+}
+
+@media only screen and ( min-width: 750px ) {
+
+  .carousel-mobile {
+    display: none;
   }
+
+  .carousel-desktop {
+    display: block;
+  }
+
 }
 
 

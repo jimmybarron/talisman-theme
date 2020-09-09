@@ -38,19 +38,74 @@
 
   <div class="grid-cols-1">
 
-    <!-- Product Carousel -->
+    {%- comment -%}
+    .......................................................
+    ......................Mobile Carousel.........................
+    .......................................................
+    {%- endcomment -%}
     
-    <div class="carousel" data-flickity='{
+    <div class="carousel-mobile" data-flickity='{
       "imagesLoaded": true,
       "cellAlign": "left",
       "wrapAround": true,
-      "prevNextButtons": false
+      "prevNextButtons": false,
+      "adaptiveHeight": true
     }'>
+
       {%- assign featured_media = product.selected_or_first_available_variant.featured_media | default: product.featured_media -%}
 
       {%- comment -%} The Limit Below controls how many images are pulled from the uploaded Product images{%- endcomment -%}
-      {%- for media in product.media limit: 3 -%}
-        {% include 'media-pdp', media: media, featured_media: featured_media, height: height, enable_image_zoom: enable_image_zoom, image_zoom_size: product_image_zoom_size, image_scale: product_image_scale %}
+
+      {%- for media in product.media -%}
+        {% if media.src contains "mobile" %}
+          {% include 'media-pdp', media: media, featured_media: featured_media, height: height, enable_image_zoom: enable_image_zoom, image_zoom_size: product_image_zoom_size, image_scale: product_image_scale %}
+        {% endif %}
+      {%- endfor -%}
+<!-- 
+      <noscript>
+        {% capture product_image_size %}{{ height }}x{% endcapture %}
+        <img src="{{ featured_media | img_url: product_image_size, scale: product_image_scale }}" alt="{{ featured_media.alt }}" id="FeaturedMedia-{{ section.id }}" class="product-featured-media" style="max-width: {{ height }}px;">
+      </noscript>
+
+      {% assign first_3d_model = product.media | where: "media_type", "model" | first %}
+
+      {%- if first_3d_model -%}
+        <button
+          aria-label="{{ 'products.product.view_in_space_label' | t }}"
+          class="product-single__view-in-space"
+          data-shopify-xr
+          data-shopify-model3d-id="{{ first_3d_model.id }}"
+          data-shopify-title="{{ product.title | escape }}"
+          data-shopify-xr-hidden
+        >
+          {% include 'icon-3d-badge-full-color' %}<span class='product-single__view-in-space-text'>{{ 'products.product.view_in_space' | t }}</span>
+        </button>
+      {%- endif -%} -->
+
+    </div>
+
+    {%- comment -%}
+    .......................................................
+    ......................Desktop Carousel.........................
+    .......................................................
+    {%- endcomment -%}
+    
+    <div class="carousel-desktop" data-flickity='{
+      "imagesLoaded": true,
+      "cellAlign": "left",
+      "wrapAround": true,
+      "prevNextButtons": false,
+      "adaptiveHeight": true
+    }'>
+
+      {%- assign featured_media = product.selected_or_first_available_variant.featured_media | default: product.featured_media -%}
+
+      {%- comment -%} The Limit Below controls how many images are pulled from the uploaded Product images{%- endcomment -%}
+
+      {%- for media in product.media -%}
+        {% if media.src contains "desktop" %}
+          {% include 'media-pdp', media: media, featured_media: featured_media, height: height, enable_image_zoom: enable_image_zoom, image_zoom_size: product_image_zoom_size, image_scale: product_image_scale %}
+        {% endif %}
       {%- endfor -%}
 <!-- 
       <noscript>
@@ -339,14 +394,6 @@
   
 </style>
 
-{%- comment -%}-------- Carousel ---------{%- endcomment -%}
-
-<!-- <script>
-  let elem = document.querySelector('.carousel')
-  let flkty = new Flickity(elem, {
-    imagesLoaded: true
-  })
-</script> -->
 
 {%- comment -%}-------- Animated Background ---------{%- endcomment -%}
 
