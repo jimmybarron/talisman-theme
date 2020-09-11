@@ -9,7 +9,7 @@
     Get first variant, or deep linked one
   {% endcomment %}
 
-  {%- assign current_variant = product.selected_or_first_available_variant -%}
+  {%- assign current_variant = product.selected_or_first_available_avariant -%}
   {%- assign product_image_zoom_size = '1024x1024' -%}
   {%- assign product_image_scale = '2' -%}
   {%- assign enable_image_zoom = section.settings.enable_image_zoom -%}
@@ -95,7 +95,9 @@
       "cellAlign": "left",
       "wrapAround": true,
       "prevNextButtons": false,
-      "adaptiveHeight": true
+      "adaptiveHeight": true,
+      "fade": true,
+      "draggable": false
     }'>
 
       {%- assign featured_media = product.selected_or_first_available_variant.featured_media | default: product.featured_media -%}
@@ -192,7 +194,11 @@
 
     </style>
 
-<!-- Product Details -->
+    {%- comment -%}
+    .......................................................
+    ......................Product Details.........................
+    .......................................................
+    {%- endcomment -%}
 
     <div class="flex items-center -mt-8">
  
@@ -354,7 +360,11 @@
           aria-hidden="true"
         >{{ 'products.product.loader_label' | t }}</p>
 
-<!-- Product Description -->
+    {%- comment -%}
+    .......................................................
+    ......................Product Description.........................
+    .......................................................
+    {%- endcomment -%}
 
       <div class="gradBg">
         <div class="gradDark1"></div>
