@@ -205,9 +205,8 @@
       lg:top-0
       lg:right-0
       lg:w-1/4
-      lg:pt-16
       lg:mr-8
-      xl:pt-32
+      product__details
     ">
       <div class="flex items-center -mt-8">
    
@@ -263,7 +262,7 @@
             
   
             {% capture "form_classes" -%}
-              lg:pt-1 product-form product-form-{{ section.id }}
+              product-form product-form-{{ section.id }}
               {%- unless section.settings.show_variant_labels %} product-form--hide-variant-labels {% endunless %}
               {%- if section.settings.enable_payment_button and product.has_only_default_variant %} product-form--payment-button-no-variants {%- endif -%}
               {%- if current_variant.available == false %} product-form--variant-sold-out {%- endif -%}
@@ -376,7 +375,7 @@
 
     {%- comment -%}
     .......................................................
-    ......................Product Description.........................
+    .....................Product Description.........................
     .......................................................
     {%- endcomment -%}
 
