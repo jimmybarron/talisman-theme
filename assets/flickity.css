@@ -106,35 +106,41 @@ https://flickity.metafizzy.co
   height: 60%;
 }
 
-/* ---- page dots ---- */
+/* ---- mobile page dots ---- */
 
-.flickity-page-dots {
-  position: absolute;
-  width: 100%;
-  right: 8px;
-  bottom: 8px;
-  padding: 0;
-  margin: 0;
-  list-style: none;
-  text-align: right;
-  line-height: 1;
+@media only screen and ( max-width: 767px ) {
+  
+  .flickity-page-dots {
+    position: absolute;
+    width: 100%;
+    right: 8px;
+    bottom: 8px;
+    padding: 0;
+    margin: 0;
+    list-style: none;
+    text-align: right;
+    line-height: 1;
+  }
+  
+  .flickity-rtl .flickity-page-dots { direction: rtl; }
+  
+  .flickity-page-dots .dot {
+    display: inline-block;
+    width: 16px;
+    height: 16px;
+    margin: 0 4px;
+    border-radius: 50%;
+    opacity: 1;
+    cursor: pointer;
+    border: 3px solid #FFFFFF;
+    box-sizing: border-box;
+  }
+  
+  .flickity-page-dots .dot.is-selected {
+    background: #ffffff;
+    opacity: 1;
+  }
+  
 }
 
-.flickity-rtl .flickity-page-dots { direction: rtl; }
 
-.flickity-page-dots .dot {
-  display: inline-block;
-  width: 16px;
-  height: 16px;
-  margin: 0 4px;
-  border-radius: 50%;
-  opacity: 1;
-  cursor: pointer;
-  border: 3px solid #FFFFFF;
-  box-sizing: border-box;
-}
-
-.flickity-page-dots .dot.is-selected {
-  background: #ffffff;
-  opacity: 1;
-}
