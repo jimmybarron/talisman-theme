@@ -412,8 +412,37 @@
             </p>
 
           </div>
+
+          {%- comment -%}Desktop Layout{%- endcomment -%}
       
-          <div class="md:flex md:flex-row-reverse md:py-20">
+          <div class="w-full hidden md:block flex flex-col py-20">
+
+            {%- capture pdp-3 -%}
+              {{ productTitle }}-pdp-3.png
+            {% endcapture %}
+
+            <div class="w-1/2">
+              {{ pdp-3 | file_url | img_tag }}
+            </div>
+
+            <div class="w-1/2 flex flex-col">
+
+              <h6 class="product-description__blockquote2 text-left">
+                {{ product.metafields.description.blockquote2 }}
+              </h6>
+          
+              <p>
+                {{ product.metafields.description.paragraph2 }}
+              </p>
+
+            </div>
+
+          </div>
+
+          {%- comment -%}Mobile Layout{%- endcomment -%}
+      
+          <div class="md:hidden flex flex-row-reverse py-20">
+
             <h6 class="product-description__blockquote2 md:w-1/2">
               {{ product.metafields.description.blockquote2 }}
             </h6>
@@ -422,13 +451,14 @@
               {{ productTitle }}-pdp-3.png
             {% endcapture %}
 
-            <div class="md:w-1/2 md:order-1">
+            <div class="w-1/2 order-1">
               {{ pdp-3 | file_url | img_tag }}
             </div>
         
-            <p class="py-16 md:w-1/2">
+            <p class="py-16 w-1/2">
               {{ product.metafields.description.paragraph2 }}
             </p>
+
           </div>
       
           {%- capture pdp-4 -%}
