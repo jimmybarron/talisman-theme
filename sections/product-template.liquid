@@ -203,14 +203,15 @@
       lg:absolute
       lg:top-0
       lg:right-0
-      lg:w-1/4
-      lg:mr-8
+      lg:w-4/12
+      lg:pr-8
+      z-10
       product__details
     ">
-      <div class="flex items-center -mt-8">
+      <div class="flex items-center -mt-8 group">
    
-        <h1 class="flex items-center justify-center text-sm w-1/6">
-          <div class="whitespace-no-wrap transform -rotate-90">
+        <h1 class="flex items-center justify-center text-sm w-1/6 left-bullet">
+          <div class="whitespace-no-wrap transform -rotate-90 md:opacity-0">
             {{ product.metafields.description.left-bullet }}
           </div>
         </h1>
@@ -223,15 +224,15 @@
           {{ pdp-1 | file_url | img_tag }}
         </div>
   
-        <h1 class="flex items-center justify-center text-sm w-1/6">
-          <div class="whitespace-no-wrap transform rotate-90">
+        <h1 class="flex items-center justify-center text-sm w-1/6 right-bullet">
+          <div class="whitespace-no-wrap transform rotate-90 md:opacity-0">
             {{ product.metafields.description.right-bullet }}
           </div>
         </h1>
   
       </div>
   
-      <h1 class="flex items-center justify-center text-sm w-screen mt-6 md:w-auto">
+      <h1 class="flex items-center justify-center text-sm w-screen mt-6 md:w-auto md:opacity-0 bottom-bullet">
         <div class="whitespace-no-wrap">
           {{ product.metafields.description.bottom-bullet }}
         </div>
@@ -315,9 +316,15 @@
                 role="alert"
               >
                 <span class="visually-hidden">{{ 'general.accessibility.error' | t }} </span>
-                {% include 'icon-error' %}
+                {% include 'icon-error' %}J
                 <span class="product-form__error-message" data-error-message>{{ 'products.product.quantity_minimum_message' | t }}</span>
               </div>
+
+              {%- comment -%}
+              .............................................
+              ....................CTA......................
+              .............................................
+              {%- endcomment -%}
   
               <div class="flex justify-center product-form__controls-group product-form__controls-group--submit">
                 <div class="product-form__item product-form__item--submit
@@ -327,9 +334,18 @@
                   <button type="submit" name="add"
                     {% unless current_variant.available %} aria-disabled="true"{% endunless %}
                     aria-label="{% unless current_variant.available %}{{ 'products.product.sold_out' | t }}{% else %}{{ 'products.product.add_to_cart' | t }}{% endunless %}"
-                    class="pt-4 btn product-form__cart-submit{% if section.settings.enable_payment_button %} btn--secondary-accent{% endif %}"
-                    {% if settings.enable_ajax %}aria-haspopup="dialog"{% endif %}
-                    data-add-to-cart>
+                    class="
+                      pt-4
+                      btn
+                      product-form__cart-submit
+                      {% if section.settings.enable_payment_button %}
+                        btn--secondary-accen
+                      {% endif %}"
+                    {% if settings.enable_ajax %}
+                      aria-haspopup="dialog"
+                    {% endif %}
+                    data-add-to-cart
+                  >
                     <span data-add-to-cart-text>
                       {% unless current_variant.available %}
                         {{ 'products.product.sold_out' | t }}
@@ -389,7 +405,6 @@
           py-20
           relative
           z-10
-          md:w-3/4
         ">
       
           <h5 class="product-description__blockquote1">
@@ -415,17 +430,17 @@
 
           {%- comment -%}Desktop Layout{%- endcomment -%}
       
-          <div class="w-full hidden md:block flex flex-col py-20">
+          <div class="w-full hidden md:flex py-20">
 
             {%- capture pdp-3 -%}
               {{ productTitle }}-pdp-3.png
             {% endcapture %}
 
-            <div class="w-1/2">
+            <div class="md:w-1/2">
               {{ pdp-3 | file_url | img_tag }}
             </div>
 
-            <div class="w-1/2 flex flex-col">
+            <div class="w-1/2 flex justify-center flex-col px-8">
 
               <h6 class="product-description__blockquote2 text-left">
                 {{ product.metafields.description.blockquote2 }}
@@ -441,7 +456,7 @@
 
           {%- comment -%}Mobile Layout{%- endcomment -%}
       
-          <div class="md:hidden flex flex-row-reverse py-20">
+          <div class="md:hidden md:flex flex-row-reverse py-10">
 
             <h6 class="product-description__blockquote2 md:w-1/2">
               {{ product.metafields.description.blockquote2 }}
@@ -451,32 +466,44 @@
               {{ productTitle }}-pdp-3.png
             {% endcapture %}
 
-            <div class="w-1/2 order-1">
+            <div class="md:w-1/2 order-1">
               {{ pdp-3 | file_url | img_tag }}
             </div>
         
-            <p class="py-16 w-1/2">
+            <p class="py-16 md:w-1/2">
               {{ product.metafields.description.paragraph2 }}
             </p>
 
           </div>
+
+
+          <div class="md:flex">
+
+            <div class="md:w-1/2 md:order-2">
+  
+              {%- capture pdp-4 -%}
+                {{ productTitle }}-pdp-4.png
+              {% endcapture %}
+              {{ pdp-4 | file_url | img_tag }}
+  
+              <h4 class="product-description__imageSubText">
+                {{ product.metafields.description.imageSubtext }}
+              </h4>
+  
+            </div>
+        
+        
+            <p class="md:w-1/2 pb-8 md:pr-8 md:pb-24 md:order-1 md:flex md:items-end md:text-right">
+              {{ product.metafields.description.paragraph3 }}
+            </p>
+
+          </div>
       
-          {%- capture pdp-4 -%}
-            {{ productTitle }}-pdp-4.png
-          {% endcapture %}
-          {{ pdp-4 | file_url | img_tag }}
+          <div class="md:mx-auto md:mb-8 md:mt-16 md:w-2/3">
+            {{ 'wowScience.png' | asset_url | img_tag }}
+          </div>
       
-          <h4 class="product-description__imageSubText">
-            {{ product.metafields.description.imageSubtext }}
-          </h4>
-      
-          <p class="pb-16">
-            {{ product.metafields.description.paragraph3 }}
-          </p>
-      
-          {{ 'wowScience.png' | asset_url | img_tag }}
-      
-          <p>
+          <p class="md:text-center">
             {{ product.metafields.description.paragraph4 }}
           </p>
       
@@ -529,9 +556,21 @@
 </style>
 
 
-{%- comment -%}-------- Animated Background ---------{%- endcomment -%}
+{%- comment -%}-------- Animations ---------{%- endcomment -%}
 
 <script>
+
+  let detailsHoverAnimate = gsap.timeline({ paused:true })
+
+  detailsHoverAnimate
+    .to('.left-bullet', 2, {
+      opacity: 1
+    .to('.right-bullet', 2, {
+    opacity: 1
+    })
+
+  document.querySelector('.product__details').addEventListener("mouseover", detailsHoverAnimate)
+
   // Top left to bottom left
 
   let gradAnimate1 = gsap.timeline({
