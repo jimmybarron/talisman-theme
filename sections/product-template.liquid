@@ -210,8 +210,8 @@
     ">
       <div class="flex items-center -mt-8 group">
    
-        <h1 class="flex items-center justify-center text-sm w-1/6 left-bullet">
-          <div class="whitespace-no-wrap transform -rotate-90 md:opacity-0">
+        <h1 class="flex items-center justify-center text-sm w-1/6 left-bullet md:opacity-0">
+          <div class="whitespace-no-wrap transform -rotate-90">
             {{ product.metafields.description.left-bullet }}
           </div>
         </h1>
@@ -224,8 +224,8 @@
           {{ pdp-1 | file_url | img_tag }}
         </div>
   
-        <h1 class="flex items-center justify-center text-sm w-1/6 right-bullet">
-          <div class="whitespace-no-wrap transform rotate-90 md:opacity-0">
+        <h1 class="flex items-center justify-center text-sm w-1/6 right-bullet md:opacity-0">
+          <div class="whitespace-no-wrap transform rotate-90">
             {{ product.metafields.description.right-bullet }}
           </div>
         </h1>
@@ -529,6 +529,7 @@
 {%- comment -%}-------- Animated Gradient Colors pulled from metafields to override defaults from theme.scss ---------{%- endcomment -%}
 
 <style>
+
   .gradBg {
     background-color: {{ product.metafields.description.backgroundColor }};
   }
@@ -560,16 +561,32 @@
 
 <script>
 
-  let detailsHoverAnimate = gsap.timeline({ paused:true })
+  // .......................................................
+  // .....................UI.........................
+  // .......................................................
 
-  detailsHoverAnimate
-    .to('.left-bullet', 2, {
-      opacity: 1
-    .to('.right-bullet', 2, {
-    opacity: 1
-    })
+  let detailsHover = gsap.timeline({
+    paused:true
+  })
 
-  document.querySelector('.product__details').addEventListener("mouseover", detailsHoverAnimate)
+  detailsHover
+    .to('.left-bullet', 1, { opacity: 1 }, 'start')
+    .to('.right-bullet', 1, { opacity: 1 }, 'start')
+    .to('.bottom-bullet', 1, { opacity: 1 }, 'start')
+
+  let productDetails = document.querySelector('.product__details')
+
+  productDetails.addEventListener('mouseover', () => {
+    detailsHover.play()
+  })
+
+  productDetails.addEventListener('mouseleave', () => {
+    detailsHover.reverse()
+  })
+
+  // .......................................................
+  // .....................Gradients.........................
+  // .......................................................
 
   // Top left to bottom left
 
@@ -633,10 +650,10 @@
       }
     }) 
     
-  gradAnimate1.pause()
+  {/* gradAnimate1.pause()
   gradAnimate2.pause()
   gradAnimate5.pause()
-  gradAnimate6.pause()
+  gradAnimate6.pause() */}
 </script>
 
 
