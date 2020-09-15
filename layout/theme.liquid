@@ -39,7 +39,16 @@
 
   {% include 'social-meta-tags' %}
 
+  {%- comment -%}
+  .....................................................
+  .................... STYLESHEETS ....................
+  ..................................................... 
+  {%- endcomment -%}
+
   {{ 'theme.scss.css' | asset_url | stylesheet_tag }}
+  <link rel="stylesheet" href="{{ 'flickity.css' | asset_url }}">
+  <link rel="stylesheet" href="{{ 'tailwind.min.css' | asset_url }}">
+
 
   <script>
     var theme = {
@@ -103,9 +112,19 @@
     <script src="{{ 'shopify_common.js' | shopify_asset_url }}" defer="defer"></script>
   {%- endif -%}
 
+   {%- comment -%}
+  .....................................................
+  .................... JS Libraries ....................
+  ..................................................... 
+  {%- endcomment -%}
+
   <script src="{{ 'lazysizes.js' | asset_url }}" async="async"></script>
   <script src="{{ 'vendor.js' | asset_url }}" defer="defer"></script>
   <script src="{{ 'theme.js' | asset_url }}" defer="defer"></script>
+  <script src="{{ 'gsap.min.js' | asset_url }}"></script>
+  <script src="{{ 'flickity.min.js' | asset_url }}" defer="defer"></script>
+  <script src="{{ 'flickity-fade.js' | asset_url }}" defer="defer"></script>
+  
 
   {{ content_for_header }}
 </head>

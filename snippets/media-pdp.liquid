@@ -30,7 +30,7 @@
 {% capture image_size %}{{ height }}x{{ height }}{% endcapture %}
 
 <div id="{{ media_wrapper_id }} carousel-cell"
-    class="product-single__media-wrapper w-11/12"
+    class="product-single__media-wrapper w-11/12 md:w-full"
     {% if media.media_type == 'video' or media.media_type == 'external_video' %} data-product-media-type-video data-enable-video-looping="{{ section.settings.enable_video_looping }}"{% endif %}
     {% if media.media_type == 'model' %} data-product-media-type-model{% endif %}
     {% if media.media_type == 'external_video' %} data-video-id="{{ media.external_id }}"{% endif %}
@@ -41,7 +41,7 @@
     {% when 'image' %}
       {% capture zoom_media_id %}ImageZoom-{{ section.id }}-{{ media.id }}{% endcapture %}
       {%- assign img_url = media | img_url: '1x1' | replace: '_1x1.', '_{width}x.' -%}
-      {% include 'image-style', height: height, wrapper_id: media_wrapper_id, img_id: media_id, image: media.preview_image %}
+      <!-- {% include 'image-style', height: height, wrapper_id: media_wrapper_id, img_id: media_id, image: media.preview_image %} -->
       <div
         id="{{ zoom_media_id }}"
         style="padding-top:{{ 1 | divided_by: media.preview_image.aspect_ratio | times: 100}}%;"

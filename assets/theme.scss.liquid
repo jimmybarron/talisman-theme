@@ -1364,10 +1364,10 @@ html {
 
 .main-content {
   display: block;
-  padding-top: $section-spacing-small;
+  // padding-top: $section-spacing-small;
 
   @include media-query($medium-up) {
-    padding-top: $section-spacing;
+    // padding-top: $section-spacing;
   }
 }
 
@@ -1942,7 +1942,7 @@ a[href^="tel"] {
   &[disabled],
   &[aria-disabled] {
     cursor: default;
-    opacity: 0.5;
+    opacity: 1;
   }
 }
 
@@ -2590,12 +2590,12 @@ textarea {
 
 .site-nav {
   position: relative;
-  padding: 0 0 0 48px;
+  padding: 0 0 0 32px;
   text-align: left;
   margin: 25px 0;
 
   a {
-    padding: 3px 10px;
+    padding: 3px 16px;
   }
 }
 
@@ -4917,7 +4917,7 @@ $color-blankstate-background: rgba($color-body-text, 0.1);
 
 .site-header__icons-wrapper--right {
   position: relative;
-  padding: 0 0 0 0;
+  padding: 0 16px 0 0;
   @include display-flexbox();
   @include align-items(center);
   @include justify-content(flex-end);
@@ -8708,49 +8708,102 @@ $min-height-disclosure: 92px;
 .carousel-cell {
 
 }
+  
+.carousel-mobile {
+  display: block;
+}
 
-@media screen and ( min-width: 768px ) {
-  /* half-width cells for larger devices */
-  .carousel-cell {
-    width: 50%
+.carousel-desktop {
+  display: none;
+}
+
+@media only screen and ( min-width: 1000px ) {
+
+  .carousel-mobile {
+    display: none;
   }
+
+  .carousel-desktop {
+    display: block;
+  }
+
+  .product__details {
+    padding-top: 10vh;
+    padding-right: 4vh;
+  }
+
+}
+
+@media only screen and ( min-width: 1280px ) {
+
+  .product__details {
+    padding-top: 12vh;
+    padding-right: 4vh;
+  }
+
+  .product-description {
+    width: 70%;
+  }
+
+}
+
+@media only screen and ( min-width: 1600px ) {
+
+  .product-description {
+    width: 45%;
+  }
+
 }
 
 
 // Text color & padding on paragraphs
-.product__description > p {
+.product-description p {
   color: {{ settings.color_body_bg }};
-  padding-bottom: 40px;
 }
 
-
 // First Blockquote
-.product__description > h5 {
+.product-description__blockquote1 {
   color: {{ settings.color_body_bg }};
   font-size: 44px;
   padding-bottom: 40px;
 }
 
-// All images after first block quote
-.product__description > img {
+@media only screen and ( min-width: 1000px ) {
+
+  .product-description__blockquote1 {
+    font-size: 64px;
+  }
+
+}
+
+// PDP Image 2
+.product-description__pdp-2 {
   padding-bottom: 40px;
 }
 
 // Second Blockquote
-.product__description > h6 {
+.product-description__blockquote2 {
   color: {{ settings.color_body_bg }};
   font-size: 44px;
   padding-bottom: 40px;
   text-align: right;
 }
 
+@media only screen and ( min-width: 1000px ) {
+
+  .product-description__blockquote2 {
+    font-size: 64px;
+  }
+
+}
+
 //Size Variation Text
-.product__description > h4 {
+.product-description__imageSubText {
   font-family: {{ base_font }};
   color: {{ settings.color_body_bg }};
   font-size: 14px;
   padding-bottom: 40px;
-  margin-top: -20px;
+  margin-top: 16px;
   text-align: right;
   font-size: 14px;
   line-height: 16px;

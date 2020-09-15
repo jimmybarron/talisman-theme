@@ -1,6 +1,3 @@
-<link rel="stylesheet" href="{{ 'tailwind.min.css' | asset_url }}">
-<link rel="stylesheet" href="{{ 'flickity.css' | asset_url }}">
-
 <div class="product-template__container"
   id="ProductSection-{{ section.id }}"
   data-section-id="{{ section.id }}"
@@ -12,7 +9,7 @@
     Get first variant, or deep linked one
   {% endcomment %}
 
-  {%- assign current_variant = product.selected_or_first_available_variant -%}
+  {%- assign current_variant = product.selected_or_first_available_avariant -%}
   {%- assign product_image_zoom_size = '1024x1024' -%}
   {%- assign product_image_scale = '2' -%}
   {%- assign enable_image_zoom = section.settings.enable_image_zoom -%}
@@ -41,19 +38,28 @@
 
   <div class="grid-cols-1">
 
-    <!-- Product Carousel -->
+    {%- comment -%}
+    .......................................................
+    ......................Mobile Carousel.........................
+    .......................................................
+    {%- endcomment -%}
     
-    <div class="carousel" data-flickity='{
+    <div class="carousel-mobile" data-flickity='{
       "imagesLoaded": true,
       "cellAlign": "left",
       "wrapAround": true,
-      "prevNextButtons": false
+      "prevNextButtons": false,
+      "adaptiveHeight": true
     }'>
+
       {%- assign featured_media = product.selected_or_first_available_variant.featured_media | default: product.featured_media -%}
 
       {%- comment -%} The Limit Below controls how many images are pulled from the uploaded Product images{%- endcomment -%}
-      {%- for media in product.media limit: 3 -%}
-        {% include 'media-pdp', media: media, featured_media: featured_media, height: height, enable_image_zoom: enable_image_zoom, image_zoom_size: product_image_zoom_size, image_scale: product_image_scale %}
+
+      {%- for media in product.media -%}
+        {% if media.src contains "mobile" %}
+          {% include 'media-pdp', media: media, featured_media: featured_media, height: height, enable_image_zoom: enable_image_zoom, image_zoom_size: product_image_zoom_size, image_scale: product_image_scale %}
+        {% endif %}
       {%- endfor -%}
 <!-- 
       <noscript>
@@ -78,219 +84,426 @@
 
     </div>
 
-<!-- Product Details -->
+    {%- comment -%}
+    .......................................................
+    ......................Desktop Carousel.........................
+    .......................................................
+    {%- endcomment -%}
+    
+    <div class="carousel-desktop" data-flickity='{
+      "imagesLoaded": true,
+      "cellAlign": "left",
+      "wrapAround": true,
+      "prevNextButtons": false,
+      "adaptiveHeight": true,
+      "fade": true,
+      "draggable": false
+    }'>
 
-    <div class="flex items-center -mt-8">
- 
-      <h1 class="flex items-center justify-center text-sm w-1/6">
-        <div class="whitespace-no-wrap transform -rotate-90">
-          {{ product.metafields.description.left-bullet }}
-        </div>
-      </h1>
+      {%- assign featured_media = product.selected_or_first_available_variant.featured_media | default: product.featured_media -%}
 
-      <div class="w-4/6 z-10">
-        {% assign productTitle = product.title | downcase %}
-        {%- capture pdp-1 -%}
-           {{ productTitle }}-pdp-1.png
-        {% endcapture %}
-        {{ pdp-1 | file_url | img_tag }}
-      </div>
+      {%- comment -%} Any uploaded filename with 'desktop' in it will show up in the desktop carousel {%- endcomment -%}
+      {%- for media in product.media -%}
+        {% if media.src contains "desktop" %}
+          {% include 'media-pdp', media: media, featured_media: featured_media, height: height, enable_image_zoom: enable_image_zoom, image_zoom_size: product_image_zoom_size, image_scale: product_image_scale %}
+        {% endif %}
+      {%- endfor -%}
 
-      <h1 class="flex items-center justify-center text-sm w-1/6">
-        <div class="whitespace-no-wrap transform rotate-90">
-          {{ product.metafields.description.right-bullet }}
-        </div>
-      </h1>
+      {%- capture dot-backgrounds -%}
+        {%- for media in product.media -%}
+          {%- if media.src contains "desktop" -%}
+            {{- media | img_url: 'compact' -}}
+            {%- if forloop.last == false -%}::{%- endif -%}
+          {%- endif -%}
+        {%- endfor -%}
+      {%- endcapture -%}
+      {%- assign dot-bg-arr = dot-backgrounds | split: '::' -%}
+<!-- 
+      <noscript>
+        {% capture product_image_size %}{{ height }}x{% endcapture %}
+        <img src="{{ featured_media | img_url: product_image_size, scale: product_image_scale }}" alt="{{ featured_media.alt }}" id="FeaturedMedia-{{ section.id }}" class="product-featured-media" style="max-width: {{ height }}px;">
+      </noscript>
+
+      {% assign first_3d_model = product.media | where: "media_type", "model" | first %}
+
+      {%- if first_3d_model -%}
+        <button
+          aria-label="{{ 'products.product.view_in_space_label' | t }}"
+          class="product-single__view-in-space"
+          data-shopify-xr
+          data-shopify-model3d-id="{{ first_3d_model.id }}"
+          data-shopify-title="{{ product.title | escape }}"
+          data-shopify-xr-hidden
+        >
+          {% include 'icon-3d-badge-full-color' %}<span class='product-single__view-in-space-text'>{{ 'products.product.view_in_space' | t }}</span>
+        </button>
+      {%- endif -%} -->
 
     </div>
 
-    <h1 class="flex items-center justify-center text-sm w-screen mt-6">
-      <div class="whitespace-no-wrap">
-        {{ product.metafields.description.bottom-bullet }}
-      </div>
-    </h1>
+    {%- comment -%}
+    .......................................................
+    ......................Desktop Carousel Dots.........................
+    .......................................................
+    {%- endcomment -%}
 
-    <div class="px-8 py-10">
+    <style>
 
-      <div class="flex flex-col items-center product-single__meta">
+      @media only screen and ( min-width: 768px ) {
 
-        <h1 class="text-5xl leading-8">{{ product.title }}</h1>
+        .flickity-page-dots {
+          position: absolute;
+          display: flex;
+          flex-direction: column;
+          top: 36%;
+        }
+        
+        .flickity-page-dots .dot.is-selected{
+          border: 3px solid #FFFFFF;
+          opacity: 1;
+        }
 
-          <h1 class="text-5xl pt-2">
-            {% include 'product-price', variant: current_variant, show_vendor: section.settings.show_vendor %}
+        .flickity-page-dots .dot {
+          display: inline-block;
+          width: 48px;
+          height: 48px;
+          margin: 6px 24px;
+          border-radius: 50%;
+          opacity: 1;
+          cursor: pointer;
+          border: 1px solid #FFFFFF;
+          box-sizing: border-box;
+        }
+
+        .flickity-page-dots .dot:first-child {
+          background-size: cover;
+          background-image: url("{{- dot-bg-arr[0] -}}");
+        }
+
+        .flickity-page-dots .dot:nth-child(2) {
+          background-size: cover;
+          background-image: url("{{- dot-bg-arr[1] -}}");
+        }
+
+        .flickity-page-dots .dot:nth-child(3) {
+          background-size: cover;
+          background-image: url("{{- dot-bg-arr[2] -}}");
+        }
+      }
+
+    </style>
+
+    {%- comment -%}
+    .......................................................
+    ......................Product Details.........................
+    .......................................................
+    {%- endcomment -%}
+
+    <div class="
+      lg:absolute
+      lg:top-0
+      lg:right-0
+      lg:w-4/12
+      lg:pr-8
+      z-10
+      product__details
+    ">
+      <div class="flex items-center -mt-8 group">
+   
+        <h1 class="flex items-center justify-center text-sm w-1/6 left-bullet md:opacity-0">
+          <div class="whitespace-no-wrap transform -rotate-90">
+            {{ product.metafields.description.left-bullet }}
           </div>
-
-          {%- if shop.taxes_included or shop.shipping_policy.body != blank -%}
-            <div class="product__policies rte" data-product-policies>
-              {%- if shop.taxes_included -%}
-                {{ 'products.product.include_taxes' | t }}
-              {%- endif -%}
-              {%- if shop.shipping_policy.body != blank -%}
-                {{ 'products.product.shipping_policy_html' | t: link: shop.shipping_policy.url }}
-              {%- endif -%}
+        </h1>
+  
+        <div class="w-4/6 z-10">
+          {% assign productTitle = product.title | downcase %}
+          {%- capture pdp-1 -%}
+             {{ productTitle }}-pdp-1.png
+          {% endcapture %}
+          {{ pdp-1 | file_url | img_tag }}
+        </div>
+  
+        <h1 class="flex items-center justify-center text-sm w-1/6 right-bullet md:opacity-0">
+          <div class="whitespace-no-wrap transform rotate-90">
+            {{ product.metafields.description.right-bullet }}
+          </div>
+        </h1>
+  
+      </div>
+  
+      <h1 class="flex items-center justify-center text-sm w-screen mt-6 md:w-auto md:opacity-0 bottom-bullet">
+        <div class="whitespace-no-wrap">
+          {{ product.metafields.description.bottom-bullet }}
+        </div>
+      </h1>
+  
+      <div class="px-8 py-10">
+  
+        <div class="flex flex-col items-center product-single__meta">
+  
+          <h1 class="text-5xl leading-8">{{ product.title }}</h1>
+  
+            <h1 class="text-5xl pt-2">
+              {% include 'product-price', variant: current_variant, show_vendor: section.settings.show_vendor %}
             </div>
-          {%- endif -%}
-
-          {% capture "form_classes" -%}
-            product-form product-form-{{ section.id }}
-            {%- unless section.settings.show_variant_labels %} product-form--hide-variant-labels {% endunless %}
-            {%- if section.settings.enable_payment_button and product.has_only_default_variant %} product-form--payment-button-no-variants {%- endif -%}
-            {%- if current_variant.available == false %} product-form--variant-sold-out {%- endif -%}
-          {%- endcapture %}
-
-          {% form 'product', product, class:form_classes, novalidate: 'novalidate', data-product-form: '' %}
-            {% unless product.has_only_default_variant %}
-              <div class="product-form__controls-group">
-                {% for option in product.options_with_values %}
-                  <div class="selector-wrapper js product-form__item">
-                    <label {% if option.name == 'default' %}class="label--hidden" {% endif %}for="SingleOptionSelector-{{ forloop.index0 }}">
-                      {{ option.name }}
-                    </label>
-                    <select class="single-option-selector single-option-selector-{{ section.id }} product-form__input"
-                      id="SingleOptionSelector-{{ forloop.index0 }}"
-                      data-index="option{{ forloop.index }}"
-                    >
-                      {% for value in option.values %}
-                        <option value="{{ value | escape }}"{% if option.selected_value == value %} selected="selected"{% endif %}>{{ value }}</option>
-                      {% endfor %}
-                    </select>
-                  </div>
-                {% endfor %}
+  
+            {%- if shop.taxes_included or shop.shipping_policy.body != blank -%}
+              <div class="product__policies rte" data-product-policies>
+                {%- if shop.taxes_included -%}
+                  {{ 'products.product.include_taxes' | t }}
+                {%- endif -%}
+                {%- if shop.shipping_policy.body != blank -%}
+                  {{ 'products.product.shipping_policy_html' | t: link: shop.shipping_policy.url }}
+                {%- endif -%}
               </div>
-            {% endunless %}
+            {%- endif -%}
 
-            <select name="id" id="ProductSelect-{{ section.id }}" class="product-form__variants no-js">
-              {% for variant in product.variants %}
-                <option value="{{ variant.id }}"
-                  {%- if variant == current_variant %} selected="selected" {%- endif -%}
-                >
-                  {{ variant.title }}  {%- if variant.available == false %} - {{ 'products.product.sold_out' | t }}{% endif %}
-                </option>
-              {% endfor %}
-            </select>
-
-            {% if section.settings.show_quantity_selector %}
-              <div class="product-form__controls-group">
-                <div class="product-form__item">
-                  <label for="Quantity-{{ section.id }}">{{ 'products.product.quantity' | t }}</label>
-                  <input type="number" id="Quantity-{{ section.id }}"
-                    name="quantity" value="1" min="1" pattern="[0-9]*"
-                    class="product-form__input product-form__input--quantity" data-quantity-input
+            
+  
+            {% capture "form_classes" -%}
+              product-form product-form-{{ section.id }}
+              {%- unless section.settings.show_variant_labels %} product-form--hide-variant-labels {% endunless %}
+              {%- if section.settings.enable_payment_button and product.has_only_default_variant %} product-form--payment-button-no-variants {%- endif -%}
+              {%- if current_variant.available == false %} product-form--variant-sold-out {%- endif -%}
+            {%- endcapture %}
+  
+            {% form 'product', product, class:form_classes, novalidate: 'novalidate', data-product-form: '' %}
+              {% unless product.has_only_default_variant %}
+                <div class="product-form__controls-group">
+                  {% for option in product.options_with_values %}
+                    <div class="selector-wrapper js product-form__item">
+                      <label {% if option.name == 'default' %}class="label--hidden" {% endif %}for="SingleOptionSelector-{{ forloop.index0 }}">
+                        {{ option.name }}
+                      </label>
+                      <select class="single-option-selector single-option-selector-{{ section.id }} product-form__input"
+                        id="SingleOptionSelector-{{ forloop.index0 }}"
+                        data-index="option{{ forloop.index }}"
+                      >
+                        {% for value in option.values %}
+                          <option value="{{ value | escape }}"{% if option.selected_value == value %} selected="selected"{% endif %}>{{ value }}</option>
+                        {% endfor %}
+                      </select>
+                    </div>
+                  {% endfor %}
+                </div>
+              {% endunless %}
+  
+              <select name="id" id="ProductSelect-{{ section.id }}" class="product-form__variants no-js">
+                {% for variant in product.variants %}
+                  <option value="{{ variant.id }}"
+                    {%- if variant == current_variant %} selected="selected" {%- endif -%}
                   >
+                    {{ variant.title }}  {%- if variant.available == false %} - {{ 'products.product.sold_out' | t }}{% endif %}
+                  </option>
+                {% endfor %}
+              </select>
+  
+              {% if section.settings.show_quantity_selector %}
+                <div class="product-form__controls-group">
+                  <div class="product-form__item">
+                    <label for="Quantity-{{ section.id }}">{{ 'products.product.quantity' | t }}</label>
+                    <input type="number" id="Quantity-{{ section.id }}"
+                      name="quantity" value="1" min="1" pattern="[0-9]*"
+                      class="product-form__input product-form__input--quantity" data-quantity-input
+                    >
+                  </div>
+                </div>
+              {% endif %}
+  
+              <div class="product-form__error-message-wrapper product-form__error-message-wrapper--hidden{% if section.settings.enable_payment_button %} product-form__error-message-wrapper--has-payment-button{% endif %}"
+                data-error-message-wrapper
+                role="alert"
+              >
+                <span class="visually-hidden">{{ 'general.accessibility.error' | t }} </span>
+                {% include 'icon-error' %}J
+                <span class="product-form__error-message" data-error-message>{{ 'products.product.quantity_minimum_message' | t }}</span>
+              </div>
+
+              {%- comment -%}
+              .............................................
+              ....................CTA......................
+              .............................................
+              {%- endcomment -%}
+  
+              <div class="flex justify-center product-form__controls-group product-form__controls-group--submit">
+                <div class="product-form__item product-form__item--submit
+                  {%- if section.settings.enable_payment_button %} product-form__item--payment-button {%- endif -%}
+                  {%- if product.has_only_default_variant %} product-form__item--no-variants {%- endif -%}"
+                >
+                  <button type="submit" name="add"
+                    {% unless current_variant.available %} aria-disabled="true"{% endunless %}
+                    aria-label="{% unless current_variant.available %}{{ 'products.product.sold_out' | t }}{% else %}{{ 'products.product.add_to_cart' | t }}{% endunless %}"
+                    class="
+                      pt-4
+                      btn
+                      product-form__cart-submit
+                      {% if section.settings.enable_payment_button %}
+                        btn--secondary-accen
+                      {% endif %}"
+                    {% if settings.enable_ajax %}
+                      aria-haspopup="dialog"
+                    {% endif %}
+                    data-add-to-cart
+                  >
+                    <span data-add-to-cart-text>
+                      {% unless current_variant.available %}
+                        {{ 'products.product.sold_out' | t }}
+                      {% else %}
+                        {{ 'products.product.add_to_cart' | t }}
+                      {% endunless %}
+                    </span>
+                    <span class="hide" data-loader>
+                      {% include 'icon-spinner' %}
+                    </span>
+                  </button>
+                  {% if section.settings.enable_payment_button %}
+                    {{ form | payment_button }}
+                  {% endif %}
                 </div>
               </div>
-            {% endif %}
+            {% endform %}
+          </div>
+  
+          {%- comment -%}
+            Live region for announcing updated price and availability to screen readers
+          {%- endcomment -%}
+          
+          <p class="visually-hidden" data-product-status
+            aria-live="polite"
+            role="status"
+          ></p>
+  
+          {%- comment -%}
+            Live region for announcing that the product form has been submitted and the
+            product is in the process being added to the cart
+          {%- endcomment -%}
+          
+          <p class="visually-hidden" data-loader-status
+            aria-live="assertive"
+            role="alert"
+            aria-hidden="true"
+          >
+            {{ 'products.product.loader_label' | t }}
+          </p>
+    </div>
 
-            <div class="product-form__error-message-wrapper product-form__error-message-wrapper--hidden{% if section.settings.enable_payment_button %} product-form__error-message-wrapper--has-payment-button{% endif %}"
-              data-error-message-wrapper
-              role="alert"
-            >
-              <span class="visually-hidden">{{ 'general.accessibility.error' | t }} </span>
-              {% include 'icon-error' %}
-              <span class="product-form__error-message" data-error-message>{{ 'products.product.quantity_minimum_message' | t }}</span>
-            </div>
+    {%- comment -%}
+    .......................................................
+    .....................Product Description.........................
+    .......................................................
+    {%- endcomment -%}
 
-            <div class="flex justify-center product-form__controls-group product-form__controls-group--submit">
-              <div class="product-form__item product-form__item--submit
-                {%- if section.settings.enable_payment_button %} product-form__item--payment-button {%- endif -%}
-                {%- if product.has_only_default_variant %} product-form__item--no-variants {%- endif -%}"
-              >
-                <button type="submit" name="add"
-                  {% unless current_variant.available %} aria-disabled="true"{% endunless %}
-                  aria-label="{% unless current_variant.available %}{{ 'products.product.sold_out' | t }}{% else %}{{ 'products.product.add_to_cart' | t }}{% endunless %}"
-                  class="pt-4 btn product-form__cart-submit{% if section.settings.enable_payment_button %} btn--secondary-accent{% endif %}"
-                  {% if settings.enable_ajax %}aria-haspopup="dialog"{% endif %}
-                  data-add-to-cart>
-                  <span data-add-to-cart-text>
-                    {% unless current_variant.available %}
-                      {{ 'products.product.sold_out' | t }}
-                    {% else %}
-                      {{ 'products.product.add_to_cart' | t }}
-                    {% endunless %}
-                  </span>
-                  <span class="hide" data-loader>
-                    {% include 'icon-spinner' %}
-                  </span>
-                </button>
-                {% if section.settings.enable_payment_button %}
-                  {{ form | payment_button }}
-                {% endif %}
-              </div>
-            </div>
-          {% endform %}
-        </div>
-
-        {%- comment -%}
-          Live region for announcing updated price and availability to screen readers
-        {%- endcomment -%}
-        
-        <p class="visually-hidden" data-product-status
-          aria-live="polite"
-          role="status"
-        ></p>
-
-        {%- comment -%}
-          Live region for announcing that the product form has been submitted and the
-          product is in the process being added to the cart
-        {%- endcomment -%}
-        
-        <p class="visually-hidden" data-loader-status
-          aria-live="assertive"
-          role="alert"
-          aria-hidden="true"
-        >{{ 'products.product.loader_label' | t }}</p>
-
-<!-- Product Description -->
-
-      <div class="gradBg">
+      <div class="flex flex-col items-center gradBg">
         <div class="gradDark1"></div>
         <div class="gradDark2"></div>
         <div class="gradLight1"></div>
         <div class="gradLight2"></div>
-        <div class="product__description px-8 py-20 relative z-10">
+        <div class="
+          product-description
+          px-8
+          py-20
+          relative
+          z-10
+        ">
       
-          <h5>
+          <h5 class="product-description__blockquote1">
             {{ product.metafields.description.blockquote1 }}
           </h5>
+
+          {%- comment -%}----------RADAR CHART----------{%- endcomment -%}
+          <div class="md:flex md:flex-row-reverse">
+        
+            {%- capture pdp-2 -%}
+              {{ productTitle }}-pdp-2.png
+            {% endcapture %}
+  
+            <div class="product-description__pdp-2 md:w-2/3 md:pl-24">
+              {{ pdp-2 | file_url | img_tag }}
+            </div>
+        
+            <p class="pb-16 md:w-1/3 md:pr-8">
+              {{ product.metafields.description.paragraph1 }}
+            </p>
+
+          </div>
+
+          {%- comment -%}Desktop Layout{%- endcomment -%}
       
-          {%- capture pdp-2 -%}
-          {{ productTitle }}-pdp-2.png
-          {% endcapture %}
-          {{ pdp-2 | file_url | img_tag }}
+          <div class="w-full hidden md:flex py-20">
+
+            {%- capture pdp-3 -%}
+              {{ productTitle }}-pdp-3.png
+            {% endcapture %}
+
+            <div class="md:w-1/2">
+              {{ pdp-3 | file_url | img_tag }}
+            </div>
+
+            <div class="w-1/2 flex justify-center flex-col px-8">
+
+              <h6 class="product-description__blockquote2 text-left">
+                {{ product.metafields.description.blockquote2 }}
+              </h6>
+          
+              <p>
+                {{ product.metafields.description.paragraph2 }}
+              </p>
+
+            </div>
+
+          </div>
+
+          {%- comment -%}Mobile Layout{%- endcomment -%}
       
-          <p>
-            {{ product.metafields.description.paragraph1 }}
-          </p>
+          <div class="md:hidden md:flex flex-row-reverse py-10">
+
+            <h6 class="product-description__blockquote2 md:w-1/2">
+              {{ product.metafields.description.blockquote2 }}
+            </h6>
+        
+            {%- capture pdp-3 -%}
+              {{ productTitle }}-pdp-3.png
+            {% endcapture %}
+
+            <div class="md:w-1/2 order-1">
+              {{ pdp-3 | file_url | img_tag }}
+            </div>
+        
+            <p class="py-16 md:w-1/2">
+              {{ product.metafields.description.paragraph2 }}
+            </p>
+
+          </div>
+
+
+          <div class="md:flex">
+
+            <div class="md:w-1/2 md:order-2">
+  
+              {%- capture pdp-4 -%}
+                {{ productTitle }}-pdp-4.png
+              {% endcapture %}
+              {{ pdp-4 | file_url | img_tag }}
+  
+              <h4 class="product-description__imageSubText">
+                {{ product.metafields.description.imageSubtext }}
+              </h4>
+  
+            </div>
+        
+        
+            <p class="md:w-1/2 pb-8 md:pr-8 md:pb-24 md:order-1 md:flex md:items-end md:text-right">
+              {{ product.metafields.description.paragraph3 }}
+            </p>
+
+          </div>
       
-          <h6>
-            {{ product.metafields.description.blockquote2 }}
-          </h6>
+          <div class="md:mx-auto md:mb-8 md:mt-16 md:w-2/3">
+            {{ 'wowScience.png' | asset_url | img_tag }}
+          </div>
       
-          {%- capture pdp-3 -%}
-          {{ productTitle }}-pdp-3.png
-          {% endcapture %}
-          {{ pdp-3 | file_url | img_tag }}
-      
-          <p>
-            {{ product.metafields.description.paragraph2 }}
-          </p>
-      
-          {%- capture pdp-4 -%}
-          {{ productTitle }}-pdp-4.png
-          {% endcapture %}
-          {{ pdp-4 | file_url | img_tag }}
-      
-          <h4>
-            {{ product.metafields.description.imageSubtext }}
-          </h4>
-      
-          <p>
-            {{ product.metafields.description.paragraph3 }}
-          </p>
-      
-          {{ 'wowScience.png' | asset_url | img_tag }}
-      
-          <p>
+          <p class="md:text-center">
             {{ product.metafields.description.paragraph4 }}
           </p>
       
@@ -313,12 +526,10 @@
   </script>
 {% endunless %}
 
-<script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.4.2/gsap.min.js"></script>
-<script src="{{ 'flickity.min.js' | asset_url }}"></script>
-
 {%- comment -%}-------- Animated Gradient Colors pulled from metafields to override defaults from theme.scss ---------{%- endcomment -%}
 
 <style>
+
   .gradBg {
     background-color: {{ product.metafields.description.backgroundColor }};
   }
@@ -345,18 +556,38 @@
   
 </style>
 
-{%- comment -%}-------- Carousel ---------{%- endcomment -%}
 
-<!-- <script>
-  let elem = document.querySelector('.carousel')
-  let flkty = new Flickity(elem, {
-    imagesLoaded: true
-  })
-</script> -->
-
-{%- comment -%}-------- Animated Background ---------{%- endcomment -%}
+{%- comment -%}-------- Animations ---------{%- endcomment -%}
 
 <script>
+
+  // .......................................................
+  // .....................UI.........................
+  // .......................................................
+
+  let detailsHover = gsap.timeline({
+    paused:true
+  })
+
+  detailsHover
+    .to('.left-bullet', 1, { opacity: 1 }, 'start')
+    .to('.right-bullet', 1, { opacity: 1 }, 'start')
+    .to('.bottom-bullet', 1, { opacity: 1 }, 'start')
+
+  let productDetails = document.querySelector('.product__details')
+
+  productDetails.addEventListener('mouseover', () => {
+    detailsHover.play()
+  })
+
+  productDetails.addEventListener('mouseleave', () => {
+    detailsHover.reverse()
+  })
+
+  // .......................................................
+  // .....................Gradients.........................
+  // .......................................................
+
   // Top left to bottom left
 
   let gradAnimate1 = gsap.timeline({
@@ -419,10 +650,10 @@
       }
     }) 
     
-  gradAnimate1.pause()
+  {/* gradAnimate1.pause()
   gradAnimate2.pause()
   gradAnimate5.pause()
-  gradAnimate6.pause()
+  gradAnimate6.pause() */}
 </script>
 
 
