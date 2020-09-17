@@ -1,0 +1,82 @@
+<style>
+  #preview-bar-iframe {
+    display: none;
+  }
+</style>
+
+{{ 'isotope.min.js' | asset_url | script_tag }}
+
+<!-- Mood Selection -->
+
+<div class="flex mt-24 pl-4 overflow-scroll">
+
+  {% for tag in collection.all_tags %}
+  
+    <div class="mr-2">
+      <button class="filter{{ tag | capitalize}} bg-transparent text-white font-semibold hover:text-white py-2 px-4 border border-white hover:border-transparent rounded">{{ tag }}</button>
+    </div>
+  
+    <script>
+      let filter{{ tag | capitalize}} = document.querySelector('.filter{{ tag | capitalize }}')
+      filter{{ tag | capitalize}}.addEventListener('click', () => {
+        iso.arrange({
+          filter: '.{{ tag | lowercase }}'
+        })
+      })
+    </script>
+  
+  {% endfor %}
+  
+</div>
+
+<!-- Product Grid -->
+
+<div class="flex justify-center">
+  <div class="productGrid w-full h-auto mt-8">
+  
+    {% for product in collection.products %}
+  
+      <!-- Product Item -->
+  
+      <a class="productGrid-item w-5/12 h-64{% for tag in product.tags %} {{ tag }}{% endfor %}" href="{{ product.url }}">
+  
+        <div>
+    
+          <div>
+            {{ product.images[0] | img_url: '700x' | img_tag }}
+          </div>
+    
+          <div>
+            {{- product.title -}}
+          </div>
+    
+          <div class="hidden">
+            {{- product.description -}}
+          </div>
+          
+          <div>
+            {{- product.price | money_without_trailing_zeros -}}
+          </div>
+    
+        </div>
+  
+      </a>
+  
+    {% endfor %}
+    
+  </div>
+</div>
+
+<script>
+
+  let productGrid = document.querySelector('.productGrid');
+  let iso = new Isotope( productGrid, {
+    itemSelector: '.productGrid-item',
+    layoutMode: 'fitRows',
+    fitRows: {
+      gutter: 8
+    }
+  });
+
+</script>
+
