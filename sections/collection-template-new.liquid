@@ -94,6 +94,7 @@
 
     filter{{ tag | capitalize }}.addEventListener('click', () => {
 
+      filter{{ tag | capitalize }}.focus();
       crystalIcon{{ tag | capitalize }}AnimIn.restart();
       crystalIcon{{ tag | capitalize }}AnimIn.play();
 
@@ -111,7 +112,14 @@
 
     });
 
-    filter{{ tag | capitalize }}.addEventListener('focusout', (event) => {
+    filter{{ tag | capitalize }}.addEventListener('focusout', () => {
+
+      crystalIcon{{ tag | capitalize }}AnimOut.restart();
+      crystalIcon{{ tag | capitalize }}AnimOut.play();
+
+    });
+
+    filter{{ tag | capitalize }}.addEventListener('touchcancel', () => {
 
       crystalIcon{{ tag | capitalize }}AnimOut.restart();
       crystalIcon{{ tag | capitalize }}AnimOut.play();
@@ -146,7 +154,7 @@
       background: 'linear-gradient(180deg, #EEF835 80%, rgba(255, 255, 255, 0) 100%)',
       height: '140px',
       ease: "power3.out",
-      duration: 0.5 })
+      duration: 0.5 });
 
 </script>
 
