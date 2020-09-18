@@ -2757,7 +2757,7 @@ body {
   @include media-query($medium-up) {
     // Prevent mobile menu inline styles from overriding desktop styles
     // sass-lint:disable no-important
-    @include transform(translate3d(0, 0, 0));
+    // @include transform(translate3d(0, 0, 0));
   }
 }
 
@@ -8703,7 +8703,21 @@ $min-height-disclosure: 92px;
 
 /*================ Shop All Page ================*/
 
+.moodFilter {
+  -ms-overflow-style: none;  /* IE and Edge */
+  scrollbar-width: none;  /* Firefox */
+}
+
+.moodFilter::-webkit-scrollbar {
+  display: none;
+}
+
+.productGrid {
+  width: 90%;
+}
+
 .productGrid-item {
+  width: 49%;
 }
 
 

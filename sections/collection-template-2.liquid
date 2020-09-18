@@ -5,16 +5,21 @@
 </style>
 
 {{ 'isotope.min.js' | asset_url | script_tag }}
+{{ 'ScrollTrigger.min.js' | asset_url | script_tag }}
 
-<!-- Mood Selection -->
+<!-- Mood Filters -->
 
-<div class="flex mt-24 pl-4 overflow-scroll">
+<div class="moodFilter z-10 flex pt-24 pl-4 overflow-scroll scrolling-touch static">
 
   {% for tag in collection.all_tags %}
+
+    {%- comment -%} Create a button with each tag as a class on the product {%- endcomment -%}
   
     <div class="mr-2">
       <button class="filter{{ tag | capitalize}} bg-transparent text-white font-semibold hover:text-white py-2 px-4 border border-white hover:border-transparent rounded">{{ tag }}</button>
     </div>
+
+    {%- comment -%} Get that button and on click invoke the isotope filter to only show items with that tag/class name {%- endcomment -%}
   
     <script>
       let filter{{ tag | capitalize}} = document.querySelector('.filter{{ tag | capitalize }}')
@@ -26,19 +31,38 @@
     </script>
   
   {% endfor %}
+
+  <script>
+    gsap.to('.moodFilter', {
+      scrollTrigger: {
+        trigger: '.moodFilter',
+        start: 'bottom top',
+        endTrigger:"html",
+        end:"bottom bottom",
+        pin: true,
+        pinSpacing: false,
+        toggleActions: "play none none reverse",
+        markers: true
+      },
+      position: 'fixed',
+      top: -80,
+      duration: 0.5
+    })
+  </script>
   
 </div>
 
 <!-- Product Grid -->
 
 <div class="flex justify-center">
-  <div class="productGrid w-full h-auto mt-8">
+
+  <div class="productGrid mt-8">
   
     {% for product in collection.products %}
   
       <!-- Product Item -->
   
-      <a class="productGrid-item w-5/12 h-64{% for tag in product.tags %} {{ tag }}{% endfor %}" href="{{ product.url }}">
+      <a class="productGrid-item{% for tag in product.tags %} {{ tag }}{% endfor %}" href="{{ product.url }}">
   
         <div>
     
@@ -64,17 +88,22 @@
   
     {% endfor %}
     
-  </div>
+  </div> 
 </div>
 
 <script>
 
   let productGrid = document.querySelector('.productGrid');
+  let productGridItem = document.querySelector('.productGrid-item');
   let iso = new Isotope( productGrid, {
     itemSelector: '.productGrid-item',
-    layoutMode: 'fitRows',
-    fitRows: {
-      gutter: 8
+    percentPosition: true,
+    layoutMode: 'masonry',
+    masonry: {
+      gutter: 8,
+      columnWidth: productGridItem,
+      fitWidth: true,
+      resize: true      
     }
   });
 
