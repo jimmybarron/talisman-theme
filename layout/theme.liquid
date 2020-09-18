@@ -137,7 +137,12 @@
     {% include 'cart-popup' %}
   {%- endif -%}
 
-  {% section 'header-pdp' %}
+  {% if template contains 'collection' %}
+    {% section 'header-solid' %}
+  {% else %}
+    {% section 'header-trans' %}
+  {% endif %}
+
 
   <div class="page-container drawer-page-content" id="PageContainer">
 
