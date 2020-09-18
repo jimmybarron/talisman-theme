@@ -6,10 +6,10 @@
 
 {{ 'isotope.min.js' | asset_url | script_tag }}
 {{ 'ScrollTrigger.min.js' | asset_url | script_tag }}
-
+ 
 <!-- Mood Filters -->
 
-<div class="moodFilter z-10 flex pt-24 pl-4 overflow-scroll scrolling-touch static">
+<div class="moodFilter z-10 flex pl-4 overflow-scroll scrolling-touch">
 
   {% for tag in collection.all_tags %}
 
@@ -31,32 +31,14 @@
     </script>
   
   {% endfor %}
-
-  <script>
-    gsap.to('.moodFilter', {
-      scrollTrigger: {
-        trigger: '.moodFilter',
-        start: 'bottom top',
-        endTrigger:"html",
-        end:"bottom bottom",
-        pin: true,
-        pinSpacing: false,
-        toggleActions: "play none none reverse",
-        markers: true
-      },
-      position: 'fixed',
-      top: -80,
-      duration: 0.5
-    })
-  </script>
   
 </div>
 
 <!-- Product Grid -->
 
-<div class="flex justify-center">
+<div class="flex justify-center mt-32">
 
-  <div class="productGrid mt-8">
+  <div class="productGrid">
   
     {% for product in collection.products %}
   
@@ -90,6 +72,32 @@
     
   </div> 
 </div>
+
+<script>
+
+  let moodFilterMobileAnim = gsap.timeline({
+    scrollTrigger: {
+      trigger: '.productGrid',
+      start: 'top top',
+      endTrigger:'.site-footer',
+      end:"bottom bottom",
+      toggleActions: "play none none reverse",
+      markers: true
+    }
+  })
+
+  moodFilterMobileAnim
+    .to('.moodFilter', {
+      top: -150,
+      position: 'fixed',
+      duration: 0
+    })
+    .to('.moodFilter', {
+      backgroundColor: '#EEF835',
+      top: 24,
+      duration: 1
+    })
+</script>
 
 <script>
 
