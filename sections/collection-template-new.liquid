@@ -196,12 +196,12 @@ PRODUCT GRID
     <a class="productGrid-item{% for tag in product.tags %} {{ tag }}{% endfor %}" href="{{ product.url }}">
 
       <div>
+        {{ product.images[0] | img_url: '700x' | img_tag }}
+      </div>
 
-        <div>
-          {{ product.images[0] | img_url: '700x' | img_tag }}
-        </div>
+      <div class="productGrid-item__content flex flex-col justify-between">
 
-        <div>
+        <div class="pl-2 pt-2">
           {{- product.title -}}
         </div>
 
@@ -209,7 +209,7 @@ PRODUCT GRID
           {{- product.description -}}
         </div>
 
-        <div>
+        <div class="text-right pr-2" style="color: #EEF835;">
           {{- product.price | money_without_trailing_zeros -}}
         </div>
 
@@ -232,12 +232,12 @@ PRODUCT GRID
     <a class="productGrid-item{% for tag in product.tags %} {{ tag }}{% endfor %}" href="{{ product.url }}">
 
       <div>
+        {{ product.images[0] | img_url: '700x' | img_tag }}
+      </div>
 
-        <div>
-          {{ product.images[0] | img_url: '700x' | img_tag }}
-        </div>
+      <div class="productGrid-item__content flex flex-col justify-between">
 
-        <div>
+        <div class="pl-2 pt-2">
           {{- product.title -}}
         </div>
 
@@ -245,7 +245,7 @@ PRODUCT GRID
           {{- product.description -}}
         </div>
 
-        <div>
+        <div class="text-right pr-2" style="color: #EEF835;">
           {{- product.price | money_without_trailing_zeros -}}
         </div>
 
@@ -268,12 +268,12 @@ PRODUCT GRID
     <a class="productGrid-item{% for tag in product.tags %} {{ tag }}{% endfor %}" href="{{ product.url }}">
 
       <div>
+        {{ product.images[0] | img_url: '700x' | img_tag }}
+      </div>
 
-        <div>
-          {{ product.images[0] | img_url: '700x' | img_tag }}
-        </div>
+      <div class="productGrid-item__content flex flex-col justify-between">
 
-        <div>
+        <div class="pl-2 pt-2">
           {{- product.title -}}
         </div>
 
@@ -281,7 +281,7 @@ PRODUCT GRID
           {{- product.description -}}
         </div>
 
-        <div>
+        <div class="text-right pr-2" style="color: #EEF835;">
           {{- product.price | money_without_trailing_zeros -}}
         </div>
 
@@ -304,12 +304,12 @@ PRODUCT GRID
     <a class="productGrid-item{% for tag in product.tags %} {{ tag }}{% endfor %}" href="{{ product.url }}">
 
       <div>
+        {{ product.images[0] | img_url: '700x' | img_tag }}
+      </div>
 
-        <div>
-          {{ product.images[0] | img_url: '700x' | img_tag }}
-        </div>
+      <div class="productGrid-item__content flex flex-col justify-between">
 
-        <div>
+        <div class="pl-2 pt-2">
           {{- product.title -}}
         </div>
 
@@ -317,7 +317,7 @@ PRODUCT GRID
           {{- product.description -}}
         </div>
 
-        <div>
+        <div class="text-right pr-2" style="color: #EEF835;">
           {{- product.price | money_without_trailing_zeros -}}
         </div>
 
