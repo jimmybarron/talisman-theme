@@ -125,10 +125,14 @@ MOOD FILTERS UI
               transform: 'scale(1)'
             }
           })
+
+          // --------------------------------------------------------
+          // VIBE IMAGES
+          // --------------------------------------------------------
   
           let numProductsInMood = document.querySelectorAll('.{{ tag }}').length - 3;
   
-          console.log(numProductsInMood)
+          console.log(numProductsInMood);
   
           if (numProductsInMood <= 4) {
             // document.querySelector('.vibe1').style.display = 'block';
@@ -178,7 +182,7 @@ MOOD FILTERS UI
 </div>
 
 <!-- --------------------------------------------------------
-Product Grid
+PRODUCT GRID
 -------------------------------------------------------- -->
 
 <div class="flex justify-center">
@@ -356,7 +360,7 @@ STICKY MOOD FILTER UI & ANIMATION
     .to('.moodFilter', {
       background: 'linear-gradient(180deg, #EEF835 80%, rgba(255, 255, 255, 0) 100%)',
       ease: "power3.out",
-      duration: 0 });
+      duration: 0.1 });
 
 </script>
 
