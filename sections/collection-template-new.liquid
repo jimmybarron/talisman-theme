@@ -186,19 +186,6 @@ MOOD FILTERS UI
 </div>
 
 <!-- --------------------------------------------------------
-MOOD TITLE & DESCRIPTION
--------------------------------------------------------- -->
-
-<div class="moodInfo my-12 px-2">
-  <h1 class="moodTitle text-4xl text-center mb-4">
-    {{ collection.title }}
-  </h1>
-  <div class="moodDescription text-center">
-    {{ collection.description }}
-  </div>
-</div>
-
-<!-- --------------------------------------------------------
 PRODUCT GRID
 -------------------------------------------------------- -->
 
@@ -206,7 +193,23 @@ PRODUCT GRID
 
   <div class="productGrid">
 
-    <!-- Product Item 1-3-->
+    <!-- --------------------------------------------------------
+    MOOD TITLE & DESCRIPTION
+    -------------------------------------------------------- -->
+    
+    <div class="productGrid-item moodInfo all">
+      
+      <h1 class="moodTitle text-xl">
+        {{- collection.title -}}
+      </h1>
+      
+      <div class="moodDescription">
+        {{- collection.description -}}
+      </div>
+      
+    </div>
+    
+    <!-- Product Item 1-3 -->
 
     {% for product in collection.products limit: 3 %}
 
@@ -349,7 +352,7 @@ PRODUCT GRID
 
 {%- comment -%}
 --------------------------------------------------------
-STICKY MOOD FILTER UI & ANIMATION
+STICKY MOOD FILTER ANIMATION
 --------------------------------------------------------
 {%- endcomment -%}
 
