@@ -8741,17 +8741,24 @@ $min-height-disclosure: 92px;
 
 .productGrid-item {
   width: calc((100vw - 32px) / 2 - 8px);
+  height: calc(((100vw - 32px) / 2 - 8px) / 0.56);
   margin-bottom: 8px;
 }
 
 .productGrid-item__content {
-  height: 74px;
+  height: calc(((100vw - 32px) / 2 - 8px) / 2.2);
   background-color: #5200FF;
   color: white;
   font-family: 'Saa-Series-C-D', 'Sans-Serif';
   font-size: 20px;
   line-height: 1.4rem;
   letter-spacing: -0.04em;
+}
+
+.productGrid-item__price {
+  position: absolute;
+  bottom: 0;
+  right: 0;
 }
 
 .filterBtn:focus {

@@ -197,9 +197,9 @@ PRODUCT GRID
     MOOD TITLE & DESCRIPTION
     -------------------------------------------------------- -->
     
-    <div class="productGrid-item moodInfo all">
+    <div class="flex flex-col justify-center px-2 productGrid-item moodInfo all">
       
-      <h1 class="moodTitle text-xl">
+      <h1 class="moodTitle text-xl pb-2">
         {{- collection.title -}}
       </h1>
       
@@ -221,7 +221,7 @@ PRODUCT GRID
 
       <div class="productGrid-item__content flex flex-col justify-between">
 
-        <div class="pl-2 pt-2">
+        <div class="px-2 pt-2">
           {{- product.title -}}
         </div>
 
@@ -229,7 +229,7 @@ PRODUCT GRID
           {{- product.description -}}
         </div>
 
-        <div class="text-right pr-2" style="color: #EEF835;">
+        <div class="productGrid-item__price text-right pr-2" style="color: #EEF835;">
           {{- product.price | money_without_trailing_zeros -}}
         </div>
 
@@ -257,7 +257,7 @@ PRODUCT GRID
 
       <div class="productGrid-item__content flex flex-col justify-between">
 
-        <div class="pl-2 pt-2">
+        <div class="px-2 pt-2">
           {{- product.title -}}
         </div>
 
@@ -265,7 +265,7 @@ PRODUCT GRID
           {{- product.description -}}
         </div>
 
-        <div class="text-right pr-2" style="color: #EEF835;">
+        <div class="productGrid-item__price text-right pr-2" style="color: #EEF835;">
           {{- product.price | money_without_trailing_zeros -}}
         </div>
 
@@ -293,7 +293,7 @@ PRODUCT GRID
 
       <div class="productGrid-item__content flex flex-col justify-between">
 
-        <div class="pl-2 pt-2">
+        <div class="px-2 pt-2">
           {{- product.title -}}
         </div>
 
@@ -301,7 +301,7 @@ PRODUCT GRID
           {{- product.description -}}
         </div>
 
-        <div class="text-right pr-2" style="color: #EEF835;">
+        <div class="productGrid-item__price text-right pr-2" style="color: #EEF835;">
           {{- product.price | money_without_trailing_zeros -}}
         </div>
 
@@ -329,7 +329,7 @@ PRODUCT GRID
 
       <div class="productGrid-item__content flex flex-col justify-between">
 
-        <div class="pl-2 pt-2">
+        <div class="px-2 pt-2">
           {{- product.title -}}
         </div>
 
@@ -337,7 +337,7 @@ PRODUCT GRID
           {{- product.description -}}
         </div>
 
-        <div class="text-right pr-2" style="color: #EEF835;">
+        <div class="productGrid-item__price text-right pr-2" style="color: #EEF835;">
           {{- product.price | money_without_trailing_zeros -}}
         </div>
 
@@ -375,8 +375,8 @@ STICKY MOOD FILTER ANIMATION
       height: 100,
       zIndex: '20'
     })
-    .set('.moodInfo', {
-      margin: '165px 0 48px 0'
+    .set('.productGrid', {
+      margin: '85px 0 48px 0'
     })
     .to('.moodFilter', {
       background: 'linear-gradient(180deg, #EEF835 80%, rgba(255, 255, 255, 0) 100%)',
