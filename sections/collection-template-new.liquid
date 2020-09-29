@@ -14,7 +14,7 @@
 
 <div class="h-10"></div>
 
-<h1 class="moodTitle text-6xl mt-16 mb-8 text-center">
+<h1 class="text-6xl mt-16 mb-8 text-center" style="color: #5200FF;">
   CRYSTALS FOR YOUR MOOD
 </h1>
 
@@ -29,6 +29,7 @@ MOOD FILTERS UI
     --------------------------------------------------------
     MOOD BUTTONS
     --------------------------------------------------------
+    Creates a button for every tag in the entire collection with all the click handlers and animations
     {%- endcomment -%}
     
     {% for tag in collection.all_tags %}
@@ -128,7 +129,20 @@ MOOD FILTERS UI
               opacity: 1,
               transform: 'scale(1)'
             }
-          })
+          });
+
+          {%- comment -%}
+          --------------------------------------------------------
+          CHANGING MOOD TITLE & DESCRIPTION ON MOOD CLICK
+          --------------------------------------------------------
+          {%- endcomment -%}
+
+
+          let collectionTitle = '{{ collections[tag].title }}';
+          let collectionDescription = '{{ collections[tag].description }}';
+          document.querySelector('.moodTitle').innerHTML = collectionTitle;
+          document.querySelector('.moodDescription').innerHTML = collectionDescription;
+        
 
           // --------------------------------------------------------
           // VIBE IMAGES
@@ -197,7 +211,7 @@ PRODUCT GRID
     MOOD TITLE & DESCRIPTION
     -------------------------------------------------------- -->
     
-    <div class="flex flex-col justify-center px-2 productGrid-item moodInfo all">
+    <div class="flex flex-col justify-center px-2 productGrid-item moodInfo {{ collection.all_tags | join: ' ' }}">
       
       <h1 class="moodTitle text-xl pb-2">
         {{- collection.title -}}
@@ -207,7 +221,7 @@ PRODUCT GRID
         {{- collection.description -}}
       </div>
       
-    </div>
+    </div> 
     
     <!-- Product Item 1-3 -->
 
@@ -408,6 +422,8 @@ ISOTOPE SETTINGS
       resize: true
     }
   });
+
+  // Initialize with ALL selected
 
   filterAll.click();
 
