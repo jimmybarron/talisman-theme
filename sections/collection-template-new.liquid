@@ -138,8 +138,8 @@ MOOD FILTERS UI
           {%- endcomment -%}
 
 
-          let collectionTitle = '{{ collections[tag].title }}';
-          let collectionDescription = '{{ collections[tag].description }}';
+          let collectionTitle = '{{ collections[tag].title | lowercase }}';
+          let collectionDescription = '{{ collections[tag].description | escape }}';
           document.querySelector('.moodTitle').innerHTML = collectionTitle;
           document.querySelector('.moodDescription').innerHTML = collectionDescription;
         
@@ -147,17 +147,20 @@ MOOD FILTERS UI
           // --------------------------------------------------------
           // VIBE IMAGES
           // --------------------------------------------------------
-  
-          let numProductsInMood = document.querySelectorAll('.{{ tag }}').length - 3;
+          
+          {% comment %}
+            Subtract 3 vibe images and moodInfo block from number of product in mood
+          {% endcomment %}
+          let numProductsInMood = document.querySelectorAll('.{{ tag }}').length - 4;
   
           console.log(numProductsInMood);
   
-          if (numProductsInMood <= 4) {
+          if (numProductsInMood <= 7) {
             // document.querySelector('.vibe1').style.display = 'block';
             document.querySelector('.vibe2').style.display = 'none';
             document.querySelector('.vibe3').style.display = 'none';
             console.log('1 Vibe Image')
-          } else if (numProductsInMood >= 5 && numProductsInMood <= 8 ) {
+          } else if (numProductsInMood >= 8 && numProductsInMood <= 14 ) {
             // document.querySelector('.vibe1').style.display = 'block';
             // document.querySelector('.vibe2').style.display = 'block';
             document.querySelector('.vibe3').style.display = 'none';
@@ -259,9 +262,9 @@ PRODUCT GRID
       {{ 'all-vibe-1.png' | file_img_url: 'master' | img_tag }}
     </div>
 
-    <!-- Product Item 4 -->
+    <!-- Product Item 4-8 -->
 
-    {% for product in collection.products limit: 1 offset: 3 %}
+    {% for product in collection.products limit: 4 offset: 3 %}
 
     <a class="productGrid-item{% for tag in product.tags %} {{ tag }}{% endfor %}" href="{{ product.url }}">
 
@@ -295,9 +298,9 @@ PRODUCT GRID
       {{ 'all-vibe-1.png' | file_img_url: 'master' | img_tag }}
     </div>
 
-    <!-- Product Item 5-8 -->
+    <!-- Product Item 8-15 -->
 
-    {% for product in collection.products limit: 4 offset: 4 %}
+    {% for product in collection.products limit: 8 offset: 7 %}
 
     <a class="productGrid-item{% for tag in product.tags %} {{ tag }}{% endfor %}" href="{{ product.url }}">
 
@@ -331,9 +334,9 @@ PRODUCT GRID
       {{ 'all-vibe-1.png' | file_img_url: 'master' | img_tag }}
     </div>
 
-    <!-- Product Item 9-8 -->
+    <!-- Product Item 16 Up -->
 
-    {% for product in collection.products offset: 8 %}
+    {% for product in collection.products offset: 15 %}
 
     <a class="productGrid-item{% for tag in product.tags %} {{ tag }}{% endfor %}" href="{{ product.url }}">
 
