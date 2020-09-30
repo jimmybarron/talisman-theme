@@ -8703,18 +8703,23 @@ $min-height-disclosure: 92px;
 
 /*================ Shop All Page ================*/
 
+.moodFilterContain {
+  -webkit-overflow-scrolling: touch;
+  color: #5200FF;
+}
+
 .moodFilter {
   -ms-overflow-style: none;  /* IE and Edge */
   scrollbar-width: none;  /* Firefox */
   -webkit-overflow-scrolling: touch;
 }
 
-.moodFilterContain {
-  -webkit-overflow-scrolling: touch;
-}
-
 .moodFilter::-webkit-scrollbar {
   display: none;
+}
+
+.filterBtn:focus {
+  outline: none;
 }
 
 .moodInfo {
@@ -8759,12 +8764,6 @@ $min-height-disclosure: 92px;
   position: absolute;
   bottom: 0;
   right: 0;
-}
-
-.filterBtn:focus {
-  outline: none;
-  border: solid #5200FF;
-  border-width: 0 0 4px 0;
 }
 
 .vibe1 {

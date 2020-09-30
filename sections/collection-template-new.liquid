@@ -36,7 +36,7 @@ MOOD FILTERS UI
   
       <div class="py-2 px-4">
   
-        <button class="filter{{ tag | capitalize}} filterBtn bg-transparent" style="color: #5200FF;">
+        <button class="filter{{ tag | capitalize}} filterBtn filterBtn{{ tag | capitalize}}" style="border: solid #5200FF; border-width: 0 0 0 0;">
   
           <div class="crystal-icon-{{ tag | lowercase}} flex justify-center opacity-0">
   
@@ -88,21 +88,30 @@ MOOD FILTERS UI
             y: 30,
             rotation: -90
           })
+          .add('key1')
           .to('.crystal-icon-{{ tag | lowercase}}', {
             duration: 0.5,
             opacity: 1,
             y: 0,
             rotation: 0
-          });
+          }, 'key1')
+          .to('.filterBtn{{ tag | capitalize }}', {
+            duration: 0.5,
+            borderWidth: '0 0 4px 0'
+          }, 'key1');
   
   
         crystalIcon{{ tag | capitalize }}AnimOut
-        .to('.crystal-icon-{{ tag | lowercase}}', {
-          duration: 1,
-          y: 30,
-          opacity: 0,
-          rotation: 180
-        });
+          .to('.crystal-icon-{{ tag | lowercase}}', {
+            duration: 0.5,
+            y: 30,
+            opacity: 0,
+            rotation: 180
+          })
+          .to('.filterBtn{{ tag | capitalize }}', {
+            duration: 0.25,
+            borderWidth: '0 0 0 0'
+          });
   
         {%- comment -%}
         --------------------------------------------------------
@@ -156,19 +165,19 @@ MOOD FILTERS UI
           console.log(numProductsInMood);
   
           if (numProductsInMood <= 7) {
-            // document.querySelector('.vibe1').style.display = 'block';
+            document.querySelector('.vibe1').style.display = 'block';
             document.querySelector('.vibe2').style.display = 'none';
             document.querySelector('.vibe3').style.display = 'none';
             console.log('1 Vibe Image')
           } else if (numProductsInMood >= 8 && numProductsInMood <= 14 ) {
-            // document.querySelector('.vibe1').style.display = 'block';
-            // document.querySelector('.vibe2').style.display = 'block';
+            document.querySelector('.vibe1').style.display = 'block';
+            document.querySelector('.vibe2').style.display = 'block';
             document.querySelector('.vibe3').style.display = 'none';
             console.log('2 Vibe Images')
           } else {
-            // document.querySelector('.vibe1').style.display = 'block';
-            // document.querySelector('.vibe2').style.display = 'block';
-            // document.querySelector('.vibe3').style.display = 'block';
+            document.querySelector('.vibe1').style.display = 'block';
+            document.querySelector('.vibe2').style.display = 'block';
+            document.querySelector('.vibe3').style.display = 'block';
             console.log('3 Vibe Images')
           }
           
