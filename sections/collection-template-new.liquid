@@ -164,27 +164,26 @@ MOOD FILTERS UI
             Subtract 3 vibe images and moodInfo block from number of product in mood
           {% endcomment %}
           let numProductsInMood = document.querySelectorAll('.{{ tag }}').length - 4;
-  
           console.log(numProductsInMood);
+
+          // iso.layout();
   
           if (numProductsInMood <= 7) {
-            document.querySelector('.vibe1').style.display = 'block';
-            document.querySelector('.vibe2').style.display = 'none';
-            document.querySelector('.vibe3').style.display = 'none';
+            document.querySelector('.vibe1{{ tag }}').style.display = 'block';
+            document.querySelector('.vibe2{{ tag }}').style.display = 'none';
+            document.querySelector('.vibe3{{ tag }}').style.display = 'none';
             console.log('1 Vibe Image')
           } else if (numProductsInMood >= 8 && numProductsInMood <= 14 ) {
-            document.querySelector('.vibe1').style.display = 'block';
-            document.querySelector('.vibe2').style.display = 'block';
-            document.querySelector('.vibe3').style.display = 'none';
+            document.querySelector('.vibe1{{ tag }}').style.display = 'block';
+            document.querySelector('.vibe2{{ tag }}').style.display = 'block';
+            document.querySelector('.vibe3{{ tag }}').style.display = 'none';
             console.log('2 Vibe Images')
           } else {
-            document.querySelector('.vibe1').style.display = 'block';
-            document.querySelector('.vibe2').style.display = 'block';
-            document.querySelector('.vibe3').style.display = 'block';
+            document.querySelector('.vibe1{{ tag }}').style.display = 'block';
+            document.querySelector('.vibe2{{ tag }}').style.display = 'block';
+            document.querySelector('.vibe3{{ tag }}').style.display = 'block';
             console.log('3 Vibe Images')
           }
-          
-          iso.layout();
   
         });
   
@@ -238,7 +237,7 @@ PRODUCT GRID
       
     </div> 
     
-    <!-- Product Item 1-3 -->
+    <!-- CRYSTALZ -->
 
     {% for product in collection.products %}
 
@@ -268,23 +267,45 @@ PRODUCT GRID
 
     {% endfor %}
 
-    <!--Vibe Image 1 -->
 
-    <div class="productGrid-item vibe1 {{ collection.all_tags | join: ' ' }}" data-order="5.5">
-      {{ 'all-vibe-1.png' | file_img_url: 'master' | img_tag }}
-    </div>
+    {%- comment -%}
+      --------------------------------------------------------
+      CREATES VIBE IMAGE SETS FOR EACH MOOD
+      --------------------------------------------------------
+    {%- endcomment -%}
+    
 
-    <!-- Vibe Image 2 -->
+    {% for tag in collection.all_tags %}
+      
+      <!--Vibe Image 1 -->
 
-    <div class="productGrid-item vibe2 {{ collection.all_tags | join: ' ' }}" data-order="9.5">
-      {{ 'all-vibe-1.png' | file_img_url: 'master' | img_tag }}
-    </div>
+      <div class="productGrid-item vibe1{{ tag }} {{ tag }}" data-order="5.5">
+        {%- capture vibe1 -%}
+          {{ tag }}-vibe-1.png
+        {%- endcapture -%}
+        {{ vibe1 | file_img_url: 'master' | img_tag }}
+      </div>
 
-    <!-- Vibe Image 3 -->
+      <!-- Vibe Image 2 -->
 
-    <div class="productGrid-item vibe3 {{ collection.all_tags | join: ' ' }}" data-order="99">
-      {{ 'all-vibe-1.png' | file_img_url: 'master' | img_tag }}
-    </div>
+      <div class="productGrid-item vibe2{{ tag }} {{ tag }}" data-order="10.5">
+        {%- capture vibe2 -%}
+          {{ tag }}-vibe-2.png
+        {%- endcapture -%}
+        {{ vibe2 | file_img_url: 'master' | img_tag }}
+      </div>
+
+      <!-- Vibe Image 3 -->
+
+      <div class="productGrid-item vibe3{{ tag }} {{ tag }}" data-order="99">
+        {%- capture vibe3 -%}
+          {{ tag }}-vibe-3.png
+        {%- endcapture -%}
+        {{ vibe3 | file_img_url: 'master' | img_tag }}
+      </div>
+
+    {%- endfor -%}
+
 
   </div>
 </div>
