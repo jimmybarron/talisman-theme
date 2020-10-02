@@ -8778,6 +8778,53 @@ $min-height-disclosure: 92px;
   display: block;
 }
 
+@media only screen and ( min-width: 1024px ) {
+
+  // Change the second value subtracted from 100vw to adjust the width of the grid items
+
+  .moodTitle {
+    font-size: 36px;
+  }
+
+  .productGrid-item {
+    width: calc((100vw - 300px) / 3 - 8px);
+    height: calc(((100vw - 300px) / 3 - 8px) / 0.56);
+    margin-bottom: 8px;
+  }
+
+  .productGrid-item__content {
+    height: calc(((100vw - 300px) / 3 - 8px) / 2.2);
+    background-color: #5200FF;
+    color: white;
+    font-family: 'Saa-Series-C-D', 'Sans-Serif';
+    font-size: 36px;
+    letter-spacing: 0em;
+  }
+
+  .productGrid-item__title {
+    padding: 24px 0 0 0;
+    line-height: 85%;
+    letter-spacing: -2px;
+  }
+  
+  .productGrid-item__description {
+    width: 90%;
+    font-family: Work Sans;
+    font-style: normal;
+    font-weight: normal;
+    font-size: 14px;
+    line-height: 21px;
+    letter-spacing: -0.01em;
+    padding: 0 8px 0 8px;
+  }
+
+  .productGrid-item__price {
+    font-size: 20px;
+    bottom: 8px;
+  }
+
+}
+
 
 /*================ Product Page ================*/
 

@@ -14,7 +14,7 @@
 
 <div class="h-10"></div>
 
-<h1 class="text-6xl mt-16 mb-8 text-center" style="color: #5200FF;">
+<h1 class="text-6xl mt-16 mb-8 text-center md:mb-4 md:mt-32 md:w-1/3 md:mx-auto" style="color: #5200FF;">
   CRYSTALS FOR YOUR MOOD
 </h1>
 
@@ -23,7 +23,7 @@ MOOD FILTERS UI
 -------------------------------------------------------- -->
 
 <div class="moodFilterContain w-screen z-10">
-  <div class="moodFilter w-screen flex py-2 overflow-x-scroll">
+  <div class="moodFilter w-screen flex md:justify-center py-2 md:mb-4 overflow-x-scroll">
     
     {%- comment -%}
     --------------------------------------------------------
@@ -227,7 +227,7 @@ PRODUCT GRID
     
     <div class="flex flex-col justify-center px-2 productGrid-item moodInfo {{ collection.all_tags | join: ' ' }}">
       
-      <h1 class="moodTitle text-xl pb-2">
+      <h1 class="moodTitle pb-2 ">
         {{- collection.title -}}
       </h1>
       
@@ -247,13 +247,13 @@ PRODUCT GRID
         {{ product.images[0] | img_url: '700x' | img_tag }}
       </div>
 
-      <div class="productGrid-item__content flex flex-col justify-between">
+      <div class="productGrid-item__content flex flex-col">
 
-        <div class="px-2 pt-2">
+        <div class="productGrid-item__title px-2 pt-2 lg:pt-6">
           {{- product.title -}}
         </div>
 
-        <div class="hidden">
+        <div class="productGrid-item__description hidden xl:block">
           {{- product.description -}}
         </div>
 
