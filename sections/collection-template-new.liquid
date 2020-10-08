@@ -14,7 +14,7 @@
 
 <div class="h-10"></div>
 
-<h1 class="text-6xl mt-16 mb-8 text-center md:mb-4 md:mt-32 md:w-1/3 md:mx-auto" style="color: #5200FF;">
+<h1 class="shopAllTitle" style="color: #5200FF;">
   CRYSTALS FOR YOUR MOOD
 </h1>
 
@@ -225,7 +225,7 @@ PRODUCT GRID
     MOOD TITLE & DESCRIPTION
     -------------------------------------------------------- -->
     
-    <div class="flex flex-col justify-center px-2 productGrid-item moodInfo {{ collection.all_tags | join: ' ' }}">
+    <div class="flex flex-col justify-center px-2 md:px-4 productGrid-item moodInfo {{ collection.all_tags | join: ' ' }}">
       
       <h1 class="moodTitle pb-2 ">
         {{- collection.title -}}
@@ -249,7 +249,7 @@ PRODUCT GRID
 
       <div class="productGrid-item__content flex flex-col">
 
-        <div class="productGrid-item__title px-2 pt-2 lg:pt-6">
+        <div class="productGrid-item__title px-2 pt-2 md:px-4 lg:pt-6">
           {{- product.title -}}
         </div>
 
@@ -279,7 +279,7 @@ PRODUCT GRID
       
       <!--Vibe Image 1 -->
 
-      <div class="productGrid-item vibe1{{ tag }} {{ tag }}" data-order="5.5">
+      <div class="productGrid-item vibe1 {{ tag }}" data-order="5.5">
         {%- capture vibe1 -%}
           {{ tag }}-vibe-1.png
         {%- endcapture -%}
@@ -288,7 +288,7 @@ PRODUCT GRID
 
       <!-- Vibe Image 2 -->
 
-      <div class="productGrid-item vibe2{{ tag }} {{ tag }}" data-order="10.5">
+      <div class="productGrid-item vibe2 {{ tag }}" data-order="10.5">
         {%- capture vibe2 -%}
           {{ tag }}-vibe-2.png
         {%- endcapture -%}
@@ -297,7 +297,7 @@ PRODUCT GRID
 
       <!-- Vibe Image 3 -->
 
-      <div class="productGrid-item vibe3{{ tag }} {{ tag }}" data-order="99">
+      <div class="productGrid-item vibe3 {{ tag }}" data-order="99">
         {%- capture vibe3 -%}
           {{ tag }}-vibe-3.png
         {%- endcapture -%}

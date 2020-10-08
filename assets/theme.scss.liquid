@@ -8703,6 +8703,13 @@ $min-height-disclosure: 92px;
 
 /*================ Shop All Page ================*/
 
+.shopAllTitle {
+  font-size: 64px;
+  width: 75%;
+  margin: 64px auto 32px auto;
+  text-align: center;
+}
+
 .moodFilterContain {
   -webkit-overflow-scrolling: touch;
   color: #5200FF;
@@ -8766,21 +8773,26 @@ $min-height-disclosure: 92px;
   right: 0;
 }
 
-.vibe1 {
-  display: block;
-}
-
-.vibe2 {
-  display: block;
-}
-
+.vibe1,
+.vibe2,
 .vibe3 {
   display: block;
 }
 
+.vibe1 img,
+.vibe2 img,
+.vibe3 img {
+  height: 100%;
+  object-fit: cover;
+}
+
 @media only screen and ( min-width: 1024px ) {
 
-  // Change the second value subtracted from 100vw to adjust the width of the grid items
+  .shopAllTitle {
+    font-size: 88px;
+    margin: 100px auto 32px auto;
+    width: 600px;
+  }
 
   .moodTitle {
     font-size: 36px;
@@ -8815,7 +8827,7 @@ $min-height-disclosure: 92px;
     font-size: 14px;
     line-height: 21px;
     letter-spacing: -0.01em;
-    padding: 0 8px 0 8px;
+    padding: 0 8px 0 16px;
   }
 
   .productGrid-item__price {
