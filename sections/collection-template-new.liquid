@@ -149,11 +149,34 @@ MOOD FILTERS UI
           --------------------------------------------------------
           {%- endcomment -%}
 
-
+          // GET TITLE & DESC FROM COLLECTION
           let collectionTitle = '{{ collections[tag].title | lowercase }}';
           let collectionDescription = '{{ collections[tag].description | escape }}';
-          document.querySelector('.moodTitle').innerHTML = collectionTitle;
-          document.querySelector('.moodDescription').innerHTML = collectionDescription;
+
+          // SWAP OUT TITLE & DESC TEXT AND ANIMATE IN
+          gsap.to('.moodTitle', {
+            duration: 0.2,
+            opacity: 0,
+            onComplete: function() {
+              document.querySelector('.moodTitle').innerHTML = collectionTitle;
+              gsap.to('.moodTitle', {
+                duration: 0.5,
+                opacity: 1
+              });
+            }
+          });
+          gsap.to('.moodDescription', {
+            duration: 0.2,
+            opacity: 0,
+            onComplete: function() {
+              document.querySelector('.moodDescription').innerHTML = collectionDescription;
+              gsap.to('.moodDescription', {
+                duration: 1,
+                delay: 0.2,
+                opacity: 1
+              });
+            }
+          });
         
 
           // --------------------------------------------------------
