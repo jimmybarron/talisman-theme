@@ -217,7 +217,7 @@
         </h1>
   
         <div class="w-4/6 z-10">
-          {% assign productTitle = product.title | downcase %}
+          {%- assign productTitle = product.title | downcase -%}
           {%- capture pdp-1 -%}
              {{ productTitle }}-pdp-1.png
           {% endcapture %}
