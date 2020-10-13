@@ -1,11 +1,11 @@
 [
   {
     "name": "theme_info",
-    "theme_name": "Debut",
-    "theme_author": "Shopify",
-    "theme_version": "17.1.0",
-    "theme_documentation_url": "https:\/\/help.shopify.com\/manual\/using-themes\/themes-by-shopify\/debut",
-    "theme_support_url": "https:\/\/support.shopify.com\/"
+    "theme_name": "Anisotropic",
+    "theme_author": "James Barron",
+    "theme_version": "1.0",
+    "theme_documentation_url": "http://www.talisman.la/help",
+    "theme_support_email": "jimmy.r.barron@gmail.com"
   },
   {
     "name": {
@@ -563,31 +563,6 @@
           "zh-CN": "标题和按钮",
           "zh-TW": "標題和按鈕"
         }
-      },
-      {
-        "type": "font_picker",
-        "id": "type_header_font",
-        "label": {
-          "da": "Skrifttype",
-          "de": "Schriftart",
-          "en": "Font",
-          "es": "Fuente",
-          "fi": "Fontti",
-          "fr": "Police",
-          "hi": "फ़ॉन्ट",
-          "it": "Font",
-          "ja": "フォント",
-          "ko": "글꼴",
-          "nb": "Skrifttype",
-          "nl": "Lettertype",
-          "pt-BR": "Fonte",
-          "pt-PT": "Tipo de letra",
-          "sv": "Typsnitt",
-          "th": "แบบอักษร",
-          "zh-CN": "字体",
-          "zh-TW": "字型"
-        },
-        "default": "Saa-Series-C-D"
       },
       {
         "type": "range",

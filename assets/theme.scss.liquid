@@ -1379,6 +1379,14 @@ html {
   }
 }
 
+.section-subheader {
+  margin-bottom: $section-spacing-small;
+
+  @include media-query($medium-up) {
+    margin-bottom: $section-spacing;
+  }
+}
+
 /*================ Typography ================*/
 blockquote {
   font-size: em(18px);

@@ -1,7 +1,20 @@
+<style>
+  #preview-bar-iframe {
+    display: none;
+  }
+</style>
+
 <div class="page-width">
+  
   {% if section.settings.title != blank %}
     <div class="section-header text-center">
-      <h2>{{ section.settings.title | escape }}</h2>
+      <h1>{{ section.settings.title | escape }}</h1>
+    </div>
+  {% endif %}
+
+  {% if section.settings.subtitle != blank %}
+    <div class="section-subheader text-center">
+      <h1>{{ section.settings.subtitle | escape }}</h1>
     </div>
   {% endif %}
 
@@ -128,6 +141,33 @@
         "th": "คอลเลกชันแนะนำ",
         "zh-CN": "特色产品系列",
         "zh-TW": "精選商品系列"
+      }
+    },
+    {
+      "type": "text",
+      "id": "subtitle",
+      "label": {
+        "da": "Overskrift",
+        "de": "Titel",
+        "en": "Subheading",
+        "es": "Título",
+        "fi": "Otsake",
+        "fr": "En-tête",
+        "hi": "शीर्षक",
+        "it": "Heading",
+        "ja": "見出し",
+        "ko": "제목",
+        "nb": "Overskrift",
+        "nl": "Kop",
+        "pt-BR": "Título",
+        "pt-PT": "Título",
+        "sv": "Rubrik",
+        "th": "ส่วนหัว",
+        "zh-CN": "标题",
+        "zh-TW": "標題"
+      },
+      "default": {
+        "en": "Supporting copy"
       }
     },
     {
