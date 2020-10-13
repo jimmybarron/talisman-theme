@@ -452,10 +452,10 @@ $color-success-bg: #f8fff9;
 // Forms
 $color-form-text: #333;
 $color-error-input-text: $color-error;
-$input-padding-top-bottom: 10px;
-$input-padding-left-right: 18px;
-$input-padding-top-bottom-small: 8px;
-$input-padding-left-right-small: 15px;
+$input-padding-top-bottom: 15px;
+$input-padding-left-right: 35px;
+$input-padding-top-bottom-small: 12px;
+$input-padding-left-right-small: 35px;
 $input-group-height: 46px;
 $input-group-height-small: 42px;
 $input-border-width: 1px;
@@ -1913,19 +1913,19 @@ a[href^="tel"] {
   cursor: pointer;
   border: 1px solid transparent;
   border-radius: 90px;
-  padding: $input-padding-top-bottom-small $input-padding-left-right-small;
+  padding: 12px 35px 8px 35px;
   background-color: $color-btn-primary;
   color: $color-btn-primary-text;
   font-family: $font-stack-header;
   font-style: $font-style-header;
   font-weight: $font-weight-header;
   text-transform: uppercase;
-  letter-spacing: 0.08em;
+  letter-spacing: 0;
   white-space: normal;
   font-size: 16px;
 
   @include media-query($medium-up) {
-    padding: $input-padding-top-bottom $input-padding-left-right;
+    padding: 12px 35px 8px 35px;
   }
 
   &:not([disabled]):hover,
@@ -3181,26 +3181,26 @@ $slick-dot-size-small: 10px;
   }
 }
 
-.index-section--flush + .index-section--flush {
-  margin-top: -($section-spacing-small * 2);
-}
+// .index-section--flush + .index-section--flush {
+//   margin-top: -($section-spacing-small * 2);
+// }
 
-[class*="index-section--flush"] + [class*="index-section--flush"] {
-  @include media-query($medium-up) {
-    margin-top: -($section-spacing * 2);
-  }
-}
+// [class*="index-section--flush"] + [class*="index-section--flush"] {
+//   @include media-query($medium-up) {
+//     margin-top: -($section-spacing * 2);
+//   }
+// }
 
-// Flush sections should be tight to the nav if they are the first on the page
-.index-section--flush:first-child {
-  margin-top: -$section-spacing-small;
-}
+// // Flush sections should be tight to the nav if they are the first on the page
+// .index-section--flush:first-child {
+//   margin-top: -$section-spacing-small;
+// }
 
-[class*="index-section--flush"]:first-child {
-  @include media-query($medium-up) {
-    margin-top: -$section-spacing;
-  }
-}
+// [class*="index-section--flush"]:first-child {
+//   @include media-query($medium-up) {
+//     margin-top: -$section-spacing;
+//   }
+// }
 
 // Flush sections should be tight to the footer if they are last on the page
 .index-section--flush:last-child {
