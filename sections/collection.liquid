@@ -4,10 +4,10 @@
   }
 </style>
 
-<div class="page-width">
+<div>
   
   {% if section.settings.title != blank %}
-    <div class="section-header text-center">
+    <div class="text-6xl text-center">
       <h1>{{ section.settings.title | escape }}</h1>
     </div>
   {% endif %}
@@ -17,6 +17,10 @@
       <h1>{{ section.settings.subtitle | escape }}</h1>
     </div>
   {% endif %}
+
+  <a href="/collections/all" class="btn flex justify-center mx-10 px-auto" aria-label="Explore Crystals">
+    Explore All Crystals
+  </a>
 
   {%- assign collection = collections[section.settings.collection] -%}
 
@@ -37,39 +41,37 @@
 
   {%- assign product_limit = section.settings.grid | times: section.settings.rows -%}
 
-  <ul class="grid grid--uniform grid--view-items">
-    {% for product in collection.products limit: product_limit %}
-      <li class="grid__item grid__item--{{section.id}} {{ grid_item_width }}">
-        {% include 'product-card-grid', max_height: max_height, product: product, show_vendor: section.settings.show_vendor %}
-      </li>
-    {% else %}
+ <div class="hpProductGrid">
 
-      {% for i in (1..product_limit) %}
-        <li class="grid__item grid__item--{{section.id}} {{ grid_item_width }}">
-          <div class="grid-view-item product-card">
-            <a class="grid-view-item__link grid-view-item__image-container full-width-link" href="#">
-              <span class="visually-hidden">{{ 'homepage.onboarding.product_title' | t }}</span>
-            </a>
-            <div class="grid-view-item__image-wrapper">
-              {% capture current %}{% cycle 1, 2, 3, 4, 5, 6 %}{% endcapture %}
-              {{ 'product-' | append: current | placeholder_svg_tag: 'placeholder-svg' }}
-            </div>
-            <div class="h4 grid-view-item__title" aria-hidden="true">{{ 'homepage.onboarding.product_title' | t }}</div>
-            {% include 'product-price' %}
+      {% for product in collection.products limit: product_limit %}
+  
+        <a class="hpProductGrid-item" href="{{ product.url }}">
+  
+          <div>
+            {{ product.images[0] | img_url: '700x' | img_tag }}
           </div>
-        </li>
+  
+          <div class="hpProductGrid-item__content flex flex-col">
+  
+            <div class="hpProductGrid-item__title px-4 pt-8 md:px-4 lg:pt-6">
+              {{- product.title -}}
+            </div>
+  
+            <div class="hpProductGrid-item__description">
+              {{- product.description -}}
+            </div>
+  
+            <div class="hpProductGrid-item__price text-right pr-2">
+              {{- product.price | money_without_trailing_zeros -}}
+            </div>
+  
+          </div>
+  
+        </a>
+  
       {% endfor %}
-    {% endfor %}
-  </ul>
 
-  {% if section.settings.show_view_all %}
-    <hr class="hr--invisible" aria-hidden="true" />
-    <div class="text-center">
-      <a href="{{ collection.url }}" class="btn" aria-label="{{ 'collections.general.view_all_label' | t: collection_name: collection.title }}">
-        {{ 'collections.general.view_all' | t }}
-      </a>
-    </div>
-  {% endif %}
+ </div>
 
 </div>
 
