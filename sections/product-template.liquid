@@ -46,11 +46,10 @@
     
     <div class="carousel-mobile" data-flickity='{
       "imagesLoaded": true,
-      "cellAlign": "left",
-      "wrapAround": true,
+      "pageDots": false,
+      "cellAlign": "center",
       "prevNextButtons": false,
-      "adaptiveHeight": true
-    }'>
+      "adaptiveHeight": true }'>
 
       {%- assign featured_media = product.selected_or_first_available_variant.featured_media | default: product.featured_media -%}
 
@@ -61,7 +60,7 @@
           {% include 'media-pdp', media: media, featured_media: featured_media, height: height, enable_image_zoom: enable_image_zoom, image_zoom_size: product_image_zoom_size, image_scale: product_image_scale %}
         {% endif %}
       {%- endfor -%}
-<!-- 
+      <!-- 
       <noscript>
         {% capture product_image_size %}{{ height }}x{% endcapture %}
         <img src="{{ featured_media | img_url: product_image_size, scale: product_image_scale }}" alt="{{ featured_media.alt }}" id="FeaturedMedia-{{ section.id }}" class="product-featured-media" style="max-width: {{ height }}px;">
@@ -650,10 +649,13 @@
       }
     }) 
     
-  {/* gradAnimate1.pause()
+  /*
+  gradAnimate1.pause()
   gradAnimate2.pause()
   gradAnimate5.pause()
-  gradAnimate6.pause() */}
+  gradAnimate6.pause()
+  */
+
 </script>
 
 
