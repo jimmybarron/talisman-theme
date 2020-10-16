@@ -47,20 +47,23 @@
       </div>
     {% endif %}
   
-    <a href="/collections/all" class="btn z-10 flex justify-center mx-10 px-auto" aria-label="Explore Crystals">
-      Explore All Crystals
-    </a>
+    <div class="flex justify-center">
+      <a href="/collections/all" class="btn" aria-label="Explore Crystals">
+        Explore All Crystals
+      </a>
+    </div>
 
   </div>
 
   {%- assign collection = collections[section.settings.collection] -%}
 
-  <div class="carousel pt-8 pb-16" data-flickity='{
+  <div class="hpProductGrid recommendCarousel pt-8 pb-16" data-flickity='{
     "imagesLoaded": true,
     "pageDots": false,
     "cellAlign": "center",
     "prevNextButtons": false,
-    "adaptiveHeight": true
+    "adaptiveHeight": true,
+    "watchCSS": true
     }'
   >
 

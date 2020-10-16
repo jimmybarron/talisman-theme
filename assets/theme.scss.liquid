@@ -8711,6 +8711,11 @@ $min-height-disclosure: 92px;
 
 /*================ Recommended Crystals Section ================*/
 
+  .recommendCarousel:after {
+    content: 'flickity';
+    display: none;
+  }
+
   .hpShopAllTitle {
     font-size: 88px;
     margin: 100px auto 32px auto;
@@ -8719,12 +8724,6 @@ $min-height-disclosure: 92px;
 
   .hpMoodTitle {
     font-size: 36px;
-  }
-
-  .hpProductGrid {
-    display: flex;
-    width: 253vw;
-    padding: 32px 0 32px 16px;
   }
 
   .hpProductGrid-item {
@@ -8764,6 +8763,24 @@ $min-height-disclosure: 92px;
     font-size: 20px;
     bottom: 0;
     right: 0;
+  }
+
+  @media only screen and ( min-width: 1000px ) {
+  
+    /* disable Flickity for large devices */
+    .recommendCarousel:after {
+      content: '';
+    }
+
+    .hpProductGrid {
+      display: flex;
+      width: 100vw;
+      justify-content: center;
+    }
+
+    .hpProductGrid-item {
+      width: 310px;
+    }
   }
 
 
