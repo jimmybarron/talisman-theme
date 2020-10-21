@@ -7472,7 +7472,7 @@ $toolbar-height-small: 46px;
   max-height: 100vh;
 
   @include media-query($medium-up) {
-    max-height: 80vh;
+    max-height: 100vh;
   }
 }
 
@@ -7526,12 +7526,17 @@ $toolbar-height-small: 46px;
   position: relative;
   display: table-cell;
   vertical-align: middle;
-  padding: $section-spacing 0;
   z-index: 2;
 }
 
 .hero__inner--offset {
-  margin-top: 80px;
+  margin-top: -30vw;
+}
+
+@media only screen and ( min-width: 1000px ) {
+  .hero__inner--offset {
+    margin-top: 0;
+  }
 }
 
 .hero__btn {
