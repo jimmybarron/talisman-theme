@@ -1,13 +1,13 @@
 <script src="{{ "marquee3k.js" | asset_url }}"></script>
 
-<div class="marquee3k" 
+<div class="marquee3k bg-white py-4 text-xs" 
   data-speed="1"
   data-pausable="false">
-  <h1>{{ section.settings.ticker-text }}</h1>
+  <p style="color:#5200FF">{{ section.settings.ticker-text }}</p>
 </div>
 
 <script>
-  Marquee3k.init()
+  Marquee3k.init();
 </script>
 
 {% schema %}
