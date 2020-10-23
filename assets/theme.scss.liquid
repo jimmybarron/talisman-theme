@@ -7434,7 +7434,7 @@ $toolbar-height-small: 46px;
   padding-bottom: $section-spacing-small;
 
   @include media-query($small) {
-    order: 2;
+    order: 0;
     padding-bottom: 0; // always last element on mobile
   }
 }
@@ -7452,6 +7452,15 @@ $toolbar-height-small: 46px;
 @include media-query($medium-up) {
   .featured-row__subtext {
     font-size: em($font-size-base + 2);
+  }
+}
+
+.imageTextFullBleed {
+  height: 100vw;
+  background: {
+    size: cover;
+    repeat: no-repeat;
+    position: 50% 50%;
   }
 }
 
