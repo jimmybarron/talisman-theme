@@ -21,7 +21,7 @@
         data-layout="{{ section.settings.hero_layout }}""
         style="background-position: {{ section.settings.alignment }}">
 
-      <div class="hero__inner">
+      <div class="hero__inner pt-{{ section.settings.hero-inner-padding-top-mobile }} md:pt-{{ section.settings.hero-inner-padding-top-desktop }}">
 
         <div class="hero__inner--offset page-width text-center">
 
@@ -125,6 +125,24 @@
       "label": {
         "en": "Desktop Image"
       }
+    },
+    {
+      "type": "range",
+      "id": "hero-inner-padding-top-mobile",
+      "min": 0,
+      "max": 64,
+      "step": 1,
+      "label": "Top Padding on Mobile",
+      "default": 0
+    },
+    {
+      "type": "range",
+      "id": "hero-inner-padding-top-desktop",
+      "min": 0,
+      "max": 64,
+      "step": 1,
+      "label": "Top Padding on Desktop",
+      "default": 0
     },
     {
       "type": "select",
