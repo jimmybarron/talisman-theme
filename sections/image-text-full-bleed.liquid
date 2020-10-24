@@ -1,49 +1,47 @@
-<div>
+{% capture image_layout %}
 
-  {% capture image_layout %}
+    {% if section.settings.image != blank %}
 
-      {% if section.settings.image != blank %}
+      {% capture img_id %}FeatureRowImage-{{ section.id }}{% endcapture %}
+      {% capture wrapper_id %}FeatureRowImageWrapper-{{ section.id }}{% endcapture %}
+      {%- assign img_url = section.settings.image | img_url: '1x1' | replace: '_1x1.', '_{width}x.' -%}
 
-        {% capture img_id %}FeatureRowImage-{{ section.id }}{% endcapture %}
-        {% capture wrapper_id %}FeatureRowImageWrapper-{{ section.id }}{% endcapture %}
-        {%- assign img_url = section.settings.image | img_url: '1x1' | replace: '_1x1.', '_{width}x.' -%}
+        <div class="imageTextFullBleed flex flex-col justify-center items-center md:w-1/2" style="background-image: url({{- section.settings.image | img_url: 'master'-}});">
 
-          <div class="imageTextFullBleed flex flex-col justify-center items-center" style="background-image: url({{- section.settings.image | img_url: 'master'-}});">
+          {% if section.settings.title != blank %}
+            <h1 class="text-6xl text-center">{{ section.settings.title | escape }}</h1>
+          {% endif %}
 
-            {% if section.settings.title != blank %}
-              <h1 class="text-6xl text-center">{{ section.settings.title | escape }}</h1>
-            {% endif %}
+          <a href="{{ section.settings.button_link }}"
+            class="btn w-3/4"
+            aria-label="{{ ariaLabel }}">
+            {{- section.settings.button_label | escape -}}
+          </a>
 
-            <a href="{{ section.settings.button_link }}"
-              class="btn w-3/4"
-              aria-label="{{ ariaLabel }}">
-              {{- section.settings.button_label | escape -}}
-            </a>
+        </div>
 
-          </div>
+      <noscript>
+        {{ section.settings.image | img_url: '600x600', scale: 2 | img_tag: section.settings.image.alt, 'feature-row__image' }}
+      </noscript>
 
-        <noscript>
-          {{ section.settings.image | img_url: '600x600', scale: 2 | img_tag: section.settings.image.alt, 'feature-row__image' }}
-        </noscript>
+    {% else %}
 
-      {% else %}
+      {{ 'image' | placeholder_svg_tag: 'placeholder-svg' }}
+      
+    {% endif %}
 
-        {{ 'image' | placeholder_svg_tag: 'placeholder-svg' }}
-        
-      {% endif %}
+{% endcapture %}
 
-  {% endcapture %}
-
-  <div>
+<div class="md:flex">
 
     {% if section.settings.layout == 'left' %}
       {{ image_layout }}
     {% endif %}
 
-    <div class="imageTextFullBleed flex flex-col align-center justify-center mx-4">
+    <div class="imageTextFullBleed flex flex-col align-center justify-center px-4 md:w-1/2 md:text-right">
 
       {% if section.settings.text != blank %}
-        <h1 class="text-3xl">{{ section.settings.text }}</h1>
+        <h1 class="text-3xl md:text-5xl">{{ section.settings.text }}</h1>
       {% endif %}
 
       {% if section.settings.button_label != blank and section.settings.button_link != blank %}
@@ -66,8 +64,6 @@
     {% if section.settings.layout == 'right' %}
       {{ image_layout }}
     {% endif %}
-
-  </div>
 
 </div>
 
