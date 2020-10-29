@@ -149,14 +149,14 @@
         class="site-footer__item
                     {% if section.blocks.size == 1 %} site-footer__item--center{% endif %}
                     {{ footer_item }}
-                    {% if block.type == 'newsletter' and section.blocks.size == 3 %}site-footer-newsletter__one-half pt-8{% endif %}
+                    {% if block.type == 'newsletter' and section.blocks.size == 3 %}site-footer-newsletter__one-half pt-10{% endif %}
                     {% if block.settings.title == blank and block.settings.menu-logo == blank %}md:mt-10{% endif %}"
         {{ block.shopify_attributes }}>
 
         <div class="site-footer__item-inner site-footer__item-inner--{{ block.type }}">
 
           {%- if block.settings.title and block.settings.title != blank -%}
-            <p class="h4">{{ block.settings.title | escape }}</p>
+            <p class="text-base">{{ block.settings.title | escape }}</p>
           {%- endif -%}
 
           {%- if block.settings.menu-logo -%}
@@ -166,39 +166,52 @@
           {%- endif -%}
           
           {%- case block.type -%}
+
           {%- when 'newsletter' -%}
+
           <div class="site-footer__newsletter
-                          {% if section.blocks.size == 1 %} site-footer__single-block--centered{% endif %}">
+            {% if section.blocks.size == 1 %} site-footer__single-block--centered{% endif %}">
             {%- assign formId = 'ContactFooter' -%}
             {% form 'customer', id: formId, novalidate: 'novalidate' %}
+
             {%- if form.posted_successfully? -%}
-            <p class="form-message form-message--success" tabindex="-1" data-form-status>
-              {{ 'general.newsletter_form.confirmation' | t }}
-            </p>
+              <p class="form-message form-message--success" tabindex="-1" data-form-status>
+                {{ 'general.newsletter_form.confirmation' | t }}
+              </p>
             {%- endif -%}
+
             <input type="hidden" name="contact[tags]" value="newsletter">
+
             <div class="input-group {% if form.errors %} input-group--error{% endif %}">
+
               <input type="email" name="contact[email]" id="{{ formId }}-email"
-                class="input-group__field newsletter__input{% if form.errors %} input--error{% endif %}"
+                class="input-group__field newsletter__input{% if form.errors %} input--error{% endif %} text-base bg-transparent border-white text-white border-0 border-b-2"
                 value="{{ form.email }}" placeholder="{{ 'general.newsletter_form.email_placeholder' | t }}"
                 aria-label="{{ 'general.newsletter_form.email_placeholder' | t }}" aria-required="true" required
                 autocorrect="off" autocapitalize="off" {% if form.errors %} aria-invalid="true"
                 aria-describedby="{{ formId }}-email-error" data-form-status {% endif %}>
+
               <span class="input-group__btn">
-                <button type="submit" class="btn newsletter__submit" name="commit">
-                  <span class="newsletter__submit-text--large">{{ 'general.newsletter_form.submit' | t }}</span>
+                <button type="submit" class="btn newsletter__submit bg-transparent border-white text-white border-0 border-b-2 pr-0" name="commit">
+                  <span style="color:#eef835; font-family: 'WorkSans-Medium','Sans-Serif'; text-transform: none;" class="newsletter__submit-text--large">Subscribe 🔮</span>
                 </button>
               </span>
+
             </div>
+
             {% if form.errors contains 'email' %}
+
             <span id="{{ formId }}-email-error" class="input-error-message">
+
               <span class="visually-hidden">{{ 'general.accessibility.error' | t }} </span>
               {% include 'icon-error' %}
-              <span class="site-footer__newsletter-error">{{ form.errors.translated_fields['email'] | capitalize }}
-                {{ form.errors.messages['email'] }}.</span>
+              <span class="site-footer__newsletter-error">{{ form.errors.translated_fields['email'] | capitalize }}{{ form.errors.messages['email'] }}.</span>
             </span>
+
             {% endif %}
+            
             {% endform %}
+
           </div>
 
           {%- when 'text' -%}
