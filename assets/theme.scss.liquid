@@ -7203,7 +7203,7 @@ $toolbar-height-small: 46px;
   @include flex-wrap(wrap);
 
   @include media-query($small) {
-    padding: 0 $footer-wrapper-spacing;
+    padding: 0 0;
   }
 
   @include media-query($medium-up) {
@@ -7214,7 +7214,6 @@ $toolbar-height-small: 46px;
 .site-footer__item {
   @include display-flexbox;
   @include flex(1 1 100%);
-  margin-bottom: $section-spacing;
 
   @include media-query($medium-up) {
     padding: 0 $footer-spacing-small 0 $footer-spacing-small;
@@ -7309,7 +7308,7 @@ $toolbar-height-small: 46px;
 
 .site-footer__linklist-item {
   display: block;
-  padding: ($grid-gutter / 2) 0;
+  padding: 6px 0;
 
   @include media-query($medium-up) {
     padding: 0 $grid-gutter 5px 0;

@@ -149,15 +149,22 @@
         class="site-footer__item
                     {% if section.blocks.size == 1 %} site-footer__item--center{% endif %}
                     {{ footer_item }}
-                    {% if block.type == 'newsletter' and section.blocks.size == 3 %}site-footer-newsletter__one-half{% endif %}"
+                    {% if block.type == 'newsletter' and section.blocks.size == 3 %}site-footer-newsletter__one-half pt-8{% endif %}
+                    {% if block.settings.title == blank and block.settings.menu-logo == blank %}md:mt-10{% endif %}"
         {{ block.shopify_attributes }}>
 
         <div class="site-footer__item-inner site-footer__item-inner--{{ block.type }}">
 
-          {%- if block.settings.title -%}
-          <p class="h4">{{ block.settings.title | escape }}</p>
+          {%- if block.settings.title and block.settings.title != blank -%}
+            <p class="h4">{{ block.settings.title | escape }}</p>
           {%- endif -%}
 
+          {%- if block.settings.menu-logo -%}
+          <a href="/">
+            {{ block.settings.menu-logo | img_url: 'master' | img_tag: 'Talisman logo', 'w-1/2 md:w-3/4 mb-5' }}
+          </a>
+          {%- endif -%}
+          
           {%- case block.type -%}
           {%- when 'newsletter' -%}
           <div class="site-footer__newsletter
@@ -207,7 +214,7 @@
           <ul class="site-footer__linklist
                             {% if inline_list %}list--inline{% endif %}">
             {%- for link in linklists[footer_linklist].links -%}
-            <li class="site-footer__linklist-item">
+            <li class="text-sm pb-4 pr-8">
               <a href="{{ link.url }}" {% if link.current %} aria-current="page" {% endif %}>
                 {{ link.title | escape }}
               </a>
@@ -315,7 +322,7 @@
 
       {%- if social_icons -%}
 
-      <ul class="flex">
+      <ul class="flex pt-8">
         {%- for social in socials -%}
         {%- assign social_link = social | prepend: 'social_' | append: '_link' | downcase -%}
         {%- assign icon_link = social | prepend: 'icon-' | downcase -%}
@@ -704,6 +711,11 @@
             "zh-CN": "快速链接",
             "zh-TW": "快速連結"
           }
+        },
+        {
+          "type": "image_picker",
+          "id": "menu-logo",
+          "label": "Image Logo"
         },
         {
           "type": "link_list",
