@@ -121,6 +121,9 @@
   }
 </style>
 
+<script type="text/javascript" async defer 
+ src="https://static.klaviyo.com/onsite/js/klaviyo.js?company_id=LtvR65">
+</script>
 
 {%- capture payment_icon_markup -%}
   {%- if show_payment_icons -%}
@@ -215,25 +218,31 @@
           </div>
 
           {%- when 'text' -%}
+
           {%- if block.settings.text != blank -%}
-          <div class="site-footer__rte
-                              {% if section.blocks.size == 1 %} site-footer__single-block--centered{% endif %}">
-            {{ block.settings.text }}
-          </div>
+
+            <div class="site-footer__rte
+                                {% if section.blocks.size == 1 %} site-footer__single-block--centered{% endif %}">
+              {{ block.settings.text }}
+            </div>
+
           {%- endif -%}
 
+
           {%- when 'link_list' -%}
+
           {%- assign footer_linklist = block.settings.menu -%}
-          <ul class="site-footer__linklist
-                            {% if inline_list %}list--inline{% endif %}">
-            {%- for link in linklists[footer_linklist].links -%}
-            <li class="text-sm pb-4 pr-8">
-              <a href="{{ link.url }}" {% if link.current %} aria-current="page" {% endif %}>
-                {{ link.title | escape }}
-              </a>
-            </li>
-            {%- endfor -%}
-          </ul>
+
+            <ul class="site-footer__linklist
+                              {% if inline_list %}list--inline{% endif %}">
+              {%- for link in linklists[footer_linklist].links -%}
+              <li class="text-sm pb-4 pr-8">
+                <a href="{{ link.url }}" {% if link.current %} aria-current="page" {% endif %}>
+                  {{ link.title | escape }}
+                </a>
+              </li>
+              {%- endfor -%}
+            </ul>
 
           {%- endcase -%}
 
