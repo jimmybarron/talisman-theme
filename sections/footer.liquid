@@ -121,6 +121,9 @@
   }
 </style>
 
+<script type="text/javascript" async defer 
+ src="https://static.klaviyo.com/onsite/js/klaviyo.js?company_id=LtvR65">
+</script>
 
 {%- capture payment_icon_markup -%}
   {%- if show_payment_icons -%}
@@ -138,211 +141,297 @@
 {%- endcapture -%}
 
 <footer class="site-footer" role="contentinfo" data-section-id="{{ section.id }}" data-section-type="footer-section">
+
   <div class="page-width">
+
     <div class="site-footer__content">
+
       {%- for block in section.blocks -%}
 
-        <div class="site-footer__item
+      <div
+        class="site-footer__item
                     {% if section.blocks.size == 1 %} site-footer__item--center{% endif %}
                     {{ footer_item }}
-                    {% if block.type == 'newsletter' and section.blocks.size == 3 %}site-footer-newsletter__one-half{% endif %}"
-             {{ block.shopify_attributes }}>
-          <div class="site-footer__item-inner site-footer__item-inner--{{ block.type }}">
+                    {% if block.type == 'newsletter' and section.blocks.size == 3 %}site-footer-newsletter__one-half pt-10{% endif %}
+                    {% if block.settings.title == blank and block.settings.menu-logo == blank %}md:mt-10{% endif %}"
+        {{ block.shopify_attributes }}>
 
-            {%- if block.settings.title -%}
-              <p class="h4">{{ block.settings.title | escape }}</p>
-            {%- endif -%}
+        <div class="site-footer__item-inner site-footer__item-inner--{{ block.type }}">
 
-            {%- case block.type -%}
-              {%- when 'newsletter' -%}
-                <div class="site-footer__newsletter
-                          {% if section.blocks.size == 1 %} site-footer__single-block--centered{% endif %}">
-                  {%- assign formId = 'ContactFooter' -%}
-                  {% form 'customer', id: formId, novalidate: 'novalidate' %}
-                    {%- if form.posted_successfully? -%}
-                      <p class="form-message form-message--success" tabindex="-1" data-form-status>
-                        {{ 'general.newsletter_form.confirmation' | t }}
-                      </p>
-                    {%- endif -%}
-                    <input type="hidden" name="contact[tags]" value="newsletter">
-                    <div class="input-group {% if form.errors %} input-group--error{% endif %}">
-                      <input type="email"
-                        name="contact[email]"
-                        id="{{ formId }}-email"
-                        class="input-group__field newsletter__input{% if form.errors %} input--error{% endif %}"
-                        value="{{ form.email }}"
-                        placeholder="{{ 'general.newsletter_form.email_placeholder' | t }}"
-                        aria-label="{{ 'general.newsletter_form.email_placeholder' | t }}"
-                        aria-required="true"
-                        required
-                        autocorrect="off"
-                        autocapitalize="off"
-                        {% if form.errors %}
-                          aria-invalid="true"
-                          aria-describedby="{{ formId }}-email-error"
-                          data-form-status
-                        {% endif %}>
-                      <span class="input-group__btn">
-                        <button type="submit" class="btn newsletter__submit" name="commit" >
-                          <span class="newsletter__submit-text--large">{{ 'general.newsletter_form.submit' | t }}</span>
-                        </button>
-                      </span>
-                    </div>
-                    {% if form.errors contains 'email' %}
-                      <span id="{{ formId }}-email-error" class="input-error-message">
-                        <span class="visually-hidden">{{ 'general.accessibility.error' | t }} </span>
-                        {% include 'icon-error' %}
-                        <span class="site-footer__newsletter-error">{{ form.errors.translated_fields['email'] | capitalize }} {{ form.errors.messages['email'] }}.</span>
-                      </span>
-                    {% endif %}
-                  {% endform %}
-                </div>
+          {%- if block.settings.title and block.settings.title != blank -%}
+            <p class="text-base">{{ block.settings.title | escape }}</p>
+          {%- endif -%}
 
-              {%- when 'text' -%}
-                {%- if block.settings.text != blank -%}
-                  <div class="site-footer__rte
-                              {% if section.blocks.size == 1 %} site-footer__single-block--centered{% endif %}">
-                      {{ block.settings.text }}
-                  </div>
-                {%- endif -%}
+          {%- if block.settings.menu-logo -%}
+            <a href="/">
+              {{ block.settings.menu-logo | img_url: 'master' | img_tag: 'Talisman logo', 'w-1/2 md:w-3/4 mb-5' }}
+            </a>
+          {%- endif -%}
+          
+          {%- case block.type -%}
 
-              {%- when 'link_list' -%}
-                {%- assign footer_linklist = block.settings.menu -%}
-                  <ul class="site-footer__linklist
-                            {% if inline_list %}list--inline{% endif %}">
-                    {%- for link in linklists[footer_linklist].links -%}
-                      <li class="site-footer__linklist-item">
-                        <a href="{{ link.url }}"
-                          {% if link.current %} aria-current="page"{% endif %}
-                        >
-                          {{ link.title | escape }}
-                        </a>
-                      </li>
-                    {%- endfor -%}
-                  </ul>
+          {%- comment -%}
+          ------------------------------------------------------------
+          -------------------- NEWSLETTER SIGNUP ---------------------
+          ------------------------------------------------------------
+          {%- endcomment -%}
 
-            {%- endcase -%}
+          {%- when 'newsletter' -%}
+
+          <div class="site-footer__newsletter{% if section.blocks.size == 1 %} site-footer__single-block--centered{% endif %}">
+
+            <form id="footer-newsletter" class="klaviyo_styling klaviyo_gdpr_embed_LIST_ID" action="//manage.kmail-lists.com/subscriptions/subscribe" data-ajax-submit="//manage.kmail-lists.com/ajax/subscriptions/subscribe" method="GET" target="_blank" novalidate="novalidate">
+                
+              <input type="hidden" name="g" value="Mgwfmc">
+              
+              <input type="hidden" name="$fields" value="$consent">
+              
+              <input type="hidden" name="$list_fields" value="$consent">
+              
+              <div class="klaviyo_messages">
+                <div class="success_message" style="display:none;"></div>
+                <div class="error_message" style="display:none;"></div>
+              </div>
+              
+              <div class="flex h-12">
+                <input class="w-2/3 text-base bg-transparent rounded-none border-white text-white border-0 border-b-2" type="email" value="" name="email" id="k_id_email" placeholder="Your email" />
+                  <button type="submit" class="w-1/3 klaviyo_submit_button text-base rounded-none bg-transparent border-white text-white text-right border-0 border-b-2 pr-0" name="commit">
+                    <span style="color:#eef835; font-family: 'WorkSans-Medium','Sans-Serif'; text-transform: none;" class="newsletter__submit-text--large">🔮 Subscribe</span>
+                  </button>
+              </div>
+              
+            </form>
+
+            <script type="text/javascript">
+                KlaviyoSubscribe.attachToForms('#footer-newsletter', {
+                  hide_form_on_success: true,
+                  extra_properties: {
+                      $source: '$embed',
+                      $method_type: "Klaviyo Form",
+                      $method_id: 'embed',
+                      $consent_version: 'Embed default text'
+                  },
+                  success: () => {
+                    let klaviyoSubscriptionForm = document.querySelector('.klaviyo_subscription_form');
+                    let klaviyoSuccessHeader = document.querySelector('.klaviyo_header');
+                    let klaviyoSuccessSubheader = document.querySelector('.klaviyo_subheader');
+                    let klaviyoInner = document.querySelector('.klaviyo-inner');
+                    klaviyoInner.style.height = '370px';
+                    klaviyoSubscriptionForm.style.display = "none";
+                    klaviyoSuccessHeader.innerHTML = "{{ settings.klaviyo-success-header-text }}";
+                    klaviyoSuccessSubheader.innerHTML = "{{ settings.klaviyo-success-subtext }}";
+                  }
+                });
+            </script>
+
+            {%- assign formId = 'ContactFooter' -%}
+
+            <!-- {% form 'customer', id: formId, novalidate: 'novalidate' %}
+
+              {%- if form.posted_successfully? -%}
+                <p class="form-message form-message--success" tabindex="-1" data-form-status>
+                  {{ 'general.newsletter_form.confirmation' | t }}
+                </p>
+              {%- endif -%}
+
+              <input type="hidden" name="contact[tags]" value="newsletter">
+
+              <div class="input-group {% if form.errors %} input-group--error{% endif %}">
+
+                <input type="email" name="contact[email]" id="{{ formId }}-email"
+                  class="input-group__field newsletter__input{% if form.errors %} input--error{% endif %} text-base bg-transparent border-white text-white border-0 border-b-2"
+                  value="{{ form.email }}" placeholder="{{ 'general.newsletter_form.email_placeholder' | t }}"
+                  aria-label="{{ 'general.newsletter_form.email_placeholder' | t }}" aria-required="true" required
+                  autocorrect="off" autocapitalize="off" {% if form.errors %} aria-invalid="true"
+                  aria-describedby="{{ formId }}-email-error" data-form-status {% endif %}>
+
+                <span class="input-group__btn">
+                  <button type="submit" class="btn newsletter__submit bg-transparent border-white text-white border-0 border-b-2 pr-0" name="commit">
+                    <span style="color:#eef835; font-family: 'WorkSans-Medium','Sans-Serif'; text-transform: none;" class="newsletter__submit-text--large">Subscribe 🔮</span>
+                  </button>
+                </span>
+
+              </div>
+
+              {% if form.errors contains 'email' %}
+
+                <span id="{{ formId }}-email-error" class="input-error-message">
+
+                  <span class="visually-hidden">{{ 'general.accessibility.error' | t }} </span>
+                  {% include 'icon-error' %}
+                  <span class="site-footer__newsletter-error">{{ form.errors.translated_fields['email'] | capitalize }}{{ form.errors.messages['email'] }}.</span>
+
+                </span>
+
+              {% endif %}  
+            
+            {% endform %} -->
 
           </div>
+
+          {%- when 'text' -%}
+
+          {%- if block.settings.text != blank -%}
+
+            <div class="site-footer__rte
+                                {% if section.blocks.size == 1 %} site-footer__single-block--centered{% endif %}">
+              {{ block.settings.text }}
+            </div>
+
+          {%- endif -%}
+
+
+          {%- when 'link_list' -%}
+
+          {%- assign footer_linklist = block.settings.menu -%}
+
+            <ul class="site-footer__linklist
+                              {% if inline_list %}list--inline{% endif %}">
+              {%- for link in linklists[footer_linklist].links -%}
+              <li class="text-sm pb-4 pr-8">
+                <a href="{{ link.url }}" {% if link.current %} aria-current="page" {% endif %}>
+                  {{ link.title | escape }}
+                </a>
+              </li>
+              {%- endfor -%}
+            </ul>
+
+          {%- endcase -%}
+
         </div>
+
+      </div>
+
       {%- endfor -%}
-    </div>
-  </div>
 
-  <hr class="site-footer__hr">
+      {%- assign socials = "Facebook Twitter Pinterest Instagram Tumblr Snapchat YouTube Vimeo" | split: ' ' -%}
 
-  {%- assign socials = "Facebook Twitter Pinterest Instagram Tumblr Snapchat YouTube Vimeo" | split: ' ' -%}
+      <div>
 
-  <div class="page-width">
-    <div class="grid grid--no-gutters small--text-center grid--footer-float-right">
-      {%- if show_selectors -%}
-        <div class="grid__item one-half small--one-whole">
-          {%- form 'localization', class: 'selectors-form' -%}
+        {%- if show_selectors -%}
+
+          <div class="grid__item one-half small--one-whole">
+
+            {%- form 'localization', class: 'selectors-form' -%}
+
             {%- if locale_selector -%}
-              <div class="selectors-form__item">
-                <h2 class="visually-hidden" id="lang-heading">
-                  {{ 'general.language.dropdown_label' | t }}
-                </h2>
 
-                <div class="disclosure" data-disclosure-locale>
-                  <button type="button" class="disclosure__toggle" aria-expanded="false" aria-controls="lang-list" aria-describedby="lang-heading" data-disclosure-toggle>
-                    {{ form.current_locale.endonym_name }}
-                  </button>
-                  <ul id="lang-list" class="disclosure-list" data-disclosure-list>
-                    {% for locale in form.available_locales %}
-                      <li class="disclosure-list__item {% if locale.iso_code == form.current_locale.iso_code %}disclosure-list__item--current{% endif %}">
-                        <a class="disclosure-list__option" href="#" lang="{{ locale.iso_code }}" {% if locale.iso_code == form.current_locale.iso_code %}aria-current="true"{% endif %} data-value="{{ locale.iso_code }}" data-disclosure-option>
-                          {{ locale.endonym_name }}
-                        </a>
-                      </li>
-                    {%- endfor -%}
-                  </ul>
-                  <input type="hidden" name="locale_code" id="LocaleSelector" value="{{ form.current_locale.iso_code }}" data-disclosure-input/>
-                </div>
+            <div class="selectors-form__item">
+              <h2 class="visually-hidden" id="lang-heading">
+                {{ 'general.language.dropdown_label' | t }}
+              </h2>
+
+              <div class="disclosure" data-disclosure-locale>
+                <button type="button" class="disclosure__toggle" aria-expanded="false" aria-controls="lang-list"
+                  aria-describedby="lang-heading" data-disclosure-toggle>
+                  {{ form.current_locale.endonym_name }}
+                </button>
+                <ul id="lang-list" class="disclosure-list" data-disclosure-list>
+                  {% for locale in form.available_locales %}
+                  <li
+                    class="disclosure-list__item {% if locale.iso_code == form.current_locale.iso_code %}disclosure-list__item--current{% endif %}">
+                    <a class="disclosure-list__option" href="#" lang="{{ locale.iso_code }}"
+                      {% if locale.iso_code == form.current_locale.iso_code %}aria-current="true" {% endif %}
+                      data-value="{{ locale.iso_code }}" data-disclosure-option>
+                      {{ locale.endonym_name }}
+                    </a>
+                  </li>
+                  {%- endfor -%}
+                </ul>
+                <input type="hidden" name="locale_code" id="LocaleSelector" value="{{ form.current_locale.iso_code }}"
+                  data-disclosure-input />
               </div>
+            </div>
+
             {%- endif -%}
 
             {%- if currency_selector -%}
-              <div class="selectors-form__item">
-                <h2 class="visually-hidden" id="currency-heading">
-                  {{ 'general.currency.dropdown_label' | t }}
-                </h2>
 
-                <div class="disclosure" data-disclosure-currency>
-                  <button type="button" class="disclosure__toggle" aria-expanded="false" aria-controls="currency-list" aria-describedby="currency-heading" data-disclosure-toggle>
-                    {{ form.current_currency.iso_code }} {%- if form.current_currency.symbol -%}{{ form.current_currency.symbol }}{%- endif -%}
-                  </button>
-                  <ul id="currency-list" class="disclosure-list" data-disclosure-list>
-                    {% for currency in form.available_currencies %}
-                      <li class="disclosure-list__item {% if currency.iso_code == form.current_currency.iso_code %}disclosure-list__item--current{% endif %}">
-                        <a class="disclosure-list__option" href="#" {% if currency.iso_code == form.current_currency.iso_code %}aria-current="true"{% endif %} data-value="{{ currency.iso_code }}" data-disclosure-option>
-                          {{ currency.iso_code }} {%- if currency.symbol -%}{{ currency.symbol }}{%- endif -%}
-                        </a>
-                      </li>
-                    {%- endfor -%}
-                  </ul>
-                  <input type="hidden" name="currency_code" id="CurrencySelector" value="{{ form.current_currency.iso_code }}" data-disclosure-input/>
-                </div>
+            <div class="selectors-form__item">
+              <h2 class="visually-hidden" id="currency-heading">
+                {{ 'general.currency.dropdown_label' | t }}
+              </h2>
+
+              <div class="disclosure" data-disclosure-currency>
+                <button type="button" class="disclosure__toggle" aria-expanded="false" aria-controls="currency-list"
+                  aria-describedby="currency-heading" data-disclosure-toggle>
+                  {{ form.current_currency.iso_code }}
+                  {%- if form.current_currency.symbol -%}{{ form.current_currency.symbol }}{%- endif -%}
+                </button>
+                <ul id="currency-list" class="disclosure-list" data-disclosure-list>
+                  {% for currency in form.available_currencies %}
+                  <li
+                    class="disclosure-list__item {% if currency.iso_code == form.current_currency.iso_code %}disclosure-list__item--current{% endif %}">
+                    <a class="disclosure-list__option" href="#"
+                      {% if currency.iso_code == form.current_currency.iso_code %}aria-current="true" {% endif %}
+                      data-value="{{ currency.iso_code }}" data-disclosure-option>
+                      {{ currency.iso_code }} {%- if currency.symbol -%}{{ currency.symbol }}{%- endif -%}
+                    </a>
+                  </li>
+                  {%- endfor -%}
+                </ul>
+                <input type="hidden" name="currency_code" id="CurrencySelector"
+                  value="{{ form.current_currency.iso_code }}" data-disclosure-input />
               </div>
+            </div>
+
             {%- endif -%}
-          {%- endform -%}
+
+            {%- endform -%}
+
         </div>
-      {%- else -%}
-        <div class="grid__item small--hide {{ payment_width_class }} {% if show_payment_icons %}site-footer-item-center-vertically{% endif %}">{{ payment_icon_markup }}</div>
-      {%- endif -%}
 
-      <div class="grid__item {% if show_selectors or show_payment_icons %}one-half{% endif %} small--one-whole site-footer-item-tall">
-        {%- if social_icons -%}
-          <ul class="list--inline site-footer__social-icons social-icons site-footer__icon-list">
-            {%- for social in socials -%}
-              {%- assign social_link = social | prepend: 'social_' | append: '_link' | downcase -%}
-              {%- assign icon_link = social | prepend: 'icon-' | downcase -%}
-              {%- if settings[social_link] != blank -%}
-                <li class="social-icons__item">
-                  <a class="social-icons__link" href="{{ settings[social_link] | escape }}" aria-describedby="a11y-external-message">
-                    {%- include icon_link -%}
-                    <span class="icon__fallback-text">{{ social }}</span>
-                  </a>
-                </li>
-              {%- endif -%}
-            {%- endfor -%}
-
-            {%- if request.page_type == 'blog' or request.page_type == 'article' -%}
-              <li>
-                <a class="social-icons__link" href="{{ shop.url }}{{ blog.url }}.atom">
-                  {% include 'icon-rss' %}
-                  <span class="icon__fallback-text">RSS</span>
-                </a>
-              </li>
-            {%- endif -%}
-          </ul>
         {%- else -%}
-          <div class="small--hide site-footer-item-align-right {% if show_selectors or show_payment_icons %}site-footer-item-center-vertically{% endif %}">
-            <small class="site-footer__copyright-content">&copy; {{ 'now' | date: "%Y" }}, {{ shop.name | link_to: routes.root_url }}</small>
-            <small class="site-footer__copyright-content site-footer__copyright-content-powered-by">{{ powered_by_link }}</small>
-          </div>
+
+          <div class="grid__item small--hide {{ payment_width_class }} {% if show_payment_icons %}site-footer-item-center-vertically{% endif %}">{{ payment_icon_markup }}</div>
+
         {%- endif -%}
+
       </div>
 
-      {%- if show_selectors -%}
-        <div class="grid__item small--hide {{ payment_width_class }}">{{ payment_icon_markup }}</div>
+
+    </div>
+
+    <div>
+
+      {%- if social_icons -%}
+
+      <ul class="flex pt-8">
+        {%- for social in socials -%}
+        {%- assign social_link = social | prepend: 'social_' | append: '_link' | downcase -%}
+        {%- assign icon_link = social | prepend: 'icon-' | downcase -%}
+        {%- if settings[social_link] != blank -%}
+        <li class="social-icons__item">
+          <a class="social-icons__link" href="{{ settings[social_link] | escape }}"
+            aria-describedby="a11y-external-message">
+            {%- include icon_link -%}
+            <span class="icon__fallback-text">{{ social }}</span>
+          </a>
+        </li>
+
       {%- endif -%}
 
-      <div class="grid__item medium-up--hide {{ payment_width_class }} small--one-whole">{{ payment_icon_markup }}</div>
+        {%- endfor -%}
 
-      {%- if social_icons and show_selectors -%}
-        <div class="grid__item small--hide site-footer-item-align-right {% if show_payment_icons %}one-half{% endif %}">
-          <small class="site-footer__copyright-content">&copy; {{ 'now' | date: "%Y" }}, {{ shop.name | link_to: routes.root_url }}</small>
-          <small class="site-footer__copyright-content site-footer__copyright-content--powered-by">{{ powered_by_link }}</small>
-        </div>
+        {%- if request.page_type == 'blog' or request.page_type == 'article' -%}
+
+        <li>
+          <a class="social-icons__link" href="{{ shop.url }}{{ blog.url }}.atom">
+            {% include 'icon-rss' %}
+            <span class="icon__fallback-text">RSS</span>
+          </a>
+        </li>
+
+        {%- endif -%}
+      </ul>
+
+      {%- else -%}
+
       {%- endif -%}
 
-      <div class="grid__item small--one-whole {{ copyright_show_class }} site-footer-item-align-right">
-        <small class="site-footer__copyright-content">&copy; {{ 'now' | date: "%Y" }}, {{ shop.name | link_to: routes.root_url }}</small>
-        <small class="site-footer__copyright-content site-footer__copyright-content--powered-by">{{ powered_by_link }}</small>
-      </div>
     </div>
   </div>
+
 </footer>
 
 
@@ -696,6 +785,11 @@
             "zh-CN": "快速链接",
             "zh-TW": "快速連結"
           }
+        },
+        {
+          "type": "image_picker",
+          "id": "menu-logo",
+          "label": "Image Logo"
         },
         {
           "type": "link_list",

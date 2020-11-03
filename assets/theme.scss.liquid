@@ -452,10 +452,10 @@ $color-success-bg: #f8fff9;
 // Forms
 $color-form-text: #333;
 $color-error-input-text: $color-error;
-$input-padding-top-bottom: 10px;
-$input-padding-left-right: 18px;
-$input-padding-top-bottom-small: 8px;
-$input-padding-left-right-small: 15px;
+$input-padding-top-bottom: 15px;
+$input-padding-left-right: 35px;
+$input-padding-top-bottom-small: 12px;
+$input-padding-left-right-small: 35px;
 $input-group-height: 46px;
 $input-group-height-small: 42px;
 $input-border-width: 1px;
@@ -467,7 +467,7 @@ $color-pinterest: #cb2027;
 
 /*================ Sizing Variables ================*/
 $width-site: 1200px;
-$gutter-site: 55px;
+$gutter-site: 64px;
 $gutter-site-mobile: 16px;
 $section-spacing: 55px;
 $section-spacing-small: 35px;
@@ -1379,6 +1379,14 @@ html {
   }
 }
 
+.section-subheader {
+  margin-bottom: $section-spacing-small;
+
+  @include media-query($medium-up) {
+    margin-bottom: $section-spacing;
+  }
+}
+
 /*================ Typography ================*/
 blockquote {
   font-size: em(18px);
@@ -1913,19 +1921,19 @@ a[href^="tel"] {
   cursor: pointer;
   border: 1px solid transparent;
   border-radius: 90px;
-  padding: $input-padding-top-bottom-small $input-padding-left-right-small;
+  padding: 12px 35px 8px 35px;
   background-color: $color-btn-primary;
   color: $color-btn-primary-text;
   font-family: $font-stack-header;
   font-style: $font-style-header;
   font-weight: $font-weight-header;
   text-transform: uppercase;
-  letter-spacing: 0.08em;
+  letter-spacing: 0;
   white-space: normal;
   font-size: 16px;
 
   @include media-query($medium-up) {
-    padding: $input-padding-top-bottom $input-padding-left-right;
+    padding: 12px 35px 8px 35px;
   }
 
   &:not([disabled]):hover,
@@ -2740,12 +2748,10 @@ body {
 }
 
 .page-width {
-  padding-left: $gutter-site;
-  padding-right: $gutter-site;
+  padding: $gutter-site;
 
   @include media-query($small) {
-    padding-left: $gutter-site-mobile;
-    padding-right: $gutter-site-mobile;
+    padding: $gutter-site-mobile;
   }
 }
 
@@ -2882,6 +2888,7 @@ hr {
     @include transform(translateY(0%));
     display: flex;
     max-height: 100vh;
+    top: 42px;
   }
 }
 
@@ -2895,8 +2902,8 @@ hr {
     left: 0;
     width: 100%;
     height: 100%;
-    background-color: $color-drawer-background;
-    z-index: $z-index-drawer - 1;
+    background-color: #5200ffdd;
+    z-index: 10;
     transition: $transition-drawer;
   }
 
@@ -3162,45 +3169,45 @@ $slick-dot-size-small: 10px;
 }
 
 /*================ Index sections ================*/
-.index-section {
-  padding-top: $section-spacing-small;
-  padding-bottom: $section-spacing-small;
+// .index-section {
+//   padding-top: $section-spacing-small;
+//   padding-bottom: $section-spacing-small;
 
-  @include media-query($medium-up) {
-    padding-top: $section-spacing;
-    padding-bottom: $section-spacing;
-  }
+//   @include media-query($medium-up) {
+//     padding-top: $section-spacing;
+//     padding-bottom: $section-spacing;
+//   }
 
-  &:first-child {
-    padding-top: 0;
-    border-top: 0;
-  }
+//   &:first-child {
+//     padding-top: 0;
+//     border-top: 0;
+//   }
 
-  &:last-child {
-    padding-bottom: 0;
-  }
-}
+//   &:last-child {
+//     padding-bottom: 0;
+//   }
+// }
 
-.index-section--flush + .index-section--flush {
-  margin-top: -($section-spacing-small * 2);
-}
+// .index-section--flush + .index-section--flush {
+//   margin-top: -($section-spacing-small * 2);
+// }
 
-[class*="index-section--flush"] + [class*="index-section--flush"] {
-  @include media-query($medium-up) {
-    margin-top: -($section-spacing * 2);
-  }
-}
+// [class*="index-section--flush"] + [class*="index-section--flush"] {
+//   @include media-query($medium-up) {
+//     margin-top: -($section-spacing * 2);
+//   }
+// }
 
-// Flush sections should be tight to the nav if they are the first on the page
-.index-section--flush:first-child {
-  margin-top: -$section-spacing-small;
-}
+// // Flush sections should be tight to the nav if they are the first on the page
+// .index-section--flush:first-child {
+//   margin-top: -$section-spacing-small;
+// }
 
-[class*="index-section--flush"]:first-child {
-  @include media-query($medium-up) {
-    margin-top: -$section-spacing;
-  }
-}
+// [class*="index-section--flush"]:first-child {
+//   @include media-query($medium-up) {
+//     margin-top: -$section-spacing;
+//   }
+// }
 
 // Flush sections should be tight to the footer if they are last on the page
 .index-section--flush:last-child {
@@ -5616,9 +5623,9 @@ $search-bar-button-hover: rgba($color-text-field-text, 0.6);
   padding-right: 45px;
   width: 100%;
   min-height: 44px;
-  color: $color-text-field-text;
+  color: #FFF;
   // Reset some input styles
-  background-color: $color-text-field;
+  background-color: {{ settings.color_body_bg }};
   border: none;
 }
 
@@ -5759,7 +5766,7 @@ $search-bar-button-hover: rgba($color-text-field-text, 0.6);
   display: flex;
   align-items: center;
   justify-content: center;
-  padding-left: $gutter-site-mobile - $input-padding-left-right-small;
+  padding-left: 24px;
   padding-right: $gutter-site-mobile - $common-search-input-padding;
   background-color: $color-bg;
 }
@@ -5784,7 +5791,7 @@ $search-bar-button-hover: rgba($color-text-field-text, 0.6);
   background-color: transparent;
   border: 0;
   margin: 0;
-  color: $color-text-field-text;
+  color: #FFF;
 
   .icon {
     position: relative;
@@ -5801,6 +5808,11 @@ $search-bar-button-hover: rgba($color-text-field-text, 0.6);
 .search-bar__input {
   @include common-search-input;
   border: 1px solid $color-border-form;
+  border-width: 0 0 2px 0px;
+
+  &::placeholder {
+    color: #ffffff;
+  }  
 }
 
 .search-bar__close {
@@ -7197,7 +7209,7 @@ $toolbar-height-small: 46px;
   @include flex-wrap(wrap);
 
   @include media-query($small) {
-    padding: 0 $footer-wrapper-spacing;
+    padding: 0 0;
   }
 
   @include media-query($medium-up) {
@@ -7208,7 +7220,6 @@ $toolbar-height-small: 46px;
 .site-footer__item {
   @include display-flexbox;
   @include flex(1 1 100%);
-  margin-bottom: $section-spacing;
 
   @include media-query($medium-up) {
     padding: 0 $footer-spacing-small 0 $footer-spacing-small;
@@ -7303,7 +7314,7 @@ $toolbar-height-small: 46px;
 
 .site-footer__linklist-item {
   display: block;
-  padding: ($grid-gutter / 2) 0;
+  padding: 6px 0;
 
   @include media-query($medium-up) {
     padding: 0 $grid-gutter 5px 0;
@@ -7329,13 +7340,7 @@ $toolbar-height-small: 46px;
 }
 
 .social-icons__item {
-  padding: 0 $footer-spacing-small;
-
-  @include media-query($medium-up) {
-    &:last-of-type {
-      padding-right: 0;
-    }
-  }
+  padding: 0 $footer-spacing-medium 0 0;
 }
 
 .social-icons__link {
@@ -7428,7 +7433,7 @@ $toolbar-height-small: 46px;
   padding-bottom: $section-spacing-small;
 
   @include media-query($small) {
-    order: 2;
+    order: 0;
     padding-bottom: 0; // always last element on mobile
   }
 }
@@ -7449,6 +7454,20 @@ $toolbar-height-small: 46px;
   }
 }
 
+.imageTextFullBleed {
+  height: 100vw;
+  background: {
+    size: cover;
+    repeat: no-repeat;
+    position: 50% 50%;
+  }
+  
+  @include media-query($large) {
+    height: 50vw;
+  }
+}
+
+
 .hero {
   position: relative;
   height: 475px;
@@ -7466,7 +7485,7 @@ $toolbar-height-small: 46px;
   max-height: 100vh;
 
   @include media-query($medium-up) {
-    max-height: 80vh;
+    max-height: 100vh;
   }
 }
 
@@ -7520,12 +7539,17 @@ $toolbar-height-small: 46px;
   position: relative;
   display: table-cell;
   vertical-align: middle;
-  padding: $section-spacing 0;
   z-index: 2;
 }
 
 .hero__inner--offset {
-  margin-top: 80px;
+  margin-top: -30vw;
+}
+
+@media only screen and ( min-width: 1000px ) {
+  .hero__inner--offset {
+    margin-top: 0;
+  }
 }
 
 .hero__btn {
@@ -8701,6 +8725,81 @@ $min-height-disclosure: 92px;
 }
 
 
+/*================ Recommended Crystals Section ================*/
+
+  .recommendCarousel:after {
+    content: 'flickity';
+    display: none;
+  }
+
+  .hpShopAllTitle {
+    font-size: 88px;
+    margin: 100px auto 32px auto;
+    width: 600px;
+  }
+
+  .hpMoodTitle {
+    font-size: 36px;
+  }
+
+  .hpProductGrid-item {
+    width: 90vw;
+    margin-right: 8px;
+  }
+  
+  .hpProductGrid-item__content {
+    position: relative;
+    height: 210px;
+    background-color: #FFFFFF;
+    color: #5200FF;
+    font-family: 'Saa-Series-C-D', 'Sans-Serif';
+    font-size: 36px;
+    letter-spacing: 0em;
+  }
+
+  .hpProductGrid-item__title {
+    padding: 24px 0 0 0;
+    line-height: 85%;
+    letter-spacing: -2px;
+  }
+  
+  .hpProductGrid-item__description {
+    width: 90%;
+    font-family: WorkSans-Medium;
+    font-style: normal;
+    font-weight: normal;
+    font-size: 14px;
+    line-height: 21px;
+    letter-spacing: -0.01em;
+    padding: 0 8px 0 16px;
+  }
+
+  .hpProductGrid-item__price {
+    position: absolute;
+    font-size: 20px;
+    bottom: 0;
+    right: 0;
+  }
+
+  @media only screen and ( min-width: 1000px ) {
+  
+    /* disable Flickity for large devices */
+    .recommendCarousel:after {
+      content: '';
+    }
+
+    .hpProductGrid {
+      display: flex;
+      width: 100vw;
+      justify-content: center;
+    }
+
+    .hpProductGrid-item {
+      width: 310px;
+    }
+  }
+
+
 /*================ Shop All Page ================*/
 
 .shopAllTitle {
@@ -8823,7 +8922,7 @@ $min-height-disclosure: 92px;
   
   .productGrid-item__description {
     width: 90%;
-    font-family: Work Sans;
+    font-family: WorkSans-Medium;
     font-style: normal;
     font-weight: normal;
     font-size: 14px;
@@ -8843,10 +8942,6 @@ $min-height-disclosure: 92px;
 /*================ Product Page ================*/
 
 // Carousel
-
-.carousel-cell {
-
-}
   
 .carousel-mobile {
   display: block;
@@ -8954,6 +9049,7 @@ $min-height-disclosure: 92px;
   width: 100%;
   height: 100%;
   background-color: #FFE0B1;
+  color: #5200FF;
 }
 
 .gradDark1 {

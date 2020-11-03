@@ -1,0 +1,31 @@
+<script src="{{ "marquee3k.js" | asset_url }}"></script>
+
+<div class="marquee3k bg-white py-4 text-xs" 
+  data-speed="1"
+  data-pausable="false">
+  <p style="color:#5200FF">{{ section.settings.ticker-text }}</p>
+</div>
+
+<script>
+  Marquee3k.init();
+</script>
+
+{% schema %}
+  {
+    "name": "Ticker",
+    "settings": [
+      {
+      "type": "text",
+      "id": "ticker-text",
+      "label": "Ticker Text",
+      "placeholder": "Your business name here!"
+      }    
+    ],
+    "presets": [
+      {
+        "name": "Ticker",
+        "category": "Text"        
+      }
+    ]
+  }
+{% endschema %}
