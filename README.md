@@ -3,7 +3,7 @@
 # Talisman Shopify Theme
 
 ### [Live Theme on Shopify Development Store](https://talismanla.myshopify.com/)
-##### Password: crystalLight
+#### Password: crystalLight
 I worked on a website for a start-up selling crystals called Talisman. It was built on top of Shopify's starter theme Debut as a boilerplate, after which pretty much every component was edited or rebuilt. I was the sole designer and developer for the project, with the exception of a brand designer. To keep the site small and manageable for a single developer, we kept the site very limited in scope. A homepage, a dynamic filtering collection page, and a product page.
 
 ## Collection Page
